@@ -4,7 +4,8 @@ const String invalidUsernameSignUpError = '';
 const String invalidUsernameSignInError = '';
 const String invalidWilayaError = '';
 const String invalidPasswordError = '';
-const String invalidPhoneNumberError = '';
+const String invalidPhoneNumberError =
+    'Veuillez entrer un numéro de telephone valide';
 const String invalidVerificationCodeError = '';
 const String invalidActivityError = '';
 const String invalidEmailError = '';
