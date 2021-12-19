@@ -13,28 +13,28 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Auth auth = context.read<Auth>();
+    return SingInScreen();
+    // return StreamBuilder<AuthUser?>(
+    //   stream: auth.onAuthStateChanged,
+    //   builder: (context, authSnapshot) {
+    //     if (authSnapshot.connectionState == ConnectionState.active) {
+    //       final AuthUser? user = authSnapshot.data;
 
-    return StreamBuilder<AuthUser?>(
-      stream: auth.onAuthStateChanged,
-      builder: (context, authSnapshot) {
-        if (authSnapshot.connectionState == ConnectionState.active) {
-          final AuthUser? user = authSnapshot.data;
-
-          if (user == null) {
-            return SingInScreen();
-          } else {
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(builder: (context) {
-              return HomeScreen();
-            }));
-          }
-          // return Provider.value(
-          //   value: user,
-          //   child: BaseScreen(),
-          // );
-        }
-        return LoadingScreen();
-      },
-    );
+    //       if (user == null) {
+    //         return SingInScreen();
+    //       } else {
+    //         Navigator.of(context)
+    //             .pushReplacement(MaterialPageRoute(builder: (context) {
+    //           return HomeScreen();
+    //         }));
+    //       }
+    //       // return Provider.value(
+    //       //   value: user,
+    //       //   child: BaseScreen(),
+    //       // );
+    //     }
+    //     return LoadingScreen();
+    //   },
+    // );
   }
 }

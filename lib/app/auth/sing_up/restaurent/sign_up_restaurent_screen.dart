@@ -2,11 +2,17 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/auth/sing_in/sign_in_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/client/sign_up_client_form.dart';
+import 'package:kw_express_pfe/app/auth/sing_up/restaurent/sign_up_restaurent_form.dart';
+import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_phone_confirmation.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/database.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -23,18 +29,19 @@ class SignUpRestaurentScreen extends StatefulWidget {
 
 class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
   late final PageController _pageController;
-
-  late String username;
-  late int wilaya;
-  late String password;
-  late String phoneNumber;
+  late final SignUpBloc bloc;
+  late String usernames;
+  late int wilayaa;
+  late String passwords;
+  late String addresss;
+  late String phoneNumberr;
 
   @override
   void initState() {
     _pageController = PageController();
-    // final Auth auth = context.read<Auth>();
-    // final Database database = context.read<Database>();
-    // bloc = SignUpBloc(auth: auth, database: database);
+    final Auth auth = context.read<Auth>();
+    final Database database = context.read<Database>();
+    bloc = SignUpBloc(auth: auth, database: database);
 
     super.initState();
   }
@@ -49,10 +56,30 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
     }
   }
 
-  Future<void> sendClientInfo() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return HomeScreen();
-    }));
+  Future<void> sendRestaurentInfo() async {
+    // start loading widget
+    try {
+      final ProgressDialog pd = ProgressDialog(context: context);
+
+      final Restaurent store = Restaurent(
+        id: '',
+        type: 2,
+        name: usernames,
+        phoneNumber: phoneNumberr,
+        adress: addresss,
+        isModerator: false,
+        wilaya: wilayaa,
+      );
+      await bloc.saveClientInfo(store);
+      pd.close();
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+    } on Exception catch (e) {
+      PlatformExceptionAlertDialog(exception: e).show(context);
+    }
+    // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+    //   return HomeScreen();
+    // }));
   }
 
   @override
@@ -78,20 +105,22 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
           physics: NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: <Widget>[
-            SignUpClientForm(
+            SignUpRestaurentForm(
               onSaved: ({
                 required String password,
                 required String phoneNumber,
                 required String username,
+                required String address,
                 required int wilaya,
               }) async {
                 try {
-                  password = password;
-                  phoneNumber = phoneNumber;
-                  username = username;
-                  wilaya = wilaya;
+                  passwords = password;
+                  phoneNumberr = phoneNumber;
+                  usernames = username;
+                  addresss = address;
+                  wilayaa = wilaya;
 
-                  //  await bloc.verifyPhoneNumber(_phoneNumber);
+                  await bloc.verifyPhoneNumber(phoneNumber);
                   swipePage(1);
                 } on Exception catch (e) {
                   logger.severe('Error in verifyPhoneNumber');
@@ -101,19 +130,18 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
             ),
             SignUpPhoneConfirmation(
               onNextPressed: (String code) async {
-                // try {
-                //   final bool isLoggedIn = await bloc.magic(
-                //     _username,
-                //     _password,
-                //     code,
-                //   );
-                //   if (isLoggedIn) {
-                swipePage(2);
-                sendClientInfo();
-                //   }
-                // } on Exception catch (e) {
-                //   PlatformExceptionAlertDialog(exception: e).show(context);
-                // }
+                try {
+                  final bool isLoggedIn = await bloc.magic(
+                    usernames,
+                    passwords,
+                    code,
+                  );
+                  if (isLoggedIn) {
+                    sendRestaurentInfo();
+                  }
+                } on Exception catch (e) {
+                  PlatformExceptionAlertDialog(exception: e).show(context);
+                }
               },
             ),
           ],

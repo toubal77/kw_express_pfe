@@ -87,17 +87,18 @@ class _SingInScreenState extends State<SingInScreen> {
             }) {
               usernames = email;
               passwords = password;
-              swipePage(1);
-            },
-          ),
-          SignInForm2(
-            onSaved: ({
-              required String address,
-            }) {
-              adressUser = address;
+              //    swipePage(1);
               sendInfoLogin();
             },
           ),
+          // SignInForm2(
+          //   onSaved: ({
+          //     required String address,
+          //   }) {
+          //     adressUser = address;
+          //     sendInfoLogin();
+          //   },
+          // ),
         ],
       ),
     );

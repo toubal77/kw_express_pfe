@@ -22,6 +22,7 @@ class SignUpRestaurentForm extends StatefulWidget {
     required String username,
     required int wilaya,
     required String password,
+    required String address,
     required String phoneNumber,
   }) onSaved;
 
@@ -34,7 +35,7 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
   late int wilaya;
   late String password;
   late String phoneNumber;
-
+  late String address;
   late final GlobalKey<FormState> _formKey;
   bool isButtonEnabled = true;
 
@@ -129,6 +130,24 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                       padding: padding,
                       child: CustomTextForm(
                         fillColor: Colors.white70,
+                        title: "Adresse du restaurent:",
+                        hintText: "Adresse du restaurent...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          address = value;
+                        },
+                        validator: (String? value) {
+                          if (!Validators.isValidUsername(value)) {
+                            return invalidUsernameSignUpError;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: padding,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
                         title: 'Numéro de téléphone:',
                         maxLength: 10,
                         isPhoneNumber: true,
@@ -183,6 +202,7 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                         username: username,
                         wilaya: wilaya,
                         password: password,
+                        address: address,
                         phoneNumber: phoneNumber,
                       );
                     }
