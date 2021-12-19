@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/client/sign_up_client_screen.dart';
+import 'package:kw_express_pfe/app/auth/sing_up/restaurent/sign_up_restaurent_screen.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/role_selector/role_selector_screen.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_constants.dart';
@@ -50,9 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (selectedRole == Role.client) ...[
           SignUpClientScreen(),
         ],
-        // if (selectedRole == Role.restaurent) ...[
-        //   SignUpClientScreen(),
-        // ],
+        if (selectedRole == Role.restaurent) ...[
+          SignUpRestaurentScreen(),
+        ],
       ],
     );
   }
