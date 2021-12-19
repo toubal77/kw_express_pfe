@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form2.dart';
-import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form3.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 
@@ -72,25 +71,15 @@ class _SingInScreenState extends State<SingInScreen> {
         children: <Widget>[
           SignInForm(
             onSaved: ({
-              required String phone,
-              required bool loginPhone,
-            }) {
-              phoneNumber = phone;
-              loginPhone = loginPhone;
-              swipePage(1);
-            },
-          ),
-          SignInForm2(
-            onSaved: ({
               required String email,
               required String password,
             }) {
               email = email;
               password = password;
-              swipePage(2);
+              swipePage(1);
             },
           ),
-          SignInForm3(
+          SignInForm2(
             onSaved: ({
               required String address,
             }) {

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:geocode/geocode.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
-import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
-import 'package:kw_express_pfe/constants/strings.dart';
-import 'package:kw_express_pfe/utils/validators.dart';
 
 class SignInForm2 extends StatefulWidget {
   const SignInForm2({
@@ -13,152 +11,146 @@ class SignInForm2 extends StatefulWidget {
     required this.onSaved,
   }) : super(key: key);
   final void Function({
-    required String email,
-    required String password,
+    required String address,
   }) onSaved;
-
   @override
   State<SignInForm2> createState() => _SignInForm2State();
 }
 
 class _SignInForm2State extends State<SignInForm2> {
-  late final _formKey = GlobalKey<FormState>();
-  bool pswVisible = false;
-  late String email = '';
-  late String password = '';
+  bool getLocation = false;
+  bool isLoading = false;
+  late String adressUser;
+  getUserLocation() async {
+    GeoCode geoCode = GeoCode();
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      var lastPosition = await Geolocator.getLastKnownPosition();
+      print(lastPosition);
+      print('lalitude: ${position.latitude}, logitude: ${position.latitude}');
+
+      Address address = await geoCode.reverseGeocoding(
+          latitude: position.latitude, longitude: position.longitude);
+      print("Street Number: ${address.streetNumber}");
+      print("Street Address: ${address.streetAddress}");
+      print("City: ${address.city}");
+      print("Region: ${address.region}");
+      print("code Postal: ${address.postal}");
+      print("Country Name: ${address.countryName}");
+      print('eàzhg $address');
+      adressUser =
+          '${address.streetNumber} ${address.streetAddress} ${address.city} ${address.region} ${address.postal} ${address.countryName}';
+      setState(() {
+        getLocation = true;
+      });
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: 130.w,
-              height: 130.h,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(whiteLogo),
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          //     Positioned(child: BackgroundImage()),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: 224.69.w,
+                  height: 170.69.h,
+                  margin: const EdgeInsets.only(
+                      top: 133, left: 94.66, right: 94.66),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(whiteLogo),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width.w,
-              margin: const EdgeInsets.only(left: 24.95, right: 24.95),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 82.w,
-                      height: 29.h,
-                      child: Text(
-                        'Loging',
-                        style: TextStyle(
-                          color: Color(0xff181725),
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      width: 233.w,
-                      height: 14.h,
-                      child: Text(
-                        'Enter your email and password',
-                        style: TextStyle(
-                          color: Color(0xff7C7C7C),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 24.95),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: 246.w,
+                        height: 29.h,
+                        child: Text(
+                          'Select Your Location',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff191725),
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    SizedBox(
-                      child: CustomTextForm(
-                        fillColor: Colors.white,
-                        textInputType: TextInputType.emailAddress,
-                        title: 'Email:',
-                        textInputAction: TextInputAction.done,
-                        isPhoneNumber: false,
-                        onChanged: (var value) {
-                          email = value;
-                        },
-                        validator: (String? value) {
-                          if (!Validators.isValidEmail(value)) {
-                            return invalidEmailError;
-                          }
-                          return null;
-                        },
+                      const SizedBox(
+                        height: 15.18,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    SizedBox(
-                      child: CustomTextForm(
-                        fillColor: Colors.white,
-                        textInputType: TextInputType.visiblePassword,
-                        title: 'Password:',
-                        textInputAction: TextInputAction.done,
-                        isPhoneNumber: false,
-                        isPassword: true,
-                        onChanged: (var value) {
-                          password = value;
-                        },
-                        validator: (String? value) {
-                          if (!Validators.isValidPassword(value)) {
-                            return invalidPasswordError;
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      height: 14.h,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Color(0xff181725),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        width: 324.w,
+                        height: 57.h,
+                        child: Text(
+                          "Swithch on your location to stay in tune with what's happening in your area",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xff7C7C7C),
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
-                    ButtomMedia(
-                      press: () {
-                        if (_formKey.currentState!.validate() &&
-                            email != null &&
-                            password != null) {
-                          widget.onSaved(
-                            email: email,
-                            password: password,
-                          );
-                        }
-                      },
-                      color: Color(0xff5383EC),
-                      text: 'Suivant',
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                  ],
+                      getLocation
+                          ? SizedBox(
+                              width: 324.w,
+                              height: 57.h,
+                              child: Text(
+                                'Your adress: $adressUser',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xff7C7C7C),
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : SizedBox(),
+                      isLoading
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 25),
+                              child: CircularProgressIndicator(),
+                            )
+                          : ButtomMedia(
+                              press: () {
+                                if (getLocation == true) {
+                                  widget.onSaved(
+                                    address: adressUser,
+                                  );
+                                } else {
+                                  getUserLocation();
+                                }
+                              },
+                              color: Color(0xff5383EC),
+                              text: !getLocation ? 'Get Location' : 'Submit',
+                            ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

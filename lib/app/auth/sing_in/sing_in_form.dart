@@ -1,139 +1,171 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kw_express_pfe/app/auth/login_screen.dart';
+import 'package:kw_express_pfe/app/auth/forgot_password/forgot_pass_screen.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
-import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
+import 'package:kw_express_pfe/utils/validators.dart';
 
-class SignInForm extends StatelessWidget {
+class SignInForm extends StatefulWidget {
   const SignInForm({
     Key? key,
     required this.onSaved,
   }) : super(key: key);
   final void Function({
-    required String phone,
-    required bool loginPhone,
+    required String email,
+    required String password,
   }) onSaved;
 
   @override
+  State<SignInForm> createState() => _SignInFormState();
+}
+
+class _SignInFormState extends State<SignInForm> {
+  late final _formKey = GlobalKey<FormState>();
+  bool pswVisible = false;
+  late String email = '';
+  late String password = '';
+  @override
   Widget build(BuildContext context) {
-    late final _formKey = GlobalKey<FormState>();
-    String phone = '';
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Image.asset(
-                  whiteLogo,
-                  height: MediaQuery.of(context).size.height * 0.45,
+        child: Column(
+          children: [
+            Container(
+              width: 130.w,
+              height: 130.h,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(whiteLogo),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 25),
-                child: SizedBox(
-                  width: 222.w,
-                  height: 63.h,
-                  child: Text(
-                    'Get your groceries with K&W Express',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff030303),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width.w,
+              margin: const EdgeInsets.only(left: 24.95, right: 24.95),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 82.w,
+                      height: 29.h,
+                      child: Text(
+                        'Loging',
+                        style: TextStyle(
+                          color: Color(0xff181725),
+                          fontSize: 26,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 15, left: 25, right: 25, bottom: 10),
-                child: CustomTextForm(
-                  fillColor: Colors.white,
-                  title: 'Numéro de téléphone:',
-                  maxLength: 10,
-                  textInputAction: TextInputAction.done,
-                  isPhoneNumber: true,
-                  onChanged: (var value) {
-                    phone = value;
-                    phone = phone.replaceFirst(RegExp('0'), '');
-                    phone = '+213$phone';
-                  },
-                  prefix: IntrinsicHeight(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            '+213',
-                            style: TextStyle(color: Colors.black),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      width: 233.w,
+                      height: 14.h,
+                      child: Text(
+                        'Enter your email and password',
+                        style: TextStyle(
+                          color: Color(0xff7C7C7C),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    SizedBox(
+                      child: CustomTextForm(
+                        fillColor: Colors.white,
+                        textInputType: TextInputType.emailAddress,
+                        title: 'Email:',
+                        textInputAction: TextInputAction.done,
+                        isPhoneNumber: false,
+                        onChanged: (var value) {
+                          email = value;
+                        },
+                        validator: (String? value) {
+                          if (!Validators.isValidEmail(value)) {
+                            return invalidEmailError;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      child: CustomTextForm(
+                        fillColor: Colors.white,
+                        textInputType: TextInputType.visiblePassword,
+                        title: 'Password:',
+                        textInputAction: TextInputAction.done,
+                        isPhoneNumber: false,
+                        isPassword: true,
+                        onChanged: (var value) {
+                          password = value;
+                        },
+                        validator: (String? value) {
+                          if (!Validators.isValidPassword(value)) {
+                            return invalidPasswordError;
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return ForgotPassScreen();
+                        }));
+                      },
+                      child: Container(
+                        alignment: Alignment.topRight,
+                        height: 14.h,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Color(0xff181725),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 57,
-                          child: VerticalDivider(
-                            thickness: 1,
-                            width: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                  validator: (String? value) {
-                    if (value == null || !value.startsWith('0')) {
-                      return invalidPhoneNumberError;
-                    }
-                    return null;
-                  },
+                    ButtomMedia(
+                      press: () {
+                        if (_formKey.currentState!.validate() &&
+                            email != null &&
+                            password != null) {
+                          widget.onSaved(
+                            email: email,
+                            password: password,
+                          );
+                        }
+                      },
+                      color: Color(0xff5383EC),
+                      text: 'Suivant',
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-                child: SignUpDivider(),
-              ),
-              GestureDetector(
-                onTap: () {
-                  onSaved(
-                    phone: phone,
-                    loginPhone: false,
-                  );
-                },
-                child: Center(
-                  child: Text(
-                    'Or connect with mail',
-                    style: TextStyle(
-                      color: Color(0xff828282),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              ButtomMedia(
-                press: () {
-                  // if (_formKey.currentState!.validate() && phone.length == 0) {
-                  onSaved(
-                    phone: phone,
-                    loginPhone: true,
-                  );
-                  //  }
-                },
-                color: Color(0xff5383EC),
-                text: 'Suivant',
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
