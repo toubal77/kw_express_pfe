@@ -125,16 +125,16 @@ class _SignInFormState extends State<SignInForm> {
                     SizedBox(
                       child: CustomTextForm(
                         fillColor: Colors.white,
-                        textInputType: TextInputType.emailAddress,
-                        title: 'Email:',
+                        textInputType: TextInputType.text,
+                        title: 'Username:',
                         textInputAction: TextInputAction.done,
                         isPhoneNumber: false,
                         onChanged: (var value) {
                           email = value;
                         },
                         validator: (String? value) {
-                          if (!Validators.isValidEmail(value)) {
-                            return invalidEmailError;
+                          if (!Validators.isValidUsername(value)) {
+                            return invalidUsernameSignInError;
                           }
                           return null;
                         },

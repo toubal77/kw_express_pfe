@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/auth/sing_in/sign_in_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form2.dart';
+import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
+import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/database.dart';
+import 'package:provider/src/provider.dart';
 
 class SingInScreen extends StatefulWidget {
   const SingInScreen({
@@ -14,19 +20,19 @@ class SingInScreen extends StatefulWidget {
 }
 
 class _SingInScreenState extends State<SingInScreen> {
-  //late final SignUpBloc bloc;
+  late final SignInBloc bloc;
   late final PageController _pageController;
 
-  late bool loginPhone;
-  late String phoneNumber;
+  late String passwords;
+  late String usernames;
   late String adressUser;
 
   @override
   void initState() {
     _pageController = PageController();
-    // final Auth auth = context.read<Auth>();
-    // final Database database = context.read<Database>();
-    // bloc = SignUpBloc(auth: auth, database: database);
+    final Auth auth = context.read<Auth>();
+
+    bloc = SignInBloc(auth: auth);
 
     super.initState();
   }
@@ -42,10 +48,15 @@ class _SingInScreenState extends State<SingInScreen> {
   }
 
   Future<void> sendInfoLogin() async {
-    Navigator.of(context)
-      ..pushReplacement(MaterialPageRoute(builder: (context) {
-        return HomeScreen();
-      }));
+    try {
+      await bloc.signIn(usernames, passwords);
+      Navigator.of(context)
+        ..pushReplacement(MaterialPageRoute(builder: (context) {
+          return HomeScreen();
+        }));
+    } on Exception catch (e) {
+      PlatformExceptionAlertDialog(exception: e).show(context);
+    }
   }
 
   @override
@@ -74,8 +85,8 @@ class _SingInScreenState extends State<SingInScreen> {
               required String email,
               required String password,
             }) {
-              email = email;
-              password = password;
+              usernames = email;
+              passwords = password;
               swipePage(1);
             },
           ),

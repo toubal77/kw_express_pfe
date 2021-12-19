@@ -3,10 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/client/sign_up_client_form.dart';
+import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_phone_confirmation.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
+import 'package:kw_express_pfe/app/models/client.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/database.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +27,7 @@ class SignUpClientScreen extends StatefulWidget {
 
 class _SignUpClientScreenState extends State<SignUpClientScreen> {
   late final PageController _pageController;
-
+  late SignUpBloc bloc;
   late String _fullname;
   late String _username;
   late int _wilaya;
@@ -37,9 +41,9 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
   @override
   void initState() {
     _pageController = PageController();
-    // final Auth auth = context.read<Auth>();
-    // final Database database = context.read<Database>();
-    // bloc = SignUpBloc(auth: auth, database: database);
+    final Auth auth = context.read<Auth>();
+    final Database database = context.read<Database>();
+    bloc = SignUpBloc(auth: auth, database: database);
 
     super.initState();
   }
@@ -55,9 +59,28 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
   }
 
   Future<void> sendClientInfo() async {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-      return HomeScreen();
-    }));
+    // start loading widget
+    try {
+      final ProgressDialog pd = ProgressDialog(context: context);
+
+      final Client store = Client(
+        id: '',
+        type: 1,
+        name: _username,
+        phoneNumber: _phoneNumber,
+        isModerator: false,
+        wilaya: _wilaya,
+      );
+      await bloc.saveClientInfo(store);
+      pd.close();
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pop();
+    } on Exception catch (e) {
+      PlatformExceptionAlertDialog(exception: e).show(context);
+    }
+    // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+    //   return HomeScreen();
+    // }));
   }
 
   @override
@@ -96,7 +119,7 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
                   _username = username;
                   _wilaya = wilaya;
 
-                  //  await bloc.verifyPhoneNumber(_phoneNumber);
+                  await bloc.verifyPhoneNumber(_phoneNumber);
                   swipePage(1);
                 } on Exception catch (e) {
                   logger.severe('Error in verifyPhoneNumber');
@@ -106,19 +129,19 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
             ),
             SignUpPhoneConfirmation(
               onNextPressed: (String code) async {
-                // try {
-                //   final bool isLoggedIn = await bloc.magic(
-                //     _username,
-                //     _password,
-                //     code,
-                //   );
-                //   if (isLoggedIn) {
-                swipePage(2);
-                sendClientInfo();
-                //   }
-                // } on Exception catch (e) {
-                //   PlatformExceptionAlertDialog(exception: e).show(context);
-                // }
+                try {
+                  final bool isLoggedIn = await bloc.magic(
+                    _username,
+                    _password,
+                    code,
+                  );
+                  if (isLoggedIn) {
+                    // swipePage(2);
+                    sendClientInfo();
+                  }
+                } on Exception catch (e) {
+                  PlatformExceptionAlertDialog(exception: e).show(context);
+                }
               },
             ),
           ],
