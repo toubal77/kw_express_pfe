@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/forgot_password/confirm_phone_number.dart';
 import 'package:kw_express_pfe/app/auth/forgot_password/enter_phone_number.dart';
+import 'package:kw_express_pfe/app/auth/forgot_password/forgot_pass_bloc.dart';
 import 'package:kw_express_pfe/app/auth/forgot_password/new_password.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/singin_screen.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
+import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +20,7 @@ class ForgotPassScreen extends StatefulWidget {
 
 class _ForgotPassScreenState extends State<ForgotPassScreen> {
   late final PageController _pageController;
-  // late ForgotPassBloc bloc;
+  late ForgotPassBloc bloc;
 
   late String phoneNumber;
   late String code;
@@ -27,7 +29,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   @override
   void initState() {
     _pageController = PageController();
-    // bloc = ForgotPassBloc(auth: context.read<Auth>());
+    bloc = ForgotPassBloc(auth: context.read<Auth>());
 
     super.initState();
   }
@@ -92,9 +94,9 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                   try {
                     password = value;
                     logger.info(password);
-                    // final bool result = await bloc.magic(code, password);
-                    // ignore: use_build_context_synchronously
-                    //    if (result == true) Navigator.of(context).pop();
+                    final bool result = await bloc.magic(code, password);
+                    //ignore: use_build_context_synchronously
+                    if (result == true) Navigator.of(context).pop();
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (context) {
                       return SingInScreen();
