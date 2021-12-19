@@ -8,6 +8,7 @@ class Admin extends User {
           type: 0,
           name: 'name',
           phoneNumber: '0',
+          isModerator: false,
           wilaya: 31,
         );
 

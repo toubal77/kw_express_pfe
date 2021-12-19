@@ -6,12 +6,14 @@ class Client extends User {
     required int type,
     required String name,
     required String phoneNumber,
+    required bool isModerator,
     required int wilaya,
   }) : super(
           id: id,
           type: type,
           name: name,
           phoneNumber: phoneNumber,
+          isModerator: isModerator,
           wilaya: wilaya,
         );
 
@@ -20,6 +22,7 @@ class Client extends User {
     final int type = data['type'] as int;
     final String name = data['name'] as String;
     final String phoneNumber = data['phoneNumber'] as String;
+    final bool isModerator = data['isModerator'] as bool;
     final int wilaya = data['wilaya'] as int;
 
     return Client(
@@ -27,6 +30,7 @@ class Client extends User {
       type: type,
       name: name,
       phoneNumber: phoneNumber,
+      isModerator: isModerator,
       wilaya: wilaya,
     );
   }
