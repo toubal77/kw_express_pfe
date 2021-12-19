@@ -50,15 +50,11 @@ class CustomTextForm extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0),
               child: titleStyle != null
                   ? Text(title!, style: titleStyle)
-                  : BorderedText(
-                      strokeColor: Colors.black,
-                      strokeWidth: 3.0,
-                      child: Text(
-                        title!,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
+                  : Text(
+                      title!,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
                       ),
                     ),
             ),
@@ -90,7 +86,7 @@ class CustomTextForm extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25.0),
                   borderSide: BorderSide(
-                    color: Colors.blueGrey,
+                    color: Colors.black,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
