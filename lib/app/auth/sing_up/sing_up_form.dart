@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kw_express_pfe/app/auth/forgot_password/forgot_pass_screen.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/singup_screen.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
@@ -27,46 +26,6 @@ class _SignInFormState extends State<SignInForm> {
   bool pswVisible = false;
   late String email = '';
   late String password = '';
-
-  Widget _buildFooter() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Vous n'avez pas de compte ?",
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w400,
-              color: Color.fromRGBO(41, 67, 107, 1.0),
-            ),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (context) {
-                  return SignUpScreen();
-                },
-              ),
-            );
-          },
-          child: Text(
-            'Créer un compte maintenant',
-            style: TextStyle(
-              fontSize: 15,
-              color: Color.fromRGBO(64, 163, 219, 1.0),
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -206,7 +165,6 @@ class _SignInFormState extends State<SignInForm> {
                 ),
               ),
             ),
-            _buildFooter(),
           ],
         ),
       ),

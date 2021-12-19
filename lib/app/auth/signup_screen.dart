@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kw_express_pfe/app/auth/location.dart';
-import 'package:kw_express_pfe/app/auth/login_screen.dart';
-import 'package:kw_express_pfe/app/auth/widgets/background_image.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -250,13 +248,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const LoginScreen();
-                          },
-                        ),
-                      );
+                      // Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return const LoginScreen();
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 25),

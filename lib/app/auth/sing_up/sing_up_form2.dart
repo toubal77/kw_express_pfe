@@ -1,20 +1,23 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
-import 'package:kw_express_pfe/app/auth/widgets/background_image.dart';
 
-class SelectLocation extends StatefulWidget {
-  final bool arrow;
-  const SelectLocation({Key? key, required this.arrow}) : super(key: key);
+class SignInForm2 extends StatefulWidget {
+  const SignInForm2({
+    Key? key,
+    required this.onSaved,
+  }) : super(key: key);
+  final void Function({
+    required String address,
+  }) onSaved;
   @override
-  State<SelectLocation> createState() => _SelectLocationState();
+  State<SignInForm2> createState() => _SignInForm2State();
 }
 
-class _SelectLocationState extends State<SelectLocation> {
+class _SignInForm2State extends State<SignInForm2> {
   bool getLocation = false;
   bool isLoading = false;
   late String adressUser;
@@ -55,23 +58,7 @@ class _SelectLocationState extends State<SelectLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
-      // extendBodyBehindAppBar: true,
-      // appBar: AppBar(
-      //   backgroundColor: Color(0x44FFFEFE),
-      //   leading: widget.arrow
-      //       ? IconButton(
-      //           onPressed: () {
-      //             Navigator.of(context).pop();
-      //           },
-      //           icon: Platform.isIOS
-      //               ? Icon(Icons.arrow_back_ios)
-      //               : Icon(Icons.arrow_back),
-      //           color: Color(0xff181725),
-      //         )
-      //       : null,
-      //   elevation: 0,
-      // ),
+      resizeToAvoidBottomInset: false,
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -141,41 +128,22 @@ class _SelectLocationState extends State<SelectLocation> {
                               padding: const EdgeInsets.only(top: 25),
                               child: CircularProgressIndicator(),
                             )
-                          : TextButton(
-                              onPressed: () {
+                          : ButtomMedia(
+                              press: () {
                                 if (getLocation == true) {
-                                  // Navigator.of(context).pushReplacement(
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) {
-                                  //       return const HomeWidget();
-                                  //     },
-                                  //   ),
-                                  // );
+                                  widget.onSaved(
+                                    address: adressUser,
+                                  );
                                 } else {
                                   getUserLocation();
                                 }
                               },
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                    top: 25, left: 25.3, right: 24.52),
-                                width: 364.w,
-                                height: 67.h,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff53B175),
-                                  borderRadius: BorderRadius.circular(19),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    !getLocation ? 'Get Location' : 'Submit',
-                                    style: TextStyle(
-                                      color: Color(0xffFFF9FF),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              color: Color(0xff5383EC),
+                              text: !getLocation ? 'Get Location' : 'Submit',
                             ),
+                      const SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 ),

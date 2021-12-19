@@ -94,6 +94,8 @@ flutter:
     - assets/drawable/resto_offre.svg
     - assets/drawable/kw.svg
     - assets/drawable_png/
+    - assets/drawable_png/client.jpg
+    - assets/drawable_png/restaurent.jpg
     - assets/drawable/
     - assets/drawable/facebook.svg
     - assets/drawable/gmail.svg
