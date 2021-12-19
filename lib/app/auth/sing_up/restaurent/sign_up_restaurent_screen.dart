@@ -1,13 +1,7 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/auth/sing_in/sign_in_bloc.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/client/sign_up_client_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/restaurent/sign_up_restaurent_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_phone_confirmation.dart';
-import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';

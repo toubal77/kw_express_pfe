@@ -1,11 +1,7 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/client/sign_up_client_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_phone_confirmation.dart';
-import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/app/models/client.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
@@ -28,15 +24,10 @@ class SignUpClientScreen extends StatefulWidget {
 class _SignUpClientScreenState extends State<SignUpClientScreen> {
   late final PageController _pageController;
   late SignUpBloc bloc;
-  late String _fullname;
   late String _username;
   late int _wilaya;
   late String _password;
   late String _phoneNumber;
-  late File _imageFile;
-  String? _bio;
-  late String _activity;
-  late Timestamp _dateOfBirth;
 
   @override
   void initState() {

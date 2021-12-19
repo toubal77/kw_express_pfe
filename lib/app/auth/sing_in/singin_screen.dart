@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sign_in_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form.dart';
-import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form2.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/services/auth.dart';
-import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/src/provider.dart';
 
 class SingInScreen extends StatefulWidget {

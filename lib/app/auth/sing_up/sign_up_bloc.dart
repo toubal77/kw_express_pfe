@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
@@ -78,7 +76,6 @@ class SignUpBloc {
       _authUser = user;
       return true;
     }
-    //! TODO @high if the user quits here he will be logged in without a profile
   }
 
   Future<void> saveClientInfo(User user) async {

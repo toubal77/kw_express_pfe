@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
-import 'package:kw_express_pfe/app/auth/widgets/background_image.dart';
 
 class SelectLocation extends StatefulWidget {
   final bool arrow;

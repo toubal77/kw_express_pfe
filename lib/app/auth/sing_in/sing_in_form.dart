@@ -187,9 +187,7 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     ButtomMedia(
                       press: () {
-                        if (_formKey.currentState!.validate() &&
-                            email != null &&
-                            password != null) {
+                        if (_formKey.currentState!.validate()) {
                           widget.onSaved(
                             email: email,
                             password: password,

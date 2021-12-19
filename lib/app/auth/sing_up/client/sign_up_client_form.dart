@@ -1,13 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/common_widgets/custom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_drop_down.dart';
-import 'package:kw_express_pfe/common_widgets/custom_elevated_button.dart';
 import 'package:kw_express_pfe/common_widgets/custom_scaffold.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
-import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
@@ -97,7 +93,6 @@ class _SignUpClientFormState extends State<SignUpClientForm> {
                         onChanged: (String? value) {
                           if (value == null) {
                           } else {
-                            //! TODO low fix this wierd string concat bitch
                             final int? wilayaN =
                                 int.tryParse(value[0] + value[1]);
 

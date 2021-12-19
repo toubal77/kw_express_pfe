@@ -93,7 +93,6 @@ class _BaseScreenState extends State<BaseScreen> {
             );
           }
         } else if (snapshot.hasError) {
-          // TODO @low work on this screen
           return Material(
             child: EmptyContent(
               title: '',
