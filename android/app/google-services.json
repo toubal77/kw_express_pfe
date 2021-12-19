@@ -1,0 +1,31 @@
+{
+    "project_info": {
+        "project_number": "96254672480",
+        "project_id": "kw-express-pfe",
+        "storage_bucket": "kw-express-pfe.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:96254672480:android:09fbe3186c281c826b0d05",
+            "android_client_info": {
+                "package_name": "com.example.kw_express_pfe"
+            }
+        },
+        "oauth_client": [{
+            "client_id": "96254672480-ulk32np1bd6e2p95uu30vb36u3jo9p4n.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [{
+            "current_key": "AIzaSyAbKLpZ0O-vdmQkjvJMPaEkSMnrxKSq5d4"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "96254672480-ulk32np1bd6e2p95uu30vb36u3jo9p4n.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
