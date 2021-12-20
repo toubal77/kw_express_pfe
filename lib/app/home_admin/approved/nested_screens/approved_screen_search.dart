@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_user_tile.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 
 class ApproveSearch extends SearchDelegate<String> {
@@ -9,7 +10,7 @@ class ApproveSearch extends SearchDelegate<String> {
     required this.approvedBloc,
   });
 
-  final List<User> users;
+  final List<Restaurent> users;
   final ApprovedBloc approvedBloc;
 
   @override

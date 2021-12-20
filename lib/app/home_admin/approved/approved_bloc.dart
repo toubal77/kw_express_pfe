@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
 import 'package:kw_express_pfe/services/database.dart';
@@ -10,23 +11,23 @@ class ApprovedBloc {
 
   final Database database;
 
-  Stream<List<User>> getUnApporvedUsers() {
+  Stream<List<Restaurent>> getUnApporvedUsers() {
     final Stream<List<String>> unApprovedIdsStream = database.streamCollection(
         path: 'users',
         builder: (data, id) => id,
         queryBuilder: (query) => query.where('isApproved', isEqualTo: false));
 
-    final Stream<List<User>> result = unApprovedIdsStream.transform(
+    final Stream<List<Restaurent>> result = unApprovedIdsStream.transform(
       StreamTransformer.fromHandlers(
           handleData: (List<String> event, EventSink output) async {
-        final List<Future<User?>> a = event.map((userId) async {
+        final List<Future<Restaurent?>> a = event.map((userId) async {
           return database.fetchDocument(
             path: APIPath.userDocument(userId),
-            builder: (data, id) => User.fromMap2(data, id),
+            builder: (data, id) => Restaurent.fromMap(data, id),
           );
         }).toList();
-        final List<User?> b = await Future.wait(a);
-        final List<User> c = b.whereType<User>().toList();
+        final List<Restaurent?> b = await Future.wait(a);
+        final List<Restaurent> c = b.whereType<Restaurent>().toList();
 
         output.add(c);
       }),

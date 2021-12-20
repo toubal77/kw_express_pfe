@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
@@ -12,7 +13,7 @@ class RestaurentDetailScreen extends StatefulWidget {
     required this.restaurent,
     required this.bloc,
   }) : super(key: key);
-  final User restaurent;
+  final Restaurent restaurent;
   final ApprovedBloc bloc;
 
   @override
@@ -44,7 +45,28 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Profile photo:'),
+              Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(widget.restaurent.profilePicture!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Text('Couverture photo:'),
+              Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(widget.restaurent.couvPicture!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               CustomTextForm(
                 isEnabled: false,
                 titleStyle: TextStyle(),

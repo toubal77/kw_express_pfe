@@ -3,6 +3,7 @@ import 'package:kw_express_pfe/app/home_admin/admin_logout.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_user_tile.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/nested_screens/approved_screen_search.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
@@ -18,9 +19,9 @@ class ApprovedScreen extends StatefulWidget {
 }
 
 class _ApprovedScreenState extends State<ApprovedScreen> {
-  late Stream<List<User>> unapprovedUsers;
+  late Stream<List<Restaurent>> unapprovedUsers;
   late final ApprovedBloc bloc;
-  late List<User> usersList = [];
+  late List<Restaurent> usersList = [];
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
   Widget build(BuildContext context) {
     return Material(
       color: backgroundColor,
-      child: StreamBuilder<List<User>>(
+      child: StreamBuilder<List<Restaurent>>(
         stream: unapprovedUsers,
         builder: (context, snapshot) {
           return Scaffold(
@@ -76,9 +77,9 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
     );
   }
 
-  Widget buildBody(AsyncSnapshot<List<User>> snapshot) {
+  Widget buildBody(AsyncSnapshot<List<Restaurent>> snapshot) {
     if (snapshot.hasData && snapshot.data != null) {
-      final List<User> items = snapshot.data!;
+      final List<Restaurent> items = snapshot.data!;
       usersList = items;
       if (items.isNotEmpty) {
         return ListView.builder(
@@ -94,7 +95,7 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: EmptyContent(
-            title: 'Aucun message ne suit les personnes pour commencer',
+            title: 'Aucun restaurent a approve',
             message: '',
           ),
         );
