@@ -39,7 +39,7 @@ class ApprovedBloc {
     logger.info('approving this user ${user.id}');
     database.setData(
       path: 'users/${user.id}',
-      data: {'isApproved': true},
+      data: {'isApproved': true, 'type': 2},
     );
   }
 }
