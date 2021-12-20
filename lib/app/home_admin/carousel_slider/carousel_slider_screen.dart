@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/home/admin/admin_logout.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/add_carousel_slider.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_bloc.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_tile.dart';
+import 'package:kw_express_pfe/app/home_admin/admin_logout.dart';
+import 'package:kw_express_pfe/app/home_admin/carousel_slider/add_carousel_slider.dart';
+import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
+import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_tile.dart';
 import 'package:kw_express_pfe/app/models/carousel_slider.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';

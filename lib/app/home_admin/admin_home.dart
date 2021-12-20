@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/home/admin/approved/approved_screen.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_screen.dart';
+import 'package:kw_express_pfe/app/home_admin/approved/approved_screen.dart';
+import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_screen.dart';
 import 'package:kw_express_pfe/app/models/admin.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';

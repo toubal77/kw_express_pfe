@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_bloc.dart';
+import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
 import 'package:kw_express_pfe/app/models/carousel_slider.dart';
 import 'package:kw_express_pfe/common_widgets/platform_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
