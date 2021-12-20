@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/admin/approved/approved_screen.dart';
-import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider.dart';
+import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_screen.dart';
 import 'package:kw_express_pfe/app/models/admin.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
@@ -24,11 +24,11 @@ class _AdminHomeState extends State<AdminHome> {
     admin = context.read<Admin>();
     super.initState();
     screens = [
-      AddImages(),
-      AddImages(),
-      AddImages(),
+      CarsouselSliderScreen(),
+      CarsouselSliderScreen(),
+      CarsouselSliderScreen(),
       ApprovedScreen(),
-      AddImages(),
+      CarsouselSliderScreen(),
       // ModeratorsScreen(),
       // SitesScreen(),
       // ReportedPostsScreen(),

@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider_bloc.dart';
 import 'package:kw_express_pfe/app/models/carousel_slider.dart';
-import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -16,16 +15,16 @@ import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 
-class AddImages extends StatefulWidget {
-  const AddImages({
+class AddCarouselSlider extends StatefulWidget {
+  const AddCarouselSlider({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddImages> createState() => _AddImagesState();
+  State<AddCarouselSlider> createState() => _AddCarouselSliderState();
 }
 
-class _AddImagesState extends State<AddImages> {
+class _AddCarouselSliderState extends State<AddCarouselSlider> {
   File? imageFile;
   File? profilePicture;
   String? profilePictures;

@@ -23,6 +23,18 @@ class CarouselSliderBloc {
     );
   }
 
+  Stream<List<CarouselSlider>> getCarouselSliders() {
+    return database.streamCollection(
+      path: 'carouselSlider',
+      builder: (data, id) => CarouselSlider.fromMap(data, id),
+      queryBuilder: (query) => query,
+    );
+  }
+
+  Future<void> deleteCarouselSlider(CarouselSlider carouselSlider) async =>
+      database.deleteDocument(
+          path: APIPath.carouselSliderDocument(carouselSlider.id));
+
   Future<void> saveCarouselSliderInfo(CarouselSlider carouselSlider) async {
     await database.setData(
       path: APIPath.carouselSliderDocument(carouselSlider.id),
