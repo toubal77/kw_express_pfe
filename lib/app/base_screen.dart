@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/app/home_admin/admin_home.dart';
+import 'package:kw_express_pfe/app/home_restaurent/restaurent_home.dart';
 import 'package:kw_express_pfe/app/models/admin.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
@@ -85,9 +86,16 @@ class _BaseScreenState extends State<BaseScreen> {
                   child: Navigator(
                     key: navigatorKey,
                     onGenerateRoute: (routeSettings) {
-                      return MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      );
+                      if (user.type == 1) {
+                        return MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        );
+                      }
+                      if (user.type == 2) {
+                        return MaterialPageRoute(
+                          builder: (context) => RestaurentHome(),
+                        );
+                      }
                     },
                   ),
                 ),
