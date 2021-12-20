@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:kw_express_pfe/app/models/carousel_slider.dart';
+import 'package:kw_express_pfe/app/models/carousel_slide.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
@@ -23,19 +23,19 @@ class CarouselSliderBloc {
     );
   }
 
-  Stream<List<CarouselSlider>> getCarouselSliders() {
+  Stream<List<CarouselSlideModel>> getCarouselSliders() {
     return database.streamCollection(
       path: 'carouselSlider',
-      builder: (data, id) => CarouselSlider.fromMap(data, id),
+      builder: (data, id) => CarouselSlideModel.fromMap(data, id),
       queryBuilder: (query) => query,
     );
   }
 
-  Future<void> deleteCarouselSlider(CarouselSlider carouselSlider) async =>
+  Future<void> deleteCarouselSlider(CarouselSlideModel carouselSlider) async =>
       database.deleteDocument(
           path: APIPath.carouselSliderDocument(carouselSlider.id));
 
-  Future<void> saveCarouselSliderInfo(CarouselSlider carouselSlider) async {
+  Future<void> saveCarouselSliderInfo(CarouselSlideModel carouselSlider) async {
     await database.setData(
       path: APIPath.carouselSliderDocument(carouselSlider.id),
       data: carouselSlider.toMap(),

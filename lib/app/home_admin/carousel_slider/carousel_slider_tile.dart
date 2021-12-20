@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
-import 'package:kw_express_pfe/app/models/carousel_slider.dart';
+import 'package:kw_express_pfe/app/models/carousel_slide.dart';
 import 'package:kw_express_pfe/common_widgets/platform_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 
@@ -12,7 +12,7 @@ class CarouselSliderTile extends StatefulWidget {
   }) : super(key: key);
 
   final CarouselSliderBloc carouselSliderBloc;
-  final CarouselSlider tuple;
+  final CarouselSlideModel tuple;
   @override
   _CarouselSliderTileState createState() => _CarouselSliderTileState();
 }

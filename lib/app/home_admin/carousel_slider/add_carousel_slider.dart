@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
-import 'package:kw_express_pfe/app/models/carousel_slider.dart';
+import 'package:kw_express_pfe/app/models/carousel_slide.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -66,7 +66,7 @@ class _AddCarouselSliderState extends State<AddCarouselSlider> {
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
-      final CarouselSlider carouselSlider = CarouselSlider(
+      final CarouselSlideModel carouselSlider = CarouselSlideModel(
         id: carouselId,
         pictureUrl: profilePictureUrl,
         createdBy: auth.currentUser()!.uid,

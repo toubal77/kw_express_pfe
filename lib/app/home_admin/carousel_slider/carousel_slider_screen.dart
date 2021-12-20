@@ -3,7 +3,8 @@ import 'package:kw_express_pfe/app/home_admin/admin_logout.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/add_carousel_slider.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_tile.dart';
-import 'package:kw_express_pfe/app/models/carousel_slider.dart';
+
+import 'package:kw_express_pfe/app/models/carousel_slide.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -19,7 +20,7 @@ class CarsouselSliderScreen extends StatefulWidget {
 }
 
 class _CarsouselSliderScreenState extends State<CarsouselSliderScreen> {
-  late Stream<List<CarouselSlider>> carouselSlider;
+  late Stream<List<CarouselSlideModel>> carouselSlider;
   late final CarouselSliderBloc carouselSliderBloc;
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _CarsouselSliderScreenState extends State<CarsouselSliderScreen> {
   Widget build(BuildContext context) {
     return Material(
       color: backgroundColor,
-      child: StreamBuilder<List<CarouselSlider>>(
+      child: StreamBuilder<List<CarouselSlideModel>>(
         stream: carouselSlider,
         builder: (context, snapshot) {
           return Scaffold(
@@ -74,9 +75,9 @@ class _CarsouselSliderScreenState extends State<CarsouselSliderScreen> {
     );
   }
 
-  Widget buildBody(AsyncSnapshot<List<CarouselSlider>> snapshot) {
+  Widget buildBody(AsyncSnapshot<List<CarouselSlideModel>> snapshot) {
     if (snapshot.hasData && snapshot.data != null) {
-      final List<CarouselSlider> items = snapshot.data!;
+      final List<CarouselSlideModel> items = snapshot.data!;
 
       if (items.isNotEmpty) {
         final List<Widget> list = [];
