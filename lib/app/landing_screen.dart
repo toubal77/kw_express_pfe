@@ -22,13 +22,7 @@ class LandingScreen extends StatelessWidget {
           if (user == null) {
             return SingInScreen();
           } else {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) {
-                  return HomeScreen();
-                },
-              ),
-            );
+            return HomeScreen();
           }
           // return Provider.value(
           //   value: user,

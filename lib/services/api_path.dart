@@ -10,14 +10,16 @@ class APIPath {
   static String savedProductDocument(String userId) =>
       'users/$userId/savedProducts/savedProducts';
 
+  static String carouselSliderDocument(String carouselSliderId) =>
+      'carouselSlider/$carouselSliderId';
   // files
   static String userProfilePicture(String uid, String photoId) =>
       'users/$uid/profile_picutres/$photoId';
 
-  static String productsFiles(
+  static String carouselSlidersFiles(
     String userId,
-    String productId,
+    String carsouselSliderId,
     String photoId,
   ) =>
-      'products/user_$userId/product_$productId/$photoId';
+      'carsouselSlider/user_$userId/carsouselSlider_$carsouselSliderId/$photoId';
 }
