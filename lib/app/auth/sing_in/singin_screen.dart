@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sign_in_bloc.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/sing_in_form.dart';
+import 'package:kw_express_pfe/app/base_screen.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
@@ -48,14 +49,6 @@ class _SingInScreenState extends State<SingInScreen> {
   Future<void> sendInfoLogin() async {
     try {
       await bloc.signIn(usernames, passwords);
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return HomeScreen();
-          },
-        ),
-      );
     } on Exception catch (e) {
       PlatformExceptionAlertDialog(exception: e).show(context);
     }

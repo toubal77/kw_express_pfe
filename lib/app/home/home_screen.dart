@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/home_admin/admin_home.dart';
+import 'package:kw_express_pfe/app/home/home.dart';
 
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //     FirebaseMessagingService();
     // firebaseMessagingService.configFirebaseNotification(user.id, database);
     screens = [
-      AdminHome(), AdminHome(), AdminHome(), AdminHome(),
+      Home(), Home(), Home(), Home(),
       // ProfileScreen(user: user),
     ];
   }
