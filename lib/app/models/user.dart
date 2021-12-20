@@ -7,6 +7,8 @@ class User {
     required this.type,
     required this.name,
     required this.phoneNumber,
+    required this.address,
+    required this.isApproved,
     required this.isModerator,
     required this.wilaya,
   });
@@ -17,7 +19,9 @@ class User {
   final String id;
   final int type;
   final String name;
+  final String? address;
   final String phoneNumber;
+  final bool isApproved;
   final bool isModerator;
   final int wilaya;
 
@@ -25,15 +29,19 @@ class User {
     final String id = documentId;
     final int type = data['type'] as int;
     final String name = data['name'] as String;
+    final String? address = data['address'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
     final bool isModerator = data['isModerator'] as bool;
+    final bool isApproved = data['isApproved'] as bool;
     final int wilaya = data['wilaya'] as int;
     return User(
       id: id,
       type: type,
       name: name,
+      address: address,
       phoneNumber: phoneNumber,
       isModerator: isModerator,
+      isApproved: isApproved,
       wilaya: wilaya,
     );
   }
@@ -50,7 +58,10 @@ class User {
     return {
       'type': type,
       'name': name,
+      'address': address,
       'phoneNumber': phoneNumber,
+      'isModerator': isModerator,
+      'isApproved': isApproved,
       'wilaya': wilaya,
     };
   }

@@ -54,15 +54,17 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
-      final Client store = Client(
+      final Client client = Client(
         id: '',
         type: 1,
         name: _username,
+        address: '',
         phoneNumber: _phoneNumber,
         isModerator: false,
+        isApproved: true,
         wilaya: _wilaya,
       );
-      await bloc.saveClientInfo(store);
+      await bloc.saveClientInfo(client);
       pd.close();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();

@@ -7,8 +7,10 @@ class Admin extends User {
           id: id,
           type: 0,
           name: 'name',
+          address: '',
           phoneNumber: '0',
           isModerator: false,
+          isApproved: false,
           wilaya: 31,
         );
 

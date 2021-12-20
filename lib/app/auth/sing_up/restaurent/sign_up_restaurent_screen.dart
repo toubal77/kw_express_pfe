@@ -55,16 +55,17 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
-      final Restaurent store = Restaurent(
+      final Restaurent restaurent = Restaurent(
         id: '',
         type: 2,
         name: usernames,
         phoneNumber: phoneNumberr,
         adress: addresss,
         isModerator: false,
+        isApproved: false,
         wilaya: wilayaa,
       );
-      await bloc.saveClientInfo(store);
+      await bloc.saveRestaurentInfo(restaurent);
       pd.close();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();

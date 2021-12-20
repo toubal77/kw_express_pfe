@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/singin_screen.dart';
+import 'package:kw_express_pfe/app/base_screen.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/loading_screen.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -21,13 +22,14 @@ class LandingScreen extends StatelessWidget {
 
           if (user == null) {
             return SingInScreen();
-          } else {
-            return HomeScreen();
           }
-          // return Provider.value(
-          //   value: user,
-          //   child: BaseScreen(),
-          // );
+          //else {
+          //  return HomeScreen();
+          //}
+          return Provider.value(
+            value: user,
+            child: BaseScreen(),
+          );
         }
         return LoadingScreen();
       },

@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:kw_express_pfe/app/models/client.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -78,10 +80,18 @@ class SignUpBloc {
     }
   }
 
-  Future<void> saveClientInfo(User user) async {
+  Future<void> saveClientInfo(Client client) async {
     await database.setData(
       path: APIPath.userDocument(_authUser.uid),
-      data: user.toMap(),
+      data: client.toMap(),
+      merge: false,
+    );
+  }
+
+  Future<void> saveRestaurentInfo(Restaurent restaurent) async {
+    await database.setData(
+      path: APIPath.userDocument(_authUser.uid),
+      data: restaurent.toMap(),
       merge: false,
     );
   }

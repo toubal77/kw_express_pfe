@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/admin/admin_home.dart';
 import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/app/models/admin.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
@@ -28,7 +29,8 @@ class _BaseScreenState extends State<BaseScreen> {
     userstram = database.streamDocument(
       path: APIPath.userDocument(authUser.uid),
       builder: (data, documentId) {
-        if (data.containsKey('isAdmin')) {
+        // if (data.containsKey('isAdmin')) {
+        if (data['isModerator'] == true) {
           return Admin.fromMap(data, documentId);
         }
         return User.fromMap2(data, documentId);
@@ -59,8 +61,8 @@ class _BaseScreenState extends State<BaseScreen> {
                     key: navigatorKey,
                     onGenerateRoute: (routeSettings) {
                       return MaterialPageRoute(
-                        //   builder: (context) => AdminHome(),
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => AdminHome(),
+                        //  builder: (context) => HomeScreen(),
                       );
                     },
                   ),
