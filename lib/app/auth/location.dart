@@ -15,20 +15,24 @@ class _SelectLocationState extends State<SelectLocation> {
   bool getLocation = false;
   bool isLoading = false;
   late String adressUser;
+  // ignore: always_declare_return_types, type_annotate_public_apis
   getUserLocation() async {
-    GeoCode geoCode = GeoCode();
+    final GeoCode geoCode = GeoCode();
     setState(() {
       isLoading = true;
     });
     try {
-      var position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      var lastPosition = await Geolocator.getLastKnownPosition();
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      final lastPosition = await Geolocator.getLastKnownPosition();
       print(lastPosition);
       print('lalitude: ${position.latitude}, logitude: ${position.latitude}');
 
-      Address address = await geoCode.reverseGeocoding(
-          latitude: position.latitude, longitude: position.longitude);
+      final Address address = await geoCode.reverseGeocoding(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
       print("Street Number: ${address.streetNumber}");
       print("Street Address: ${address.streetAddress}");
       print("City: ${address.city}");
@@ -80,7 +84,10 @@ class _SelectLocationState extends State<SelectLocation> {
                   width: 224.69.w,
                   height: 170.69.h,
                   margin: const EdgeInsets.only(
-                      top: 133, left: 94.66, right: 94.66),
+                    top: 133,
+                    left: 94.66,
+                    right: 94.66,
+                  ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(whiteLogo),
@@ -119,60 +126,65 @@ class _SelectLocationState extends State<SelectLocation> {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      getLocation
-                          ? SizedBox(
-                              width: 324.w,
-                              height: 57.h,
+                      if (getLocation)
+                        SizedBox(
+                          width: 324.w,
+                          height: 57.h,
+                          child: Text(
+                            'Your adress: $adressUser',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff7C7C7C),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      else
+                        SizedBox(),
+                      if (isLoading)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: CircularProgressIndicator(),
+                        )
+                      else
+                        TextButton(
+                          onPressed: () {
+                            if (getLocation == true) {
+                              // Navigator.of(context).pushReplacement(
+                              //   MaterialPageRoute(
+                              //     builder: (context) {
+                              //       return const HomeWidget();
+                              //     },
+                              //   ),
+                              // );
+                            } else {
+                              getUserLocation();
+                            }
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                              top: 25,
+                              left: 25.3,
+                              right: 24.52,
+                            ),
+                            width: 364.w,
+                            height: 67.h,
+                            decoration: BoxDecoration(
+                              color: Color(0xff53B175),
+                              borderRadius: BorderRadius.circular(19),
+                            ),
+                            child: Center(
                               child: Text(
-                                'Your adress: $adressUser',
+                                !getLocation ? 'Get Location' : 'Submit',
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xff7C7C7C),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : SizedBox(),
-                      isLoading
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: CircularProgressIndicator(),
-                            )
-                          : TextButton(
-                              onPressed: () {
-                                if (getLocation == true) {
-                                  // Navigator.of(context).pushReplacement(
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) {
-                                  //       return const HomeWidget();
-                                  //     },
-                                  //   ),
-                                  // );
-                                } else {
-                                  getUserLocation();
-                                }
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                    top: 25, left: 25.3, right: 24.52),
-                                width: 364.w,
-                                height: 67.h,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff53B175),
-                                  borderRadius: BorderRadius.circular(19),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    !getLocation ? 'Get Location' : 'Submit',
-                                    style: TextStyle(
-                                      color: Color(0xffFFF9FF),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                  color: Color(0xffFFF9FF),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
+                          ),
+                        ),
                     ],
                   ),
                 ),

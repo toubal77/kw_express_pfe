@@ -38,7 +38,6 @@ class _SignUpPhoneConfirmationState extends State<SignUpPhoneConfirmation> {
       appBar: CustomAppBar(),
       backgroundColor: backgroundColor,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 30),
           SignUpTitle(title: 'confirmation du numéro'),

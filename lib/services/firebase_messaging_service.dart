@@ -4,9 +4,9 @@ import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:kw_express_pfe/services/api_path.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
-import 'api_path.dart';
 
 class FirebaseMessagingService {
   FirebaseMessagingService();
@@ -19,25 +19,28 @@ class FirebaseMessagingService {
     final initializationSettingsAndroid =
         AndroidInitializationSettings('launcher_icon');
     final initializationSettingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) {
-      // this is for iphone usings ios under 10
+      onDidReceiveLocalNotification:
+          (int id, String? title, String? body, String? payload) {
+        // this is for iphone usings ios under 10
 
-      // didReceiveLocalNotificationSubject.add(ReceivedNotification(
-      //     id: id, title: title, body: body, payload: payload));
-    });
+        // didReceiveLocalNotificationSubject.add(ReceivedNotification(
+        //     id: id, title: title, body: body, payload: payload));
+      },
+    );
     final initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (dynamic payload) async {
-      if (payload != null) {
-        //! clicking on the notif callback
-        logger.info('onMessage Clicked: ');
-        logger.info(payload);
-      }
-    });
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onSelectNotification: (dynamic payload) async {
+        if (payload != null) {
+          //! clicking on the notif callback
+          logger.info('onMessage Clicked: ');
+          logger.info(payload);
+        }
+      },
+    );
   }
 
   Future<void> configFirebaseNotification(String uid, Database database) async {
@@ -49,7 +52,8 @@ class FirebaseMessagingService {
 
       if (message.notification != null) {
         logger.info(
-            'Message also contained a notification: ${message.notification}');
+          'Message also contained a notification: ${message.notification}',
+        );
         logger.info("onMessage: $message");
 
         _showNotification(message.notification);

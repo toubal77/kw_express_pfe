@@ -21,20 +21,24 @@ class _SignInForm2State extends State<SignInForm2> {
   bool getLocation = false;
   bool isLoading = false;
   late String adressUser;
+  // ignore: always_declare_return_types, type_annotate_public_apis
   getUserLocation() async {
-    GeoCode geoCode = GeoCode();
+    final GeoCode geoCode = GeoCode();
     setState(() {
       isLoading = true;
     });
     try {
-      var position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      var lastPosition = await Geolocator.getLastKnownPosition();
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      final lastPosition = await Geolocator.getLastKnownPosition();
       print(lastPosition);
       print('lalitude: ${position.latitude}, logitude: ${position.latitude}');
 
-      Address address = await geoCode.reverseGeocoding(
-          latitude: position.latitude, longitude: position.longitude);
+      final Address address = await geoCode.reverseGeocoding(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
       print("Street Number: ${address.streetNumber}");
       print("Street Address: ${address.streetAddress}");
       print("City: ${address.city}");
@@ -70,7 +74,10 @@ class _SignInForm2State extends State<SignInForm2> {
                   width: 224.69.w,
                   height: 170.69.h,
                   margin: const EdgeInsets.only(
-                      top: 133, left: 94.66, right: 94.66),
+                    top: 133,
+                    left: 94.66,
+                    right: 94.66,
+                  ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(whiteLogo),
@@ -109,38 +116,40 @@ class _SignInForm2State extends State<SignInForm2> {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      getLocation
-                          ? SizedBox(
-                              width: 324.w,
-                              height: 57.h,
-                              child: Text(
-                                'Your adress: $adressUser',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xff7C7C7C),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : SizedBox(),
-                      isLoading
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: CircularProgressIndicator(),
-                            )
-                          : ButtomMedia(
-                              press: () {
-                                if (getLocation == true) {
-                                  widget.onSaved(
-                                    address: adressUser,
-                                  );
-                                } else {
-                                  getUserLocation();
-                                }
-                              },
-                              color: Color(0xff5383EC),
-                              text: !getLocation ? 'Get Location' : 'Submit',
+                      if (getLocation)
+                        SizedBox(
+                          width: 324.w,
+                          height: 57.h,
+                          child: Text(
+                            'Your adress: $adressUser',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff7C7C7C),
                             ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      else
+                        SizedBox(),
+                      if (isLoading)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: CircularProgressIndicator(),
+                        )
+                      else
+                        ButtomMedia(
+                          press: () {
+                            if (getLocation == true) {
+                              widget.onSaved(
+                                address: adressUser,
+                              );
+                            } else {
+                              getUserLocation();
+                            }
+                          },
+                          color: Color(0xff5383EC),
+                          text: !getLocation ? 'Get Location' : 'Submit',
+                        ),
                       const SizedBox(
                         height: 15,
                       ),

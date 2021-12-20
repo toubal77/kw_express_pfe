@@ -124,11 +124,8 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     SizedBox(
                       child: CustomTextForm(
-                        fillColor: Colors.white,
-                        textInputType: TextInputType.text,
                         title: 'Username:',
                         textInputAction: TextInputAction.done,
-                        isPhoneNumber: false,
                         onChanged: (var value) {
                           email = value;
                         },
@@ -145,11 +142,9 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     SizedBox(
                       child: CustomTextForm(
-                        fillColor: Colors.white,
                         textInputType: TextInputType.visiblePassword,
                         title: 'Password:',
                         textInputAction: TextInputAction.done,
-                        isPhoneNumber: false,
                         isPassword: true,
                         onChanged: (var value) {
                           password = value;
@@ -167,10 +162,13 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return ForgotPassScreen();
-                        }));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ForgotPassScreen();
+                            },
+                          ),
+                        );
                       },
                       child: Container(
                         alignment: Alignment.topRight,

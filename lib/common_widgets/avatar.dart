@@ -36,12 +36,13 @@ class _AvatarState extends State<Avatar> {
         }
       },
       child: CircleAvatar(
-          radius: 75,
-          backgroundImage: imageFile == null
-              ? null
-              : MemoryImage(imageFile!.readAsBytesSync()),
-          backgroundColor: Colors.black12,
-          child: imageFile == null ? widget.placeHolder : null),
+        radius: 75,
+        backgroundImage: imageFile == null
+            ? null
+            : MemoryImage(imageFile!.readAsBytesSync()),
+        backgroundColor: Colors.black12,
+        child: imageFile == null ? widget.placeHolder : null,
+      ),
     );
   }
 }

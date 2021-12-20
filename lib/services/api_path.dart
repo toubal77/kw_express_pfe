@@ -1,3 +1,4 @@
+// ignore: avoid_classes_with_only_static_members
 class APIPath {
   static String userDocument(String uid) => 'users/$uid/';
   static String usersCollection() => 'users/';
@@ -14,6 +15,9 @@ class APIPath {
       'users/$uid/profile_picutres/$photoId';
 
   static String productsFiles(
-          String userId, String productId, String photoId) =>
+    String userId,
+    String productId,
+    String photoId,
+  ) =>
       'products/user_$userId/product_$productId/$photoId';
 }

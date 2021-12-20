@@ -5,6 +5,7 @@ import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/services/auth.dart';
+// ignore: implementation_imports
 import 'package:provider/src/provider.dart';
 
 class SingInScreen extends StatefulWidget {
@@ -47,10 +48,14 @@ class _SingInScreenState extends State<SingInScreen> {
   Future<void> sendInfoLogin() async {
     try {
       await bloc.signIn(usernames, passwords);
-      Navigator.of(context)
-        ..pushReplacement(MaterialPageRoute(builder: (context) {
-          return HomeScreen();
-        }));
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeScreen();
+          },
+        ),
+      );
     } on Exception catch (e) {
       PlatformExceptionAlertDialog(exception: e).show(context);
     }

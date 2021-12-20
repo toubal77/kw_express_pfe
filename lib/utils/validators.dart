@@ -1,3 +1,4 @@
+// ignore: avoid_classes_with_only_static_members
 class Validators {
   static bool isValidName(String? value) {
     if (value != null) {
@@ -10,8 +11,8 @@ class Validators {
   static bool isValidUsername(String? value) {
     if (value != null) {
       return RegExp(
-              r'^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')
-          .hasMatch(value);
+        r'^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$',
+      ).hasMatch(value);
     } else {
       return false;
     }

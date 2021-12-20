@@ -6,6 +6,7 @@ class Restaurent extends User {
     required int type,
     required String name,
     required String phoneNumber,
+    // ignore: avoid_unused_constructor_parameters
     required String adress,
     required bool isModerator,
     required int wilaya,
