@@ -6,6 +6,8 @@ class Restaurent extends User {
     required int type,
     required String name,
     required String phoneNumber,
+    required String? profilePicture,
+    required String? couvPicture,
     required String? adress,
     required bool isModerator,
     required bool isApproved,
@@ -16,6 +18,8 @@ class Restaurent extends User {
           name: name,
           address: adress,
           isApproved: isApproved,
+          couvPicture: couvPicture,
+          profilePicture: profilePicture,
           phoneNumber: phoneNumber,
           isModerator: isModerator,
           wilaya: wilaya,
@@ -26,6 +30,8 @@ class Restaurent extends User {
     final int type = data['type'] as int;
     final String name = data['name'] as String;
     final String phoneNumber = data['phoneNumber'] as String;
+    final String? profilePicture = data['profilePicture'] as String?;
+    final String? couvPicture = data['couvPicture'] as String?;
     final String? adress = data['address'] as String?;
     final bool isModerator = data['isModerator'] as bool;
     final bool isApproved = data['isApproved'] as bool;
@@ -36,6 +42,8 @@ class Restaurent extends User {
       type: type,
       name: name,
       phoneNumber: phoneNumber,
+      couvPicture: couvPicture,
+      profilePicture: profilePicture,
       adress: adress,
       isModerator: isModerator,
       isApproved: isApproved,

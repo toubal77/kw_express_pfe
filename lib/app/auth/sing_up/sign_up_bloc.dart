@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:kw_express_pfe/app/models/client.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
-import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
@@ -20,6 +21,20 @@ class SignUpBloc {
 
   String? verificationId;
   late AuthUser _authUser;
+
+  Future<String> uploadProfilePicture(File file) async {
+    return database.uploadFile(
+      path: APIPath.userProfilePicture(_authUser.uid, uuid.v4()),
+      filePath: file.path,
+    );
+  }
+
+  Future<String> uploadCouvPicture(File file) async {
+    return database.uploadFile(
+      path: APIPath.userCouvPicture(_authUser.uid, uuid.v4()),
+      filePath: file.path,
+    );
+  }
 
   Future<void> verifyPhoneNumber(String phoneNumber) async {
     await auth.verifyPhoneNumber(

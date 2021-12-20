@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
+import 'package:kw_express_pfe/common_widgets/avatar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_drop_down.dart';
 import 'package:kw_express_pfe/common_widgets/custom_scaffold.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
+import 'package:kw_express_pfe/constants/assets_constants.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
 import 'package:kw_express_pfe/utils/validators.dart';
 
@@ -20,6 +24,8 @@ class SignUpRestaurentForm extends StatefulWidget {
     required String password,
     required String address,
     required String phoneNumber,
+    required File? imageFile,
+    required File? imageFile2,
   }) onSaved;
 
   @override
@@ -32,6 +38,8 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
   late String password;
   late String phoneNumber;
   late String address;
+  File? imageFile;
+  File? imageFile2;
   late final GlobalKey<FormState> _formKey;
   bool isButtonEnabled = true;
 
@@ -61,6 +69,68 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8.0,
+                        right: 8.0,
+                        bottom: 16.0,
+                      ),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 8.0,
+                                    right: 8.0,
+                                    bottom: 16.0,
+                                  ),
+                                  child: Text('Photo de profile :'),
+                                ),
+                                Avatar(
+                                  placeHolder: Image.asset(
+                                    uploadPicture,
+                                    width: 150,
+                                  ),
+                                  onChanged: (File f) {
+                                    imageFile = f;
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 8.0,
+                              right: 8.0,
+                              bottom: 16.0,
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 8.0,
+                                    right: 8.0,
+                                    bottom: 16.0,
+                                  ),
+                                  child: Text('Photo de couverture :'),
+                                ),
+                                Avatar(
+                                  placeHolder: Image.asset(
+                                    uploadPicture,
+                                    width: 150,
+                                  ),
+                                  onChanged: (File f) {
+                                    imageFile2 = f;
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     Padding(
                       padding: padding,
                       child: CustomTextForm(
@@ -198,6 +268,8 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                         password: password,
                         address: address,
                         phoneNumber: phoneNumber,
+                        imageFile: imageFile,
+                        imageFile2: imageFile2,
                       );
                     }
                   },

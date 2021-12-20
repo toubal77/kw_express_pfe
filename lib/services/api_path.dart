@@ -15,6 +15,8 @@ class APIPath {
   // files
   static String userProfilePicture(String uid, String photoId) =>
       'users/$uid/profile_picutres/$photoId';
+  static String userCouvPicture(String uid, String photoId) =>
+      'users/$uid/couv_picutres/$photoId';
 
   static String carouselSlidersFiles(
     String userId,

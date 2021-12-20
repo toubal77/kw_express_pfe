@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/restaurent/sign_up_restaurent_form.dart';
 import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
@@ -29,6 +31,8 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
   late String passwords;
   late String addresss;
   late String phoneNumberr;
+  late File? imageFilee;
+  late File? imageFilee2;
 
   @override
   void initState() {
@@ -51,7 +55,9 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
   }
 
   Future<void> sendRestaurentInfo() async {
-    // start loading widget
+    final String profilePictureUrl =
+        await bloc.uploadProfilePicture(imageFilee!);
+    final String couvPicture = await bloc.uploadCouvPicture(imageFilee2!);
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
@@ -60,6 +66,8 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
         type: 2,
         name: usernames,
         phoneNumber: phoneNumberr,
+        couvPicture: couvPicture,
+        profilePicture: profilePictureUrl,
         adress: addresss,
         isModerator: false,
         isApproved: false,
@@ -107,6 +115,8 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
                 required String username,
                 required String address,
                 required int wilaya,
+                required File? imageFile,
+                required File? imageFile2,
               }) async {
                 try {
                   passwords = password;
@@ -114,7 +124,8 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
                   usernames = username;
                   addresss = address;
                   wilayaa = wilaya;
-
+                  imageFilee = imageFile;
+                  imageFilee2 = imageFile2;
                   await bloc.verifyPhoneNumber(phoneNumber);
                   swipePage(1);
                 } on Exception catch (e) {

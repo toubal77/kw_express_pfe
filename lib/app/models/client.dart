@@ -6,6 +6,8 @@ class Client extends User {
     required int type,
     required String name,
     required String? address,
+    required String? profilePicture,
+    required String? couvPicture,
     required String phoneNumber,
     required bool isModerator,
     required bool isApproved,
@@ -16,6 +18,8 @@ class Client extends User {
           name: name,
           address: address,
           phoneNumber: phoneNumber,
+          couvPicture: couvPicture,
+          profilePicture: profilePicture,
           isApproved: isApproved,
           isModerator: isModerator,
           wilaya: wilaya,
@@ -26,6 +30,8 @@ class Client extends User {
     final int type = data['type'] as int;
     final String name = data['name'] as String;
     final String? address = data['address'] as String?;
+    final String? profilePicture = data['profilePicture'] as String?;
+    final String? couvPicture = data['couvPicture'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
     final bool isModerator = data['isModerator'] as bool;
     final bool isApproved = data['isApproved'] as bool;
@@ -36,6 +42,8 @@ class Client extends User {
       type: type,
       name: name,
       address: address,
+      profilePicture: profilePicture,
+      couvPicture: couvPicture,
       phoneNumber: phoneNumber,
       isApproved: isApproved,
       isModerator: isModerator,

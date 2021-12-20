@@ -6,6 +6,8 @@ class User {
     required this.id,
     required this.type,
     required this.name,
+    required this.profilePicture,
+    required this.couvPicture,
     required this.phoneNumber,
     required this.address,
     required this.isApproved,
@@ -20,6 +22,8 @@ class User {
   final int type;
   final String name;
   final String? address;
+  final String? profilePicture;
+  final String? couvPicture;
   final String phoneNumber;
   final bool isApproved;
   final bool isModerator;
@@ -31,6 +35,8 @@ class User {
     final String name = data['name'] as String;
     final String? address = data['address'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
+    final String? profilePicture = data['profilePicture'] as String?;
+    final String? couvPicture = data['couvPicture'] as String?;
     final bool isModerator = data['isModerator'] as bool;
     final bool isApproved = data['isApproved'] as bool;
     final int wilaya = data['wilaya'] as int;
@@ -39,6 +45,8 @@ class User {
       type: type,
       name: name,
       address: address,
+      profilePicture: profilePicture,
+      couvPicture: couvPicture,
       phoneNumber: phoneNumber,
       isModerator: isModerator,
       isApproved: isApproved,
@@ -60,6 +68,8 @@ class User {
       'name': name,
       'address': address,
       'phoneNumber': phoneNumber,
+      'profilePicture': profilePicture,
+      'couvPicture': couvPicture,
       'isModerator': isModerator,
       'isApproved': isApproved,
       'wilaya': wilaya,

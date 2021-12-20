@@ -8,6 +8,8 @@ class Admin extends User {
           type: 0,
           name: 'name',
           address: '',
+          profilePicture: '',
+          couvPicture: '',
           phoneNumber: '0',
           isModerator: false,
           isApproved: false,

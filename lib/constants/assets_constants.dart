@@ -6,3 +6,4 @@ const String iconGMsvg = 'assets/drawable/gmail.svg';
 const String iconKWsvg = 'assets/drawable/kw.svg';
 const String iconLogosvg = 'assets/drawable/logo.svg';
 const String iconVIBERsvg = 'assets/drawable/viber.svg';
+const String uploadPicture = 'assets/drawable_png/club_upload_picture.png';
