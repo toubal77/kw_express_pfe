@@ -43,7 +43,7 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
               actions: [AdminLogout()],
               iconTheme: IconThemeData(color: darkBlue),
               title: Text(
-                'Users',
+                'Restaurents',
                 style: TextStyle(color: Colors.black),
               ),
               leading: Padding(

@@ -25,15 +25,7 @@ class _AdminHomeState extends State<AdminHome> {
     super.initState();
     screens = [
       CarsouselSliderScreen(),
-      CarsouselSliderScreen(),
-      CarsouselSliderScreen(),
       ApprovedScreen(),
-      CarsouselSliderScreen(),
-      // ModeratorsScreen(),
-      // SitesScreen(),
-      // ReportedPostsScreen(),
-      // ApprovedScreen(),
-      // SubScreen(),
     ];
   }
 
@@ -70,12 +62,9 @@ class _AdminHomeState extends State<AdminHome> {
             setState(() => this.index = index);
           },
           items: [
-            FABBottomAppBarItem(iconData: Icons.people, notification: 0),
-            FABBottomAppBarItem(iconData: Icons.gps_fixed, notification: 0),
-            FABBottomAppBarItem(iconData: Icons.report, notification: 0),
-            FABBottomAppBarItem(iconData: Icons.report, notification: 0),
             FABBottomAppBarItem(
-                iconData: Icons.account_circle_outlined, notification: 0),
+                iconData: Icons.picture_in_picture, notification: 0),
+            FABBottomAppBarItem(iconData: Icons.restaurant, notification: 0),
           ],
           backgroundColor: Colors.white,
         ),
@@ -83,42 +72,3 @@ class _AdminHomeState extends State<AdminHome> {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:kw_express_pfe/app/home/admin/carousel_slider/carousel_slider.dart';
-// import 'package:kw_express_pfe/services/firebase_auth.dart';
-
-// class Home extends StatelessWidget {
-//   const Home({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Column(
-//           children: [
-//             TextButton(
-//               onPressed: () {
-//                // FirebaseAuthService().signOut();
-//                     context.read<Auth>().signOut();
-//               },
-//               child: Text('Sing out'),
-//             ),
-//             TextButton(
-//               onPressed: () {
-//                 Navigator.of(context).push(
-//                   MaterialPageRoute(
-//                     builder: (context) {
-//                       return AddImages();
-//                     },
-//                   ),
-//                 );
-//               },
-//               child: Text('Add images'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
