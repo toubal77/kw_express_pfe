@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/feed/widget/build_resto.dart';
 import 'package:kw_express_pfe/app/home/feed/carousel_slider/carousel.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
 import 'package:kw_express_pfe/app/models/carousel_slide.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -20,6 +23,7 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   late FeedBloc bloc;
   late Stream<List<CarouselSlideModel>> carouselSliderStream;
+  late Stream<List<Restaurent>> allRestaurent;
   late CarouselSliderBloc carouselSliderBloc;
   late bool isLoadingNextMessages;
 
@@ -30,7 +34,7 @@ class _FeedScreenState extends State<FeedScreen> {
       currentUser: context.read<User>(),
       database: context.read<Database>(),
     );
-
+    allRestaurent = bloc.getAllResto();
     carouselSliderBloc = CarouselSliderBloc(
       currentUser: context.read<Auth>(),
       database: context.read<Database>(),
@@ -45,7 +49,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: ListView(
+        body: Column(
           children: [
             Carousel(
               carouselSliderStream: carouselSliderStream,
@@ -72,6 +76,41 @@ class _FeedScreenState extends State<FeedScreen> {
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                 ),
+              ),
+            ),
+            Expanded(
+              child: StreamBuilder<List<Restaurent?>>(
+                stream: allRestaurent,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    final List<Restaurent?> typeMenu = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: typeMenu.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return CardBuildRestaurent(
+                          res: typeMenu[index],
+                          isLoading: false,
+                        );
+                      },
+                    );
+                  } else if (!(snapshot.hasData && snapshot.data != null)) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: EmptyContent(
+                        title: 'Aucune Données',
+                        message: '',
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return EmptyContent(
+                      title: "Quelque chose s'est mal passé",
+                      message:
+                          "Impossible de charger les éléments pour le moment",
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
               ),
             ),
           ],
