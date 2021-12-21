@@ -25,6 +25,13 @@ class RestaurentBloc {
     );
   }
 
+  Stream<List<MenuRestaurent>> getMenuResto() {
+    return database.streamCollection(
+      path: APIPath.menuRestoCollection(currentUser.id),
+      builder: (data, documentId) => MenuRestaurent.fromMap(data, documentId),
+    );
+  }
+
   Future<void> sendMenuRestoInfo(MenuRestaurent menuResto) async {
     final Uuid uuid = Uuid();
     String menuRestoId = uuid.v4();

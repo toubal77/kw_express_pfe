@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_logout.dart';
+import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
@@ -19,6 +20,7 @@ class RestaurentMenu extends StatefulWidget {
 
 class _RestaurentMenuState extends State<RestaurentMenu> {
   late Stream<Restaurent?> restaurent;
+  late Stream<List<MenuRestaurent?>> menuResto;
 
   late final RestaurentBloc bloc;
 
@@ -32,6 +34,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
       currentUser: user,
     );
     restaurent = bloc.getMyResto();
+    menuResto = bloc.getMenuResto();
     super.initState();
   }
 
@@ -93,72 +96,59 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
         height: SizeConfig.screenHeight,
         child: Stack(
           children: [
-            Container(
-              height: 150,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    resto.couvPicture!,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            BuildCouvResto(resto: resto),
             Positioned(
               top: 110,
               left: 25,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                          border: Border.all(color: Colors.white, width: 5.0),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            resto.profilePicture!,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(top: 5, left: 15, right: 15),
-                        child: Text(
-                          resto.bio!,
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                  DefaultTabController(
-                    length: 5,
-                    child: TabBar(
-                      isScrollable: true,
-                      indicatorColor: Colors.red,
-                      indicatorWeight: 2.0,
-                      tabs: <Widget>[
-                        for (int i = 0; i < 5; i++)
-                          Tab(
-                            child: Container(
-                              child: Text(
-                                'pizza',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w800,
+                  BuildProfileBioResto(resto: resto),
+                  StreamBuilder<List<MenuRestaurent?>>(
+                    stream: menuResto,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData && snapshot.data != null) {
+                        final List<MenuRestaurent?> menuResto = snapshot.data!;
+                        return DefaultTabController(
+                          length: menuResto.length,
+                          child: TabBar(
+                            isScrollable: true,
+                            indicatorColor: Colors.red,
+                            indicatorWeight: 2.0,
+                            tabs: <Widget>[
+                              for (int i = 0; i < menuResto.length; i++)
+                                Tab(
+                                  child: Container(
+                                    child: Text(
+                                      menuResto[i]!.type,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
+                            ],
                           ),
-                      ],
-                    ),
+                        );
+                      } else if (!(snapshot.hasData && snapshot.data != null)) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: EmptyContent(
+                            title: 'Aucune Données',
+                            message: '',
+                          ),
+                        );
+                      } else if (snapshot.hasError) {
+                        return EmptyContent(
+                          title: "Quelque chose s'est mal passé",
+                          message:
+                              "Impossible de charger les éléments pour le moment",
+                        );
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
                   ),
                 ],
               ),
@@ -181,5 +171,68 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
       );
     }
     return Center(child: CircularProgressIndicator());
+  }
+}
+
+class BuildProfileBioResto extends StatelessWidget {
+  const BuildProfileBioResto({
+    Key? key,
+    required this.resto,
+  }) : super(key: key);
+
+  final Restaurent resto;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 90,
+          height: 90,
+          decoration: BoxDecoration(
+            color: Colors.amber,
+            border: Border.all(color: Colors.white, width: 5.0),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.network(
+              resto.profilePicture!,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
+          child: Text(
+            resto.bio!,
+            style: TextStyle(fontSize: 14),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BuildCouvResto extends StatelessWidget {
+  const BuildCouvResto({
+    Key? key,
+    required this.resto,
+  }) : super(key: key);
+
+  final Restaurent resto;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+            resto.couvPicture!,
+          ),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
   }
 }
