@@ -7,8 +7,11 @@ class APIPath {
       'users/$uid/savedProducts';
   static String menuRestoDocument(String uid, String menuRestoid) =>
       'users/$uid/menuResto/$menuRestoid/';
+  static String menuTypeDocument(String uid, String typeMenuid) =>
+      'users/$uid/typesMenu/$typeMenuid/';
   static String productsCollection() => 'products/';
   static String menuRestoCollection(String uid) => 'users/$uid/menuResto/';
+  static String typesMenuCollection(String uid) => 'users/$uid/typesMenu/';
   static String savedProductDocument(String userId) =>
       'users/$userId/savedProducts/savedProducts';
 

@@ -7,6 +7,7 @@ import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_logout.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:kw_express_pfe/app/models/types_menu.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
@@ -25,6 +26,7 @@ class RestaurentMenu extends StatefulWidget {
 class _RestaurentMenuState extends State<RestaurentMenu> {
   late Stream<Restaurent?> restaurent;
   late Stream<List<MenuRestaurent?>> menuResto;
+  late Stream<List<TypeMenu?>> typesMenu;
 
   late final RestaurentBloc bloc;
 
@@ -38,6 +40,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
     );
     restaurent = bloc.getMyResto();
     menuResto = bloc.getMenuResto();
+    typesMenu = bloc.getTypesMenu();
     super.initState();
   }
 
@@ -103,29 +106,29 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                     ),
                   ],
                 ),
-                child: StreamBuilder<List<MenuRestaurent?>>(
-                  stream: menuResto,
+                child: StreamBuilder<List<TypeMenu?>>(
+                  stream: typesMenu,
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
-                      final List<MenuRestaurent?> menuResto = snapshot.data!;
+                      final List<TypeMenu?> typeMenu = snapshot.data!;
                       return DefaultTabController(
-                        length: menuResto.length,
+                        length: typeMenu.length,
                         child: TabBar(
                           isScrollable: true,
                           indicatorColor: Colors.red,
                           indicatorWeight: 2.0,
                           tabs: <Widget>[
-                            for (int i = 0; i < menuResto.length; i++)
+                            for (int i = 0; i < typeMenu.length; i++)
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    type = menuResto[i]!.type;
+                                    type = typeMenu[i]!.name;
                                   });
                                 },
                                 child: Tab(
                                   child: Container(
                                     child: Text(
-                                      menuResto[i]!.type,
+                                      typeMenu[i]!.name,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15.0,
@@ -197,71 +200,6 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
           ),
         ],
       );
-
-      // SizedBox(
-      //   height: SizeConfig.screenHeight,
-      //   child: Stack(
-      //     children: [
-      //       BuildCouvResto(resto: resto),
-      //       Positioned(
-      //         top: 110,
-      //         left: 25,
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             BuildProfileBioResto(resto: resto),
-      //             StreamBuilder<List<MenuRestaurent?>>(
-      //               stream: menuResto,
-      //               builder: (context, snapshot) {
-      //                 if (snapshot.hasData && snapshot.data != null) {
-      //                   final List<MenuRestaurent?> menuResto = snapshot.data!;
-      //                   return DefaultTabController(
-      //                     length: menuResto.length,
-      //                     child: TabBar(
-      //                       isScrollable: true,
-      //                       indicatorColor: Colors.red,
-      //                       indicatorWeight: 2.0,
-      //                       tabs: <Widget>[
-      //                         for (int i = 0; i < menuResto.length; i++)
-      //                           Tab(
-      //                             child: Container(
-      //                               child: Text(
-      //                                 menuResto[i]!.type,
-      //                                 style: TextStyle(
-      //                                   color: Colors.black,
-      //                                   fontSize: 15.0,
-      //                                   fontWeight: FontWeight.w800,
-      //                                 ),
-      //                               ),
-      //                             ),
-      //                           ),
-      //                       ],
-      //                     ),
-      //                   );
-      //                 } else if (!(snapshot.hasData && snapshot.data != null)) {
-      //                   return Padding(
-      //                     padding: const EdgeInsets.all(8.0),
-      //                     child: EmptyContent(
-      //                       title: 'Aucune Données',
-      //                       message: '',
-      //                     ),
-      //                   );
-      //                 } else if (snapshot.hasError) {
-      //                   return EmptyContent(
-      //                     title: "Quelque chose s'est mal passé",
-      //                     message:
-      //                         "Impossible de charger les éléments pour le moment",
-      //                   );
-      //                 }
-      //                 return Center(child: CircularProgressIndicator());
-      //               },
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // );
     } else if (!(snapshot.hasData && snapshot.data != null)) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
