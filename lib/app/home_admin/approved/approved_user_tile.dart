@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
-import 'package:kw_express_pfe/app/models/user.dart';
 
 import 'nested_screens/restaurent_detail_screen.dart';
 

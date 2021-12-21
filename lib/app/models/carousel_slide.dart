@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kw_express_pfe/app/models/mini_user.dart';
 
 class CarouselSlideModel {
   CarouselSlideModel({

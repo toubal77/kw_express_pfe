@@ -4,7 +4,6 @@ import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_user_tile.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/nested_screens/approved_screen_search.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
-import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';

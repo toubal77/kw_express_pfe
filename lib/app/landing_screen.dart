@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/sing_in/singin_screen.dart';
 import 'package:kw_express_pfe/app/base_screen.dart';
-import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/common_widgets/loading_screen.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:provider/provider.dart';

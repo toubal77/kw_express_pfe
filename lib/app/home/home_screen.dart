@@ -4,9 +4,6 @@ import 'package:kw_express_pfe/app/home/feed/feed_screen.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
-import 'package:kw_express_pfe/services/database.dart';
-
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     //  user = context.read<User>();
-    final Database database = context.read<Database>();
+    // final Database database = context.read<Database>();
     super.initState();
     // final FirebaseMessagingService firebaseMessagingService =
     //     FirebaseMessagingService();

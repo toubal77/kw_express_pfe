@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_couv_resto.dart';
+import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_profile_bio_menu_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_logout.dart';
@@ -28,7 +30,6 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
   void initState() {
     final User user = context.read<User>();
     final Database database = context.read<Database>();
-    late TabController tabController;
     bloc = RestaurentBloc(
       database: database,
       currentUser: user,
@@ -68,16 +69,6 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                         .push(MaterialPageRoute(builder: (context) {
                       return NewMenuScreen();
                     }));
-                    // logger.info(usersList.length);
-                    // if (usersList.isNotEmpty) {
-                    //   showSearch(
-                    //     context: context,
-                    //     delegate: ApproveSearch(
-                    //       approvedBloc: bloc,
-                    //       users: usersList,
-                    //     ),
-                    //   );
-                    // }
                   },
                 ),
               ),
@@ -171,68 +162,5 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
       );
     }
     return Center(child: CircularProgressIndicator());
-  }
-}
-
-class BuildProfileBioResto extends StatelessWidget {
-  const BuildProfileBioResto({
-    Key? key,
-    required this.resto,
-  }) : super(key: key);
-
-  final Restaurent resto;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 90,
-          height: 90,
-          decoration: BoxDecoration(
-            color: Colors.amber,
-            border: Border.all(color: Colors.white, width: 5.0),
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.network(
-              resto.profilePicture!,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
-          child: Text(
-            resto.bio!,
-            style: TextStyle(fontSize: 14),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class BuildCouvResto extends StatelessWidget {
-  const BuildCouvResto({
-    Key? key,
-    required this.resto,
-  }) : super(key: key);
-
-  final Restaurent resto;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-            resto.couvPicture!,
-          ),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
   }
 }

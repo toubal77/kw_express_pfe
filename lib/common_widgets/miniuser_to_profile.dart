@@ -28,7 +28,7 @@ class MiniuserToProfile extends StatelessWidget {
       ),
       builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.hasData && (snapshot.data != null)) {
-          final User user = snapshot.data!;
+          //   final User user = snapshot.data!;
           // return ProfileScreen(user: user);
         } else if (snapshot.hasError) {
           EmptyContent(
