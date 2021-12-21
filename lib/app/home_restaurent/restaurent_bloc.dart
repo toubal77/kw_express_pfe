@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/api_path.dart';
@@ -21,6 +22,16 @@ class RestaurentBloc {
     return database.streamDocument(
       path: APIPath.userDocument(currentUser.id),
       builder: (data, documentId) => Restaurent.fromMap(data, documentId),
+    );
+  }
+
+  Future<void> sendMenuRestoInfo(MenuRestaurent menuResto) async {
+    final Uuid uuid = Uuid();
+    String menuRestoId = uuid.v4();
+    await database.setData(
+      path: APIPath.menuRestoDocument(currentUser.id, menuRestoId),
+      data: menuResto.toMap(),
+      merge: false,
     );
   }
 }

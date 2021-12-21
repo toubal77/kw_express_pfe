@@ -5,7 +5,8 @@ class APIPath {
 
   static String savedProductsCollection(String uid) =>
       'users/$uid/savedProducts';
-  static String productDocument(String productId) => 'products/$productId';
+  static String menuRestoDocument(String uid, String menuRestoid) =>
+      'users/$uid/menuResto/$menuRestoid/';
   static String productsCollection() => 'products/';
   static String savedProductDocument(String userId) =>
       'users/$userId/savedProducts/savedProducts';

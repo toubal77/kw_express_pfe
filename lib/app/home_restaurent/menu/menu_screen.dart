@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_logout.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
@@ -60,6 +61,10 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                   ),
                   color: darkBlue,
                   onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return NewMenuScreen();
+                    }));
                     // logger.info(usersList.length);
                     // if (usersList.isNotEmpty) {
                     //   showSearch(
