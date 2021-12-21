@@ -30,6 +30,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
   late int wilayaa;
   late String passwords;
   late String addresss;
+  late String bioo;
   late String phoneNumberr;
   late File? imageFilee;
   late File? imageFilee2;
@@ -65,6 +66,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
         id: '',
         type: 2,
         name: usernames,
+        bio: bioo,
         phoneNumber: phoneNumberr,
         couvPicture: couvPicture,
         profilePicture: profilePictureUrl,
@@ -114,6 +116,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
                 required String phoneNumber,
                 required String username,
                 required String address,
+                required String bio,
                 required int wilaya,
                 required File? imageFile,
                 required File? imageFile2,
@@ -123,6 +126,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
                   phoneNumberr = phoneNumber;
                   usernames = username;
                   addresss = address;
+                  bioo = bio;
                   wilayaa = wilaya;
                   imageFilee = imageFile;
                   imageFilee2 = imageFile2;

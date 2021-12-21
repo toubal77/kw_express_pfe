@@ -15,7 +15,7 @@ class RestaurentHome extends StatefulWidget {
 
 class _RestaurentHomeState extends State<RestaurentHome> {
   late final User admin;
-  int index = 4;
+  int index = 1;
   late List<Widget> screens;
 
   @override
@@ -23,6 +23,7 @@ class _RestaurentHomeState extends State<RestaurentHome> {
     admin = context.read<User>();
     super.initState();
     screens = [
+      RestaurentMenu(),
       RestaurentMenu(),
       RestaurentMenu(),
     ];
@@ -63,6 +64,8 @@ class _RestaurentHomeState extends State<RestaurentHome> {
           items: [
             FABBottomAppBarItem(iconData: Icons.menu_book, notification: 0),
             FABBottomAppBarItem(iconData: Icons.restaurant, notification: 0),
+            FABBottomAppBarItem(
+                iconData: Icons.account_circle, notification: 0),
           ],
           backgroundColor: Colors.white,
         ),

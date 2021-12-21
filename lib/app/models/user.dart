@@ -6,6 +6,7 @@ class User {
     required this.id,
     required this.type,
     required this.name,
+    required this.bio,
     required this.profilePicture,
     required this.couvPicture,
     required this.phoneNumber,
@@ -21,6 +22,7 @@ class User {
   final String id;
   final int type;
   final String name;
+  final String? bio;
   final String? address;
   final String? profilePicture;
   final String? couvPicture;
@@ -33,6 +35,7 @@ class User {
     final String id = documentId;
     final int type = data['type'] as int;
     final String name = data['name'] as String;
+    final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
     final String? profilePicture = data['profilePicture'] as String?;
@@ -44,6 +47,7 @@ class User {
       id: id,
       type: type,
       name: name,
+      bio: bio,
       address: address,
       profilePicture: profilePicture,
       couvPicture: couvPicture,
@@ -66,6 +70,7 @@ class User {
     return {
       'type': type,
       'name': name,
+      'bio': bio,
       'address': address,
       'phoneNumber': phoneNumber,
       'profilePicture': profilePicture,

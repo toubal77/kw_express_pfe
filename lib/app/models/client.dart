@@ -5,6 +5,7 @@ class Client extends User {
     required String id,
     required int type,
     required String name,
+    required String? bio,
     required String? address,
     required String? profilePicture,
     required String? couvPicture,
@@ -16,6 +17,7 @@ class Client extends User {
           id: id,
           type: type,
           name: name,
+          bio: bio,
           address: address,
           phoneNumber: phoneNumber,
           couvPicture: couvPicture,
@@ -29,6 +31,7 @@ class Client extends User {
     final String id = documentId;
     final int type = data['type'] as int;
     final String name = data['name'] as String;
+    final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
     final String? profilePicture = data['profilePicture'] as String?;
     final String? couvPicture = data['couvPicture'] as String?;
@@ -41,6 +44,7 @@ class Client extends User {
       id: id,
       type: type,
       name: name,
+      bio: bio,
       address: address,
       profilePicture: profilePicture,
       couvPicture: couvPicture,

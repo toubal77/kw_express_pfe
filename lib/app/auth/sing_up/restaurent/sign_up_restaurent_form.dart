@@ -23,6 +23,7 @@ class SignUpRestaurentForm extends StatefulWidget {
     required int wilaya,
     required String password,
     required String address,
+    required String bio,
     required String phoneNumber,
     required File? imageFile,
     required File? imageFile2,
@@ -38,6 +39,7 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
   late String password;
   late String phoneNumber;
   late String address;
+  late String bio;
   File? imageFile;
   File? imageFile2;
   late final GlobalKey<FormState> _formKey;
@@ -213,6 +215,21 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                       padding: padding,
                       child: CustomTextForm(
                         fillColor: Colors.white70,
+                        title: "Bio:",
+                        hintText: "Bio du restaurent...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          bio = value;
+                        },
+                        validator: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: padding,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
                         title: 'Numéro de téléphone:',
                         maxLength: 10,
                         isPhoneNumber: true,
@@ -265,6 +282,7 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                       widget.onSaved(
                         username: username,
                         wilaya: wilaya,
+                        bio: bio,
                         password: password,
                         address: address,
                         phoneNumber: phoneNumber,

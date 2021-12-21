@@ -6,6 +6,7 @@ class Restaurent extends User {
     required int type,
     required String name,
     required String phoneNumber,
+    required String? bio,
     required String? profilePicture,
     required String? couvPicture,
     required String? adress,
@@ -16,6 +17,7 @@ class Restaurent extends User {
           id: id,
           type: type,
           name: name,
+          bio: bio,
           address: adress,
           isApproved: isApproved,
           couvPicture: couvPicture,
@@ -29,6 +31,7 @@ class Restaurent extends User {
     final String id = documentId;
     final int type = data['type'] as int;
     final String name = data['name'] as String;
+    final String? bio = data['bio'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
     final String? profilePicture = data['profilePicture'] as String?;
     final String? couvPicture = data['couvPicture'] as String?;
@@ -41,6 +44,7 @@ class Restaurent extends User {
       id: id,
       type: type,
       name: name,
+      bio: bio,
       phoneNumber: phoneNumber,
       couvPicture: couvPicture,
       profilePicture: profilePicture,

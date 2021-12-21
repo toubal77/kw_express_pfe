@@ -59,6 +59,7 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
         type: 1,
         name: _username,
         address: '',
+        bio: '',
         profilePicture: '',
         couvPicture: '',
         phoneNumber: _phoneNumber,

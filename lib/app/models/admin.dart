@@ -7,6 +7,7 @@ class Admin extends User {
           id: id,
           type: 0,
           name: 'name',
+          bio: '',
           address: '',
           profilePicture: '',
           couvPicture: '',
