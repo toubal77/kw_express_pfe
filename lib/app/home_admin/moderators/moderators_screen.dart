@@ -64,8 +64,8 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                           final List<User> mods = snapshot.data!;
                           if (mods.isEmpty) {
                             return EmptyContent(
-                              title: 'there are no mods',
-                              message: 'search for users and start adding them',
+                              title: 'there are no moderator',
+                              message: '',
                             );
                           } else {
                             modsIdsList.value = mods.map((e) => e.id).toList();
@@ -77,7 +77,7 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                                 final bool =
                                     modsIdsList.value.contains(mods[index].id);
                                 return UserTile(
-                                  miniUser: mods[index],
+                                  user: mods[index],
                                   initialValue: bool,
                                   moderatorsBloc: bloc,
                                   onCheckBoxClicked: () {
@@ -88,7 +88,6 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                             );
                           }
                         } else if (snapshot.hasError) {
-                          // TODO @low work on this screen
                           return EmptyContent(
                             title: '',
                             message: snapshot.error.toString(),
