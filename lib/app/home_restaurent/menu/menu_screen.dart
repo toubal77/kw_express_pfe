@@ -123,6 +123,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                                 onTap: () {
                                   setState(() {
                                     type = typeMenu[i]!.name;
+                                    print('fdohsdogh $type');
                                   });
                                 },
                                 child: Tab(
@@ -169,7 +170,9 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                       return ListView.builder(
                         itemCount: menuResto.length,
                         itemBuilder: (context, index) {
-                          return BuildDetailRestoMenu(res: menuResto[index]!);
+                          return type == menuResto[index]!.type
+                              ? BuildDetailRestoMenu(res: menuResto[index]!)
+                              : Container();
                         },
                       );
                     } else if (!(snapshot.hasData && snapshot.data != null)) {
