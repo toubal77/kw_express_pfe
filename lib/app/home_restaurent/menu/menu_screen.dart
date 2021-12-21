@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_couv_resto.dart';
+import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_detail_resto_menu.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_profile_bio_menu_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
@@ -8,10 +9,11 @@ import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
-import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
+
+String? type;
 
 class RestaurentMenu extends StatefulWidget {
   const RestaurentMenu({Key? key}) : super(key: key);
@@ -83,32 +85,44 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
   Widget buildBody(AsyncSnapshot<Restaurent?> snapshot) {
     if (snapshot.hasData && snapshot.data != null) {
       final Restaurent resto = snapshot.data!;
-      return SizedBox(
-        height: SizeConfig.screenHeight,
-        child: Stack(
-          children: [
-            BuildCouvResto(resto: resto),
-            Positioned(
-              top: 110,
-              left: 25,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BuildProfileBioResto(resto: resto),
-                  StreamBuilder<List<MenuRestaurent?>>(
-                    stream: menuResto,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data != null) {
-                        final List<MenuRestaurent?> menuResto = snapshot.data!;
-                        return DefaultTabController(
-                          length: menuResto.length,
-                          child: TabBar(
-                            isScrollable: true,
-                            indicatorColor: Colors.red,
-                            indicatorWeight: 2.0,
-                            tabs: <Widget>[
-                              for (int i = 0; i < menuResto.length; i++)
-                                Tab(
+      return Stack(
+        children: [
+          Column(
+            children: [
+              BuildCouvResto(resto: resto),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(top: 45),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 1,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: StreamBuilder<List<MenuRestaurent?>>(
+                  stream: menuResto,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      final List<MenuRestaurent?> menuResto = snapshot.data!;
+                      return DefaultTabController(
+                        length: menuResto.length,
+                        child: TabBar(
+                          isScrollable: true,
+                          indicatorColor: Colors.red,
+                          indicatorWeight: 2.0,
+                          tabs: <Widget>[
+                            for (int i = 0; i < menuResto.length; i++)
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    type = menuResto[i]!.type;
+                                  });
+                                },
+                                child: Tab(
                                   child: Container(
                                     child: Text(
                                       menuResto[i]!.type,
@@ -120,33 +134,134 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                                     ),
                                   ),
                                 ),
-                            ],
-                          ),
-                        );
-                      } else if (!(snapshot.hasData && snapshot.data != null)) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: EmptyContent(
-                            title: 'Aucune Données',
-                            message: '',
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return EmptyContent(
-                          title: "Quelque chose s'est mal passé",
-                          message:
-                              "Impossible de charger les éléments pour le moment",
-                        );
-                      }
-                      return Center(child: CircularProgressIndicator());
-                    },
-                  ),
-                ],
+                              ),
+                          ],
+                        ),
+                      );
+                    } else if (!(snapshot.hasData && snapshot.data != null)) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: EmptyContent(
+                          title: 'Aucune Données',
+                          message: '',
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return EmptyContent(
+                        title: "Quelque chose s'est mal passé",
+                        message:
+                            "Impossible de charger les éléments pour le moment",
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
+              Expanded(
+                child: StreamBuilder<List<MenuRestaurent?>>(
+                  stream: menuResto,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      final List<MenuRestaurent?> menuResto = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: menuResto.length,
+                        itemBuilder: (context, index) {
+                          return BuildDetailRestoMenu(res: menuResto[index]!);
+                        },
+                      );
+                    } else if (!(snapshot.hasData && snapshot.data != null)) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: EmptyContent(
+                          title: 'Aucune Données',
+                          message: '',
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return EmptyContent(
+                        title: "Quelque chose s'est mal passé",
+                        message:
+                            "Impossible de charger les éléments pour le moment",
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 110,
+            left: 25,
+            child: BuildProfileBioResto(resto: resto),
+          ),
+        ],
       );
+
+      // SizedBox(
+      //   height: SizeConfig.screenHeight,
+      //   child: Stack(
+      //     children: [
+      //       BuildCouvResto(resto: resto),
+      //       Positioned(
+      //         top: 110,
+      //         left: 25,
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             BuildProfileBioResto(resto: resto),
+      //             StreamBuilder<List<MenuRestaurent?>>(
+      //               stream: menuResto,
+      //               builder: (context, snapshot) {
+      //                 if (snapshot.hasData && snapshot.data != null) {
+      //                   final List<MenuRestaurent?> menuResto = snapshot.data!;
+      //                   return DefaultTabController(
+      //                     length: menuResto.length,
+      //                     child: TabBar(
+      //                       isScrollable: true,
+      //                       indicatorColor: Colors.red,
+      //                       indicatorWeight: 2.0,
+      //                       tabs: <Widget>[
+      //                         for (int i = 0; i < menuResto.length; i++)
+      //                           Tab(
+      //                             child: Container(
+      //                               child: Text(
+      //                                 menuResto[i]!.type,
+      //                                 style: TextStyle(
+      //                                   color: Colors.black,
+      //                                   fontSize: 15.0,
+      //                                   fontWeight: FontWeight.w800,
+      //                                 ),
+      //                               ),
+      //                             ),
+      //                           ),
+      //                       ],
+      //                     ),
+      //                   );
+      //                 } else if (!(snapshot.hasData && snapshot.data != null)) {
+      //                   return Padding(
+      //                     padding: const EdgeInsets.all(8.0),
+      //                     child: EmptyContent(
+      //                       title: 'Aucune Données',
+      //                       message: '',
+      //                     ),
+      //                   );
+      //                 } else if (snapshot.hasError) {
+      //                   return EmptyContent(
+      //                     title: "Quelque chose s'est mal passé",
+      //                     message:
+      //                         "Impossible de charger les éléments pour le moment",
+      //                   );
+      //                 }
+      //                 return Center(child: CircularProgressIndicator());
+      //               },
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // );
     } else if (!(snapshot.hasData && snapshot.data != null)) {
       return Padding(
         padding: const EdgeInsets.all(8.0),

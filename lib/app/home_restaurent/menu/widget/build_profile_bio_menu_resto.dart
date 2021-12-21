@@ -29,7 +29,7 @@ class BuildProfileBioResto extends StatelessWidget {
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 5, left: 15, right: 15),
+          margin: const EdgeInsets.only(top: 25, left: 15, right: 15),
           child: Text(
             resto.bio!,
             style: TextStyle(fontSize: 14),
