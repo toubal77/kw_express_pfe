@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/espace_client/espace_client_bloc.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_contact.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_new_resto.dart';
+import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_send_bug.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/services/database.dart';
+import 'package:provider/provider.dart';
 
-class ServiceClient extends StatelessWidget {
+class ServiceClient extends StatefulWidget {
+  @override
+  _ServiceClientState createState() => _ServiceClientState();
+}
+
+class _ServiceClientState extends State<ServiceClient> {
+  late EspaceClientBloc bloc;
+  @override
+  void initState() {
+    bloc = EspaceClientBloc(
+      currentUser: context.read<User>(),
+      database: context.read<Database>(),
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +89,12 @@ class ServiceClient extends StatelessWidget {
                             TextEditingController();
 
                         dialogNewResto(
-                            context, _nameResto, _numClient, _addressResto);
+                          context,
+                          _nameResto,
+                          _numClient,
+                          _addressResto,
+                          bloc,
+                        );
                       },
                       child: BuildEspaceClient(
                         title: 'Nouveau Restaurant',
@@ -84,7 +109,23 @@ class ServiceClient extends StatelessWidget {
                       height: 30,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        TextEditingController _nameClient =
+                            TextEditingController();
+                        TextEditingController _numClient =
+                            TextEditingController();
+                        TextEditingController _bugDescription =
+                            TextEditingController();
+
+                        dialogSendBug(
+                          context,
+                          _nameClient,
+                          _numClient,
+                          _bugDescription,
+                          bloc,
+                          'bug',
+                        );
+                      },
                       child: BuildEspaceClient(
                         title: 'Bug',
                         icon: Icon(
@@ -98,7 +139,23 @@ class ServiceClient extends StatelessWidget {
                       height: 30,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        TextEditingController _nameClient =
+                            TextEditingController();
+                        TextEditingController _numClient =
+                            TextEditingController();
+                        TextEditingController _bugDescription =
+                            TextEditingController();
+
+                        dialogSendBug(
+                          context,
+                          _nameClient,
+                          _numClient,
+                          _bugDescription,
+                          bloc,
+                          'recla',
+                        );
+                      },
                       child: BuildEspaceClient(
                         title: 'Reclamation',
                         icon: Icon(
@@ -110,17 +167,6 @@ class ServiceClient extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: BuildEspaceClient(
-                        title: 'Nouveau Restaurant',
-                        icon: Icon(
-                          //         IconsApp.sugg,
-                          Icons.support_agent,
-                          color: Colors.red,
-                        ),
-                      ),
                     ),
                   ],
                 ),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/espace_client/espace_client_bloc.dart';
-import 'package:kw_express_pfe/app/models/new_resto.dart';
+import 'package:kw_express_pfe/app/models/bug.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 
-Future<dynamic> dialogNewResto(
+Future<dynamic> dialogSendBug(
   BuildContext context,
-  TextEditingController _nameResto,
+  TextEditingController _nameClient,
   TextEditingController _numClient,
-  TextEditingController _addressResto,
+  TextEditingController _bugDescription,
   EspaceClientBloc bloc,
+  String type,
 ) {
   return showDialog(
     context: context,
@@ -20,15 +21,15 @@ Future<dynamic> dialogNewResto(
           child: Column(
             children: [
               TextField(
-                controller: _nameResto,
+                controller: _nameClient,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  hintText: "Nom du restaurant",
+                  hintText: "Nom de l'utilisateur",
                   hintStyle: TextStyle(color: Colors.grey),
                   contentPadding: EdgeInsets.all(8),
                 ),
                 onSubmitted: (val) {
-                  _nameResto.text = val.trim();
+                  _nameClient.text = val.trim();
                 },
               ),
               SizedBox(
@@ -51,15 +52,18 @@ Future<dynamic> dialogNewResto(
                 height: 10,
               ),
               TextField(
-                controller: _addressResto,
+                controller: _bugDescription,
+                keyboardType: TextInputType.multiline,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  hintText: "address du restaurant",
+                  hintText: type == 'recla'
+                      ? "Description reclamation"
+                      : "Description bug",
                   hintStyle: TextStyle(color: Colors.grey),
                   contentPadding: EdgeInsets.all(8),
                 ),
                 onSubmitted: (val) {
-                  _addressResto.text = val.trim();
+                  _bugDescription.text = val.trim();
                 },
               ),
               SizedBox(
@@ -67,14 +71,15 @@ Future<dynamic> dialogNewResto(
               ),
               GestureDetector(
                 onTap: () async {
-                  NewResto newResto = NewResto(
+                  Bug bug = Bug(
                     id: '',
-                    name: _nameResto.text,
+                    name: _nameClient.text,
+                    type: type,
                     phoneNumber: _numClient.text,
-                    address: _addressResto.text,
+                    description: _bugDescription.text,
                   );
                   try {
-                    await bloc.senNewRestoInfo(newResto);
+                    await bloc.sendBugInfo(bug);
                     Navigator.of(context).pop();
                   } on Exception catch (e) {
                     PlatformExceptionAlertDialog(exception: e).show(context);

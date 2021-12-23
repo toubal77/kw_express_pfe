@@ -1,5 +1,11 @@
 // ignore: avoid_classes_with_only_static_members
 class APIPath {
+  static String newRestoDocument(String uid) => 'newResto/$uid/';
+  static String newRestoCollection() => 'newResto';
+
+  static String bugDocument(String uid) => 'bug/$uid/';
+  static String bugCollection() => 'bug/';
+
   static String userDocument(String uid) => 'users/$uid/';
   static String usersCollection() => 'users/';
 
