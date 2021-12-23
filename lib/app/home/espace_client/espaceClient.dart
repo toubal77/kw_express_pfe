@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
+import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EspaceClient extends StatelessWidget {
@@ -130,36 +131,7 @@ class EspaceClient extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () async {
-                var linkUrl = 'https://www.facebook.com/KWAffichage/';
-                if (await canLaunch(linkUrl.toString())) {
-                  await launch(
-                    linkUrl.toString(),
-                  );
-                }
-              },
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'powerdBy',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w300,
-                        fontFamily: 'CedarvilleCursive-Regular',
-                        color: Colors.red,
-                      ),
-                    ),
-                    // Container(
-                    //   width: 100,
-                    //   height: 100,
-                    //   child: SvgPicture.asset(iconKWsvg),
-                    // ),
-                  ],
-                ),
-              ),
-            ),
+            BuildPowerBy(),
           ],
         ),
       ),

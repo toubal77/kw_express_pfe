@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/espace_client/espace_client_bloc.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
+import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_contact.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_new_resto.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_send_bug.dart';
@@ -30,11 +31,20 @@ class _ServiceClientState extends State<ServiceClient> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Espace Client',
+          'Service Client',
           style: TextStyle(
             color: Colors.grey,
             fontSize: 16,
             fontWeight: FontWeight.w600,
+          ),
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
         ),
         centerTitle: true,
@@ -172,26 +182,7 @@ class _ServiceClientState extends State<ServiceClient> {
                 ),
               ),
             ),
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    'powerdBy',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'CedarvilleCursive-Regular',
-                      color: Colors.red,
-                    ),
-                  ),
-                  // Container(
-                  //   width: 100,
-                  //   height: 100,
-                  //   child: SvgPicture.asset(kwSvg),
-                  // ),
-                ],
-              ),
-            ),
+            BuildPowerBy(),
           ],
         ),
       ),
