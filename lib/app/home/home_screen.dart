@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/feed/espace_client/espaceClient.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_screen.dart';
 
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       FeedScreen(),
       FeedScreen(),
       FeedScreen(),
-      FeedScreen(),
+      EspaceClient(),
       // ProfileScreen(user: user),
     ];
   }

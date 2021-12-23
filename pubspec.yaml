@@ -71,6 +71,10 @@ dependencies:
   geolocator: ^7.3.0
   geocode: ^1.0.1
   lint: ^1.5.3
+  flutter_sms: ^2.3.1
+  flutter_share: ^2.0.0
+  email_launcher: ^1.1.1
+  speed_dial_fab: ^2.1.1
 
 dev_dependencies:
   flutter_test:
