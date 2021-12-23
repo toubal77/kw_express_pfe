@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:kw_express_pfe/app/home/feed/espace_client/serviceClient.dart';
-import 'package:kw_express_pfe/app/home/feed/espace_client/widget/build_espace_client.dart';
+import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
+import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EspaceClient extends StatelessWidget {

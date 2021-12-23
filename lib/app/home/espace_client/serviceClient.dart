@@ -1,6 +1,6 @@
 import 'package:email_launcher/email_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/home/feed/espace_client/widget/build_espace_client.dart';
+import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ServiceClient extends StatelessWidget {
