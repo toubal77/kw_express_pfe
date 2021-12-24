@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home/espace_client/espace_client_bloc.dart';
 import 'package:kw_express_pfe/app/models/bug.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
@@ -81,6 +82,10 @@ Future<dynamic> dialogSendBug(
                   try {
                     await bloc.sendBugInfo(bug);
                     Navigator.of(context).pop();
+                    Fluttertoast.showToast(
+                      msg: 'Les informations sont passée avec succès',
+                      toastLength: Toast.LENGTH_LONG,
+                    );
                   } on Exception catch (e) {
                     PlatformExceptionAlertDialog(exception: e).show(context);
                   }

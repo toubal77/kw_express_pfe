@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
 import 'package:kw_express_pfe/app/models/carousel_slide.dart';
 import 'package:kw_express_pfe/common_widgets/platform_alert_dialog.dart';
@@ -50,6 +51,10 @@ class _CarouselSliderTileState extends State<CarouselSliderTile> {
               ).show(context);
               if (isSure == true) {
                 widget.carouselSliderBloc.deleteCarouselSlider(widget.tuple);
+                Fluttertoast.showToast(
+                  msg: 'L\'image est supprime avec succès',
+                  toastLength: Toast.LENGTH_LONG,
+                );
               }
             },
             style: ButtonStyle(

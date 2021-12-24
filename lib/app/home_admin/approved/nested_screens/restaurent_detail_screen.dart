@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_bloc.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
@@ -126,6 +127,10 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
               ButtomMedia(
                 press: () {
                   widget.bloc.approveUser(widget.restaurent);
+                  Fluttertoast.showToast(
+                    msg: 'L\'utilisateur approve avec succès',
+                    toastLength: Toast.LENGTH_LONG,
+                  );
                   Navigator.of(context).pop();
                 },
                 color: Color(0xff5383EC),

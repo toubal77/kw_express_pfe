@@ -3,7 +3,9 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
+import 'package:kw_express_pfe/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 class EspaceClient extends StatelessWidget {
   @override
@@ -123,6 +125,22 @@ class EspaceClient extends StatelessWidget {
                         icon: Icon(
                           //  IconsApp.noteApp,
                           Icons.note_add,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.read<Auth>().signOut();
+                      },
+                      child: BuildEspaceClient(
+                        title: 'Log out',
+                        icon: Icon(
+                          //   IconsApp.questions,
+                          Icons.exit_to_app,
                           color: Colors.red,
                         ),
                       ),

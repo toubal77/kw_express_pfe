@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_form.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
@@ -70,6 +71,10 @@ class _NewMenuScreenState extends State<NewMenuScreen> {
       await bloc.sendMenuRestoInfo(menuResto);
       bool check = await bloc.checkTypeMenu(typee);
       if (check) await bloc.sendTypeRestoInfo(typeMenu);
+      Fluttertoast.showToast(
+        msg: 'Les informations sont passée avec succès',
+        toastLength: Toast.LENGTH_LONG,
+      );
       pd.close();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();

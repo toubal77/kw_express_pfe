@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_bloc.dart';
@@ -73,6 +74,10 @@ class _AddCarouselSliderState extends State<AddCarouselSlider> {
         createdAt: Timestamp.now(),
       );
       await carouselSliderBloc.saveCarouselSliderInfo(carouselSlider);
+      Fluttertoast.showToast(
+        msg: 'L\'image est passée avec succès',
+        toastLength: Toast.LENGTH_LONG,
+      );
       pd.close();
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
