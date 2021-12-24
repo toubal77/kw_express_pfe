@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/espace_client/espaceClient.dart';
+import 'package:kw_express_pfe/app/home/favoriteResto.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_screen.dart';
+import 'package:kw_express_pfe/app/home/offreResto.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
@@ -27,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // firebaseMessagingService.configFirebaseNotification(user.id, database);
     screens = [
       FeedScreen(),
-      FeedScreen(),
-      FeedScreen(),
+      FavoriteResto(),
+      OffreResto(),
       EspaceClient(),
       // ProfileScreen(user: user),
     ];
