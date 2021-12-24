@@ -11,6 +11,7 @@ class User {
     required this.couvPicture,
     required this.phoneNumber,
     required this.address,
+    required this.createdBy,
     required this.isApproved,
     required this.isModerator,
     required this.wilaya,
@@ -27,6 +28,7 @@ class User {
   final String? profilePicture;
   final String? couvPicture;
   final String phoneNumber;
+  final String createdBy;
   final bool isApproved;
   final bool isModerator;
   final int wilaya;
@@ -40,6 +42,7 @@ class User {
     final String phoneNumber = data['phoneNumber'] as String;
     final String? profilePicture = data['profilePicture'] as String?;
     final String? couvPicture = data['couvPicture'] as String?;
+    final String createdBy = data['createdBy'] as String;
     final bool isModerator = data['isModerator'] as bool;
     final bool isApproved = data['isApproved'] as bool;
     final int wilaya = data['wilaya'] as int;
@@ -52,6 +55,7 @@ class User {
       profilePicture: profilePicture,
       couvPicture: couvPicture,
       phoneNumber: phoneNumber,
+      createdBy: createdBy,
       isModerator: isModerator,
       isApproved: isApproved,
       wilaya: wilaya,
@@ -75,6 +79,7 @@ class User {
       'phoneNumber': phoneNumber,
       'profilePicture': profilePicture,
       'couvPicture': couvPicture,
+      'createdBy': createdBy,
       'isModerator': isModerator,
       'isApproved': isApproved,
       'wilaya': wilaya,

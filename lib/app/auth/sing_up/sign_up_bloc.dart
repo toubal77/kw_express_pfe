@@ -96,17 +96,45 @@ class SignUpBloc {
   }
 
   Future<void> saveClientInfo(Client client) async {
+    final Client clientt = Client(
+      id: '',
+      type: 1,
+      name: client.name,
+      address: '',
+      bio: '',
+      profilePicture: '',
+      couvPicture: '',
+      phoneNumber: client.phoneNumber,
+      createdBy: _authUser.uid,
+      isModerator: false,
+      isApproved: true,
+      wilaya: client.wilaya,
+    );
     await database.setData(
       path: APIPath.userDocument(_authUser.uid),
-      data: client.toMap(),
+      data: clientt.toMap(),
       merge: false,
     );
   }
 
   Future<void> saveRestaurentInfo(Restaurent restaurent) async {
+    final Restaurent restaurentt = Restaurent(
+      id: '',
+      type: 2,
+      name: restaurent.name,
+      bio: restaurent.bio,
+      phoneNumber: restaurent.bio!,
+      couvPicture: restaurent.couvPicture,
+      profilePicture: restaurent.profilePicture,
+      adress: restaurent.address,
+      createdBy: _authUser.uid,
+      isModerator: false,
+      isApproved: false,
+      wilaya: restaurent.wilaya,
+    );
     await database.setData(
       path: APIPath.userDocument(_authUser.uid),
-      data: restaurent.toMap(),
+      data: restaurentt.toMap(),
       merge: false,
     );
   }

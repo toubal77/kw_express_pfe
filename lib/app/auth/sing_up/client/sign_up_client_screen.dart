@@ -11,6 +11,7 @@ import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sn_progress_dialog/progress_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 class SignUpClientScreen extends StatefulWidget {
   const SignUpClientScreen({
@@ -50,7 +51,8 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
   }
 
   Future<void> sendClientInfo() async {
-    // start loading widget
+    final Uuid uuid = Uuid();
+    final idUser = uuid.v4();
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
@@ -63,6 +65,7 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
         profilePicture: '',
         couvPicture: '',
         phoneNumber: _phoneNumber,
+        createdBy: idUser,
         isModerator: false,
         isApproved: true,
         wilaya: _wilaya,

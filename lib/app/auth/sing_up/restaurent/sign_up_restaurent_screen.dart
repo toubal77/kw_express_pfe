@@ -13,6 +13,7 @@ import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sn_progress_dialog/progress_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 class SignUpRestaurentScreen extends StatefulWidget {
   const SignUpRestaurentScreen({
@@ -56,6 +57,8 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
   }
 
   Future<void> sendRestaurentInfo() async {
+    final Uuid uuid = Uuid();
+    final idResto = uuid.v4();
     final String profilePictureUrl =
         await bloc.uploadProfilePicture(imageFilee!);
     final String couvPicture = await bloc.uploadCouvPicture(imageFilee2!);
@@ -71,6 +74,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
         couvPicture: couvPicture,
         profilePicture: profilePictureUrl,
         adress: addresss,
+        createdBy: idResto,
         isModerator: false,
         isApproved: false,
         wilaya: wilayaa,

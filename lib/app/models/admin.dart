@@ -12,6 +12,7 @@ class Admin extends User {
           profilePicture: '',
           couvPicture: '',
           phoneNumber: '0',
+          createdBy: '',
           isModerator: false,
           isApproved: false,
           wilaya: 31,

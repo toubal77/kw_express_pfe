@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/feed/detail_resto/detail_resto_screen.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 
 // ignore: must_be_immutable
@@ -15,14 +16,14 @@ class _CardBuildRestaurentState extends State<CardBuildRestaurent> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) {
-        //       return DetailResto(widget.res);
-        //     },
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailRestoScreen(resto: widget.res!);
+            },
+          ),
+        );
       },
       child: Stack(
         children: [
