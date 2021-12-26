@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/espace_resto_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/menu_screen.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
@@ -25,7 +26,7 @@ class _RestaurentHomeState extends State<RestaurentHome> {
     screens = [
       RestaurentMenu(),
       RestaurentMenu(),
-      RestaurentMenu(),
+      EspaceResto(),
     ];
   }
 
