@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:provider/provider.dart';
 
 class BuildDetailRestoMenu extends StatefulWidget {
   final MenuRestaurent? res;
@@ -16,8 +19,15 @@ class BuildDetailRestoMenu extends StatefulWidget {
 class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return TextButton(
+      onPressed: () {
+        Provider.of<Cart>(context, listen: false)
+            .addItem(widget.res!.name, 1, widget.res!.prix);
+        Fluttertoast.showToast(
+          msg: '${widget.res!.name} ajoute au panier avec succès',
+          toastLength: Toast.LENGTH_LONG,
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),

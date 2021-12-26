@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/cart/cartScreen.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_couv_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_detail_resto_menu.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_profile_bio_menu_resto.dart';
+import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/types_menu.dart';
@@ -188,6 +190,46 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
           left: 25,
           child: BuildProfileBioResto(resto: widget.resto),
         ),
+        if (Provider.of<Cart>(context, listen: false).itemEmpty == true)
+          Positioned(
+            bottom: 20,
+            left: 25,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartScreen(widget.resto.name),
+                  ),
+                );
+              },
+              child: Container(
+                height: 50,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(40),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 2,
+                      offset: Offset(1, 2),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    'VOIR PANIER',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
