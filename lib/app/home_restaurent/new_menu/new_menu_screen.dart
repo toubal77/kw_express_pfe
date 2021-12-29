@@ -10,14 +10,14 @@ import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
-
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class NewMenuScreen extends StatefulWidget {
   const NewMenuScreen({
     Key? key,
+    this.menuResto,
   }) : super(key: key);
-
+  final MenuRestaurent? menuResto;
   @override
   _NewMenuScreenState createState() => _NewMenuScreenState();
 }
@@ -25,10 +25,7 @@ class NewMenuScreen extends StatefulWidget {
 class _NewMenuScreenState extends State<NewMenuScreen> {
   late final PageController _pageController;
   late final RestaurentBloc bloc;
-  late String typee;
-  late String namee;
-  late String descriptionn;
-  late int prixx;
+  MenuRestaurent? menuRestos;
 
   @override
   void initState() {
@@ -57,19 +54,12 @@ class _NewMenuScreenState extends State<NewMenuScreen> {
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
-      final MenuRestaurent menuResto = MenuRestaurent(
-        id: '',
-        type: typee,
-        name: namee,
-        description: descriptionn,
-        prix: prixx,
-      );
       final TypeMenu typeMenu = TypeMenu(
         id: '',
-        name: typee,
+        name: menuRestos!.type,
       );
-      await bloc.sendMenuRestoInfo(menuResto);
-      bool check = await bloc.checkTypeMenu(typee);
+      await bloc.sendMenuRestoInfo(menuRestos!);
+      bool check = await bloc.checkTypeMenu(menuRestos!.type);
       if (check) await bloc.sendTypeRestoInfo(typeMenu);
       Fluttertoast.showToast(
         msg: 'Les informations sont passée avec succès',
@@ -107,17 +97,12 @@ class _NewMenuScreenState extends State<NewMenuScreen> {
           controller: _pageController,
           children: <Widget>[
             NewMenuRestaurentForm(
+              menuResto: widget.menuResto,
               onSaved: ({
-                required String type,
-                required String name,
-                required String description,
-                required int prix,
+                required MenuRestaurent? menuResto,
               }) async {
                 try {
-                  typee = type;
-                  namee = name;
-                  descriptionn = description;
-                  prixx = prix;
+                  menuRestos = menuResto;
 
                   sendMenuRestoInfo();
                   swipePage(1);

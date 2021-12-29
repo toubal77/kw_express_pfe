@@ -171,7 +171,10 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                         itemCount: menuResto.length,
                         itemBuilder: (context, index) {
                           return type == menuResto[index]!.type
-                              ? BuildDetailRestoMenu(res: menuResto[index]!)
+                              ? BuildDetailRestoMenu(
+                                  res: menuResto[index]!,
+                                  bloc: bloc,
+                                )
                               : Container();
                         },
                       );

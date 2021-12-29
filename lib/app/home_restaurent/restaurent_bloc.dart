@@ -55,7 +55,12 @@ class RestaurentBloc {
 
   Future<void> sendMenuRestoInfo(MenuRestaurent menuResto) async {
     final Uuid uuid = Uuid();
-    String menuRestoId = uuid.v4();
+    String menuRestoId;
+    if (menuResto.id == '') {
+      menuRestoId = uuid.v4();
+    } else {
+      menuRestoId = menuResto.id;
+    }
     await database.setData(
       path: APIPath.menuRestoDocument(currentUser.id, menuRestoId),
       data: menuResto.toMap(),
@@ -63,6 +68,10 @@ class RestaurentBloc {
     );
   }
 
+  Future<void> deleteProduct(MenuRestaurent product) async =>
+      database.deleteDocument(
+        path: APIPath.menuRestoDocument(currentUser.id, product.id),
+      );
   Future<void> sendTypeRestoInfo(TypeMenu typeMenu) async {
     final Uuid uuid = Uuid();
     String typeMenuId = uuid.v4();

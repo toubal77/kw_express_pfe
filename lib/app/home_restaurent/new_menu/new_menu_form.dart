@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
+import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/custom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_drop_down.dart';
 import 'package:kw_express_pfe/common_widgets/custom_scaffold.dart';
@@ -11,24 +12,23 @@ import 'package:kw_express_pfe/constants/strings.dart';
 class NewMenuRestaurentForm extends StatefulWidget {
   const NewMenuRestaurentForm({
     Key? key,
+    required this.menuResto,
     required this.onSaved,
   }) : super(key: key);
   final void Function({
-    required String type,
-    required String name,
-    required String description,
-    required int prix,
+    required MenuRestaurent? menuResto,
   }) onSaved;
-
+  final MenuRestaurent? menuResto;
   @override
   _NewMenuRestaurentFormState createState() => _NewMenuRestaurentFormState();
 }
 
 class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
-  late String type;
-  late String name;
-  late String description;
-  late int prix;
+  String initType = 'choose a type';
+  String? type;
+  String? name;
+  String? description;
+  int? prix;
   List<String> typesMenuResto = [
     'PIZZAS',
     'TACOS',
@@ -95,6 +95,15 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
   void initState() {
     _formKey = GlobalKey<FormState>();
     typesMenuResto.sort((a, b) => a[0].compareTo(b[0]));
+    typesMenuResto.add('choose a type');
+    if (widget.menuResto != null) {
+      initType = widget.menuResto!.type;
+      type = widget.menuResto!.type;
+      name = widget.menuResto!.name;
+      description = widget.menuResto!.description;
+      prix = widget.menuResto!.prix;
+    }
+
     super.initState();
   }
 
@@ -121,6 +130,7 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                     Padding(
                       padding: padding,
                       child: CustomDropDown(
+                        initialValue: initType,
                         fillColor: Colors.white70,
                         title: 'Type',
                         hint: 'Type',
@@ -142,6 +152,7 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                     Padding(
                       padding: padding,
                       child: CustomTextForm(
+                        initialValue: name,
                         fillColor: Colors.white70,
                         title: "Name:",
                         hintText: "Name...",
@@ -157,6 +168,7 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                     Padding(
                       padding: padding,
                       child: CustomTextForm(
+                        initialValue: description,
                         fillColor: Colors.white70,
                         title: "Description:",
                         hintText: "Description...",
@@ -172,6 +184,9 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                     Padding(
                       padding: padding,
                       child: CustomTextForm(
+                        initialValue: prix.toString() == 'null'
+                            ? 'Prix...'
+                            : prix.toString(),
                         fillColor: Colors.white70,
                         title: "Prix:",
                         hintText: "Prix...",
@@ -195,11 +210,16 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                 child: ButtomMedia(
                   press: () {
                     if (_formKey.currentState!.validate()) {
+                      final MenuRestaurent menuRestos = MenuRestaurent(
+                        id: widget.menuResto?.id ?? '',
+                        name: name!,
+                        type: type!,
+                        description: description!,
+                        prix: prix!,
+                      );
+
                       widget.onSaved(
-                        name: name,
-                        description: description,
-                        prix: prix,
-                        type: type,
+                        menuResto: menuRestos,
                       );
                     }
                   },

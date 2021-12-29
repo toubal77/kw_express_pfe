@@ -4,6 +4,7 @@ import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_couv_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_detail_resto_menu.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_profile_bio_menu_resto.dart';
+import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
@@ -31,12 +32,17 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
   late Stream<List<TypeMenu?>> typesMenu;
 
   late final FeedBloc bloc;
+  late final RestaurentBloc bloc2;
 
   @override
   void initState() {
     final User user = context.read<User>();
     final Database database = context.read<Database>();
     bloc = FeedBloc(
+      database: database,
+      currentUser: user,
+    );
+    bloc2 = RestaurentBloc(
       database: database,
       currentUser: user,
     );
@@ -160,7 +166,10 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
                       itemCount: menuResto.length,
                       itemBuilder: (context, index) {
                         return type == menuResto[index]!.type
-                            ? BuildDetailRestoMenu(res: menuResto[index]!)
+                            ? BuildDetailRestoMenu(
+                                res: menuResto[index]!,
+                                bloc: bloc2,
+                              )
                             : Container();
                       },
                     );

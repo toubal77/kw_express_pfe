@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kw_express_pfe/app/home_restaurent/new_menu/new_menu_screen.dart';
+import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 
 class BuildDetailRestoMenu extends StatefulWidget {
   final MenuRestaurent? res;
+  final RestaurentBloc bloc;
   BuildDetailRestoMenu({
     Key? key,
     required this.res,
+    required this.bloc,
   }) : super(key: key);
 
   @override
@@ -33,36 +38,73 @@ class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
           ],
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              widget.res!.name,
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 15,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.res!.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  widget.res!.description,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '${widget.res!.prix} DA',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15,
+                    color: Colors.red,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              widget.res!.description,
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              '${widget.res!.prix} DA',
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 15,
-                color: Colors.red,
-              ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    widget.bloc.deleteProduct(widget.res!);
+                    Fluttertoast.showToast(
+                      msg: 'Les informations sont supprime avec succès',
+                      toastLength: Toast.LENGTH_LONG,
+                    );
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return NewMenuScreen(menuResto: widget.res);
+                        },
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.mode_edit,
+                    color: Colors.red,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
