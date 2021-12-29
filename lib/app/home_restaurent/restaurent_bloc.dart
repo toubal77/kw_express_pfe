@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
@@ -16,6 +18,48 @@ class RestaurentBloc {
   final Database database;
   final User currentUser;
   final Uuid uuid = Uuid();
+
+  Future<String> uploadProfilePicture(File file) async {
+    return database.uploadFile(
+      path: APIPath.userProfilePicture(currentUser.id, uuid.v4()),
+      filePath: file.path,
+    );
+  }
+
+  Future<String> uploadCouvPicture(File file) async {
+    return database.uploadFile(
+      path: APIPath.userCouvPicture(currentUser.id, uuid.v4()),
+      filePath: file.path,
+    );
+  }
+
+  Future<void> saveRestaurentInfo(Restaurent restaurent) async {
+    String restoId;
+    if (restaurent.id == '') {
+      restoId = uuid.v4();
+    } else {
+      restoId = restaurent.id;
+    }
+    final Restaurent restaurentt = Restaurent(
+      id: restoId,
+      type: 2,
+      name: restaurent.name,
+      bio: restaurent.bio,
+      phoneNumber: restaurent.bio!,
+      couvPicture: restaurent.couvPicture,
+      profilePicture: restaurent.profilePicture,
+      adress: restaurent.address,
+      createdBy: restaurent.createdBy,
+      isModerator: false,
+      isApproved: false,
+      wilaya: restaurent.wilaya,
+    );
+    await database.setData(
+      path: APIPath.userDocument(restaurent.createdBy),
+      data: restaurentt.toMap(),
+      merge: false,
+    );
+  }
 
   Stream<Restaurent?> getMyResto() {
     return database.streamDocument(
@@ -54,7 +98,6 @@ class RestaurentBloc {
   }
 
   Future<void> sendMenuRestoInfo(MenuRestaurent menuResto) async {
-    final Uuid uuid = Uuid();
     String menuRestoId;
     if (menuResto.id == '') {
       menuRestoId = uuid.v4();

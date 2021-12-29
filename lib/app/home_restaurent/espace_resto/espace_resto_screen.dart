@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/info_resto/info_resto_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_espace_resto.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,15 @@ class EspaceResto extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      onTap: () async {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return InfoRestoScreen();
+                            },
+                          ),
+                        );
+                      },
                       child: BuildEspaceResto(
                         title: 'Modifier les Informations du resto',
                         icon: Icon(
