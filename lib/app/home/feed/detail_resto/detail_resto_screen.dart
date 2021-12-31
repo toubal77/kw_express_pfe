@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/cart/cartScreen.dart';
+import 'package:kw_express_pfe/app/home/feed/detail_resto/widget/build_detail_resto_menu.dart';
+import 'package:kw_express_pfe/app/home/feed/detail_resto/widget/build_profile_bio_menu_resto.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
+import 'package:kw_express_pfe/app/home/home_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_couv_resto.dart';
-import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_detail_resto_menu.dart';
-import 'package:kw_express_pfe/app/home_restaurent/menu/widget/build_profile_bio_menu_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
@@ -72,8 +73,56 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
                 Icons.arrow_back,
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Provider.of<Cart>(context, listen: false).itemEmpty == true
+                    ? Navigator.of(context).pop()
+                    : showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Panier sera efface"),
+                            content: Text(
+                                'si vous sortez de ce restaurant votre panier sera efface'),
+                            actions: [
+                              TextButton(
+                                child: Text(
+                                  'CANCEL',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text(
+                                  'OK',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Provider.of<Cart>(context, listen: false)
+                                      .clear();
+                                  Navigator.of(context).pop();
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => HomeScreen(),
+                                  //   ),
+                                  // );
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
               },
+              // onPressed: () {
+              //   Navigator.of(context).pop();
+              // },
             ),
           ),
         ),
@@ -168,7 +217,6 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
                         return type == menuResto[index]!.type
                             ? BuildDetailRestoMenu(
                                 res: menuResto[index]!,
-                                bloc: bloc2,
                               )
                             : Container();
                       },
@@ -199,46 +247,46 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
           left: 25,
           child: BuildProfileBioResto(resto: widget.resto),
         ),
-        if (Provider.of<Cart>(context, listen: false).itemEmpty == true)
-          Positioned(
-            bottom: 20,
-            left: 25,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(widget.resto.name),
-                  ),
-                );
-              },
-              child: Container(
-                height: 50,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(40),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 2,
-                      offset: Offset(1, 2),
-                    ),
-                  ],
+        // if (Provider.of<Cart>(context, listen: false).itemEmpty == false)
+        Positioned(
+          bottom: 20,
+          left: 25,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartScreen(widget.resto.name),
                 ),
-                child: Center(
-                  child: Text(
-                    'VOIR PANIER',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ),
+              );
+            },
+            child: Container(
+              height: 50,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(40),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 2,
+                    offset: Offset(1, 2),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  'VOIR PANIER',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
                   ),
                 ),
               ),
             ),
           ),
+        ),
       ],
     );
   }
