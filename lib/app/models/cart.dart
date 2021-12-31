@@ -33,6 +33,13 @@ class Cart with ChangeNotifier {
     return total;
   }
 
+  double totalPromo(double total) {
+    double reduc = total * 0.1;
+    total -= reduc;
+    print(total);
+    return total;
+  }
+
   void addItem(
     String title,
     int quantity,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:kw_express_pfe/app/home/cart/buildItemCart.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
+import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
+import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -15,11 +17,14 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   List commandes = [];
+  late String codePromo;
 
+  late double total;
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     final cart = Provider.of<Cart>(context);
-
+    total = cart.totalAmount;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -71,6 +76,33 @@ class _CartScreenState extends State<CartScreen> {
                 Divider(
                   height: 3,
                   color: Colors.grey,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: SizeConfig.screenWidth * 0.7,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
+                        title: "Code promo:",
+                        hintText: "Code promo...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          codePromo = value;
+                        },
+                        validator: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('Confirme'),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10,
