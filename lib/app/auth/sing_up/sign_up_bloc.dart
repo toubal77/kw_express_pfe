@@ -123,7 +123,7 @@ class SignUpBloc {
       type: 2,
       name: restaurent.name,
       bio: restaurent.bio,
-      phoneNumber: restaurent.bio!,
+      phoneNumber: restaurent.phoneNumber,
       couvPicture: restaurent.couvPicture,
       profilePicture: restaurent.profilePicture,
       adress: restaurent.address,

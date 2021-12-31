@@ -82,6 +82,17 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
               CustomTextForm(
                 isEnabled: false,
                 titleStyle: TextStyle(),
+                initialValue: widget.restaurent.bio,
+                fillColor: Colors.white70,
+                title: 'Bio:',
+                hintText: 'Bio...',
+                textInputAction: TextInputAction.next,
+                onChanged: (var value) {},
+                validator: (String? value) {},
+              ),
+              CustomTextForm(
+                isEnabled: false,
+                titleStyle: TextStyle(),
                 initialValue: widget.restaurent.address,
                 fillColor: Colors.white70,
                 title: 'Localisation:',
@@ -95,33 +106,10 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
                 titleStyle: TextStyle(),
                 initialValue: widget.restaurent.phoneNumber,
                 fillColor: Colors.white70,
-                title: 'Numéro de téléphone:',
-                maxLength: 10,
-                textInputAction: TextInputAction.done,
-                isPhoneNumber: true,
+                title: 'Numero de telephone:',
+                hintText: 'Numero de telephone...',
+                textInputAction: TextInputAction.next,
                 onChanged: (var value) {},
-                prefix: IntrinsicHeight(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(
-                          '+213',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 57,
-                        child: VerticalDivider(
-                          thickness: 1,
-                          width: 20,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 validator: (String? value) {},
               ),
               ButtomMedia(
