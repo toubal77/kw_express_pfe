@@ -1,22 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/restaurent/sign_up_restaurent_form.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/sign_up_bloc.dart';
-import 'package:kw_express_pfe/app/auth/sing_up/sign_up_phone_confirmation.dart';
+
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/info_resto/info_resto_form.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
-import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
-import 'package:kw_express_pfe/utils/logger.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sn_progress_dialog/progress_dialog.dart';
-import 'package:uuid/uuid.dart';
 
 class InfoRestoScreen extends StatefulWidget {
   const InfoRestoScreen({
@@ -77,9 +72,14 @@ class _InfoRestoScreenState extends State<InfoRestoScreen> {
   }
 
   Future<void> sendRestaurentInfo() async {
-    // final String profilePictureUrl =
-    //     await bloc.uploadProfilePicture(imageFilee!);
-    // final String couvPicture = await bloc.uploadCouvPicture(imageFilee2!);
+    late String profilePictureUrl = '';
+    late String couvPicture = '';
+    if (imageFilee != null) {
+      profilePictureUrl = await bloc.uploadProfilePicture(imageFilee!);
+    }
+    if (imageFilee2 != null) {
+      couvPicture = await bloc.uploadCouvPicture(imageFilee2!);
+    }
     try {
       final ProgressDialog pd = ProgressDialog(context: context);
 
@@ -89,8 +89,9 @@ class _InfoRestoScreenState extends State<InfoRestoScreen> {
         name: usernames,
         bio: bioo,
         phoneNumber: user.phoneNumber,
-        couvPicture: user.couvPicture,
-        profilePicture: user.profilePicture,
+        couvPicture: couvPicture == '' ? user.couvPicture : couvPicture,
+        profilePicture:
+            profilePictureUrl == '' ? user.profilePicture : profilePictureUrl,
         adress: addresss,
         createdBy: user.id,
         isModerator: false,
@@ -148,6 +149,7 @@ class _InfoRestoScreenState extends State<InfoRestoScreen> {
                 wilayaa = wilaya;
                 imageFilee = imageFile;
                 imageFilee2 = imageFile2;
+
                 sendRestaurentInfo();
                 swipePage(1);
               },

@@ -1,16 +1,16 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
-import 'package:kw_express_pfe/common_widgets/avatar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/custom_drop_down.dart';
 import 'package:kw_express_pfe/common_widgets/custom_scaffold.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
-import 'package:kw_express_pfe/constants/assets_constants.dart';
+
 import 'package:kw_express_pfe/constants/strings.dart';
 import 'package:kw_express_pfe/utils/validators.dart';
 
@@ -54,6 +54,17 @@ class _InfoRestoFormState extends State<InfoRestoForm> {
     bio = widget.resto.bio!;
   }
 
+  Future<void> pickImage(bool img) async {
+    final ImagePicker _picker = ImagePicker();
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      img ? imageFile = File(image.path) : imageFile2 = File(image.path);
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final padding = EdgeInsets.symmetric(vertical: 1);
@@ -85,16 +96,25 @@ class _InfoRestoFormState extends State<InfoRestoForm> {
                           Center(
                             child: Column(
                               children: [
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        widget.resto.couvPicture!,
-                                      ),
-                                      fit: BoxFit.cover,
+                                GestureDetector(
+                                  onTap: () => pickImage(true),
+                                  child: Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80),
+                                      image: imageFile != null
+                                          ? DecorationImage(
+                                              image: FileImage(imageFile!),
+                                              //FileImage(imageFile!),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : DecorationImage(
+                                              image: NetworkImage(
+                                                widget.resto.profilePicture!,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -134,19 +154,29 @@ class _InfoRestoFormState extends State<InfoRestoForm> {
                                   ),
                                   child: Text('Photo de couverture :'),
                                 ),
-                                Container(
-                                  width: 150,
-                                  height: 150,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(80),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        widget.resto.couvPicture!,
-                                      ),
-                                      fit: BoxFit.cover,
+                                GestureDetector(
+                                  onTap: () => pickImage(false),
+                                  child: Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(80),
+                                      image: imageFile2 != null
+                                          ? DecorationImage(
+                                              image: FileImage(imageFile2!),
+                                              //FileImage(imageFile!),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : DecorationImage(
+                                              image: NetworkImage(
+                                                widget.resto.couvPicture!,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                                 ),
+
                                 // Avatar(
                                 //   placeHolder: Image.network(
                                 //     widget.resto.couvPicture!,
