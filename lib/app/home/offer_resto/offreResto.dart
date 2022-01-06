@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 
 class OffreResto extends StatefulWidget {
@@ -118,7 +119,7 @@ class _OffreRestoState extends State<OffreResto> {
                 ),
               ],
             ),
-            //   child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
+            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -134,7 +135,7 @@ class _OffreRestoState extends State<OffreResto> {
                 ),
               ],
             ),
-            //  child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
+            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -150,7 +151,7 @@ class _OffreRestoState extends State<OffreResto> {
                 ),
               ],
             ),
-            //       child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
+            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
           ),
         ],
       ),
