@@ -11,6 +11,9 @@ class User {
     required this.couvPicture,
     required this.phoneNumber,
     required this.address,
+    required this.timeOpen,
+    required this.mapAdress,
+    required this.dure,
     required this.createdBy,
     required this.isApproved,
     required this.isModerator,
@@ -27,6 +30,9 @@ class User {
   final String? address;
   final String? profilePicture;
   final String? couvPicture;
+  final String? timeOpen;
+  final String? mapAdress;
+  final String? dure;
   final String phoneNumber;
   final String createdBy;
   final bool isApproved;
@@ -39,6 +45,9 @@ class User {
     final String name = data['name'] as String;
     final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
+    final String? timeOpen = data['timeOpen'] as String?;
+    final String? mapAdress = data['mapAdress'] as String?;
+    final String? dure = data['dure'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
     final String? profilePicture = data['profilePicture'] as String?;
     final String? couvPicture = data['couvPicture'] as String?;
@@ -52,6 +61,9 @@ class User {
       name: name,
       bio: bio,
       address: address,
+      timeOpen: timeOpen,
+      mapAdress: mapAdress,
+      dure: dure,
       profilePicture: profilePicture,
       couvPicture: couvPicture,
       phoneNumber: phoneNumber,

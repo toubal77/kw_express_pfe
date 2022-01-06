@@ -23,6 +23,9 @@ class SignUpRestaurentForm extends StatefulWidget {
     required int wilaya,
     required String password,
     required String address,
+    required String timeOpen,
+    required String mapAdress,
+    required String dure,
     required String bio,
     required String phoneNumber,
     required File? imageFile,
@@ -39,6 +42,9 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
   late String password;
   late String phoneNumber;
   late String address;
+  late String timeOpen;
+  late String mapAdress;
+  late String dure;
   late String bio;
   File? imageFile;
   File? imageFile2;
@@ -230,6 +236,52 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                       padding: padding,
                       child: CustomTextForm(
                         fillColor: Colors.white70,
+                        title: "Heure d'ouverture:",
+                        hintText: "exemple 8h-17h...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          timeOpen = value;
+                        },
+                        validator: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: padding,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
+                        title: "Adresse google map:",
+                        hintText:
+                            "https://www.google.com/maps/place/Cit%C3%A9+Sabbah...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          mapAdress = value;
+                        },
+                        validator: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: padding,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
+                        title: "Dure de preparation:",
+                        hintText: "exemple 20min-30min...",
+                        textInputAction: TextInputAction.next,
+                        onChanged: (var value) {
+                          dure = value;
+                        },
+                        validator: (String? value) {
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: padding,
+                      child: CustomTextForm(
+                        fillColor: Colors.white70,
                         title: 'Numéro de téléphone:',
                         maxLength: 10,
                         isPhoneNumber: true,
@@ -283,6 +335,9 @@ class _SignUpRestaurentFormState extends State<SignUpRestaurentForm> {
                         username: username,
                         wilaya: wilaya,
                         bio: bio,
+                        timeOpen: timeOpen,
+                        mapAdress: mapAdress,
+                        dure: dure,
                         password: password,
                         address: address,
                         phoneNumber: phoneNumber,

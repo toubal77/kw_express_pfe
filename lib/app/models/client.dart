@@ -7,6 +7,9 @@ class Client extends User {
     required String name,
     required String? bio,
     required String? address,
+    required String? timeOpen,
+    required String? mapAdress,
+    required String? dure,
     required String? profilePicture,
     required String? couvPicture,
     required String phoneNumber,
@@ -20,6 +23,9 @@ class Client extends User {
           name: name,
           bio: bio,
           address: address,
+          timeOpen: timeOpen,
+          mapAdress: mapAdress,
+          dure: dure,
           phoneNumber: phoneNumber,
           couvPicture: couvPicture,
           profilePicture: profilePicture,
@@ -35,6 +41,9 @@ class Client extends User {
     final String name = data['name'] as String;
     final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
+    final String? timeOpen = data['timeOpen'] as String?;
+    final String? mapAdress = data['mapAdress'] as String?;
+    final String? dure = data['dure'] as String?;
     final String? profilePicture = data['profilePicture'] as String?;
     final String? couvPicture = data['couvPicture'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
@@ -49,6 +58,9 @@ class Client extends User {
       name: name,
       bio: bio,
       address: address,
+      timeOpen: timeOpen,
+      mapAdress: mapAdress,
+      dure: dure,
       profilePicture: profilePicture,
       couvPicture: couvPicture,
       phoneNumber: phoneNumber,
