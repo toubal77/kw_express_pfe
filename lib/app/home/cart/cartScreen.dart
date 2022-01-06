@@ -83,33 +83,6 @@ class _CartScreenState extends State<CartScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: SizeConfig.screenWidth * 0.7,
-                      child: CustomTextForm(
-                        fillColor: Colors.white70,
-                        title: "Code promo:",
-                        hintText: "Code promo...",
-                        textInputAction: TextInputAction.next,
-                        onChanged: (var value) {
-                          codePromo = value;
-                        },
-                        validator: (String? value) {
-                          return null;
-                        },
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text('Confirme'),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
                     Text(
                       'Sous-Total:',
                       style: TextStyle(
