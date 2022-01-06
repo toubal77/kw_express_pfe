@@ -23,17 +23,17 @@ class BuildFloatButtonDetailResto extends StatelessWidget {
       ],
       secondaryIconsOnPress: [
         () async {
-          // if (await canLaunch(resDet!.map.toString())) {
-          //   await launch(
-          //     resDet!.map.toString(),
-          //   );
-          // } else {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     const SnackBar(
-          //       content: Text('Can\'t open google map'),
-          //     ),
-          //   );
-          // }
+          if (await canLaunch(resDet.mapAdress.toString())) {
+            await launch(
+              resDet.mapAdress.toString(),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Can\'t open google map'),
+              ),
+            );
+          }
         },
         () => {
               showDialog(
@@ -43,7 +43,7 @@ class BuildFloatButtonDetailResto extends StatelessWidget {
                     title: Text("Reserver une table:"),
                     content: GestureDetector(
                       onTap: () {
-                        launch('tel:+213${resDet.phoneNumber.toString()}');
+                        launch('tel:${resDet.phoneNumber.toString()}');
                       },
                       child: ListTile(
                         leading: Icon(
@@ -71,7 +71,7 @@ class BuildFloatButtonDetailResto extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              launch('tel:+213${0542149642}');
+                              launch('tel:${resDet.phoneNumber}');
                             },
                             child: ListTile(
                               leading: Icon(
@@ -79,13 +79,13 @@ class BuildFloatButtonDetailResto extends StatelessWidget {
                                 color: Colors.blue,
                               ),
                               title: Text(
-                                '0659185831',
+                                resDet.phoneNumber,
                               ),
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
-                              launch('tel:+213${0792140427}');
+                              launch('tel:${resDet.phoneNumber}');
                             },
                             child: ListTile(
                               leading: Icon(
@@ -93,7 +93,7 @@ class BuildFloatButtonDetailResto extends StatelessWidget {
                                 color: Colors.blue,
                               ),
                               title: Text(
-                                '0792140427',
+                                resDet.phoneNumber,
                               ),
                             ),
                           ),

@@ -87,8 +87,18 @@ class _CardBuildRestaurentState extends State<CardBuildRestaurent> {
                       fontSize: 16.0,
                     ),
                   ),
+                  SizedBox(height: 20),
                   Text(
                     widget.res!.address!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    widget.res!.timeOpen!,
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 14.0,
@@ -135,7 +145,7 @@ class _CardBuildRestaurentState extends State<CardBuildRestaurent> {
               ),
               child: Center(
                 child: Text(
-                  '15 min - 30 min',
+                  widget.res!.dure!,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 14.0,
