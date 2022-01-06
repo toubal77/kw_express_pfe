@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/cart/cartScreen.dart';
+import 'package:kw_express_pfe/app/home/feed/detail_resto/widget/builFFloatButtonDetailResto.dart';
 import 'package:kw_express_pfe/app/home/feed/detail_resto/widget/build_detail_resto_menu.dart';
 import 'package:kw_express_pfe/app/home/feed/detail_resto/widget/build_profile_bio_menu_resto.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
@@ -246,6 +247,11 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
           top: 110,
           left: 25,
           child: BuildProfileBioResto(resto: widget.resto),
+        ),
+        Positioned(
+          bottom: 20,
+          right: 25,
+          child: BuildFloatButtonDetailResto(widget.resto),
         ),
         // if (Provider.of<Cart>(context, listen: false).itemEmpty == false)
         Positioned(
