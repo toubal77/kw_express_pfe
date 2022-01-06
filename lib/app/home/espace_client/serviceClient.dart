@@ -6,6 +6,7 @@ import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_contact.dart
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_new_resto.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_send_bug.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/common_widgets/icons_app.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -109,8 +110,7 @@ class _ServiceClientState extends State<ServiceClient> {
                       child: BuildEspaceClient(
                         title: 'Nouveau Restaurant',
                         icon: Icon(
-                          //      IconsApp.resto,
-                          Icons.restaurant,
+                          IconsApp.resto,
                           color: Colors.red,
                         ),
                       ),
@@ -139,8 +139,7 @@ class _ServiceClientState extends State<ServiceClient> {
                       child: BuildEspaceClient(
                         title: 'Bug',
                         icon: Icon(
-                          //               IconsApp.bug,
-                          Icons.bug_report,
+                          IconsApp.bug,
                           color: Colors.red,
                         ),
                       ),
@@ -169,8 +168,7 @@ class _ServiceClientState extends State<ServiceClient> {
                       child: BuildEspaceClient(
                         title: 'Reclamation',
                         icon: Icon(
-                          // IconsApp.recla,
-                          Icons.recommend_outlined,
+                          IconsApp.recla,
                           color: Colors.red,
                         ),
                       ),

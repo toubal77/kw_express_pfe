@@ -1,5 +1,6 @@
 import 'package:email_launcher/email_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 dialogContact(BuildContext context) async {
@@ -17,14 +18,11 @@ dialogContact(BuildContext context) async {
                   launch('tel:+213${659185831}');
                 },
                 child: ListTile(
-                  // leading: Container(
-                  //   width: 30,
-                  //   height: 30,
-                  //   child: SvgPicture.asset(
-                  //       'assets/drawer/phone.svg'),
-
-                  // ),
-                  leading: Icon(Icons.cabin),
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset('assets/drawable/phone.svg'),
+                  ),
                   title: Text(
                     'Telephone',
                   ),
@@ -40,13 +38,11 @@ dialogContact(BuildContext context) async {
                   }
                 },
                 child: ListTile(
-                  // leading: Container(
-                  //   width: 30,
-                  //   height: 30,
-                  //   child: SvgPicture.asset(
-                  //       'assets/drawer/facebook.svg'),
-                  // ),
-                  leading: Icon(Icons.cabin),
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset('assets/drawable/facebook.svg'),
+                  ),
                   title: Text(
                     'Facebook',
                   ),
@@ -63,13 +59,11 @@ dialogContact(BuildContext context) async {
                   }
                 },
                 child: ListTile(
-                  // leading: Container(
-                  //   width: 30,
-                  //   height: 30,
-                  //   child: SvgPicture.asset(
-                  //       'assets/drawer/messenger.svg'),
-                  // ),
-                  leading: Icon(Icons.cabin),
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset('assets/drawable/messenger.svg'),
+                  ),
                   title: Text(
                     'Messenger',
                   ),
@@ -80,13 +74,11 @@ dialogContact(BuildContext context) async {
                   launch('tel:+213${659185831}');
                 },
                 child: ListTile(
-                  // leading: Container(
-                  //   width: 30,
-                  //   height: 30,
-                  //   child: SvgPicture.asset(
-                  //       'assets/drawer/viber.svg'),
-                  // ),
-                  leading: Icon(Icons.cabin),
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset('assets/drawable/viber.svg'),
+                  ),
                   title: Text(
                     'Viber',
                   ),
@@ -100,13 +92,11 @@ dialogContact(BuildContext context) async {
                   await EmailLauncher.launch(email);
                 },
                 child: ListTile(
-                  // leading: Container(
-                  //   width: 30,
-                  //   height: 30,
-                  //   child: SvgPicture.asset(
-                  //       'assets/drawer/gmail.svg'),
-                  // ),
-                  leading: Icon(Icons.cabin),
+                  leading: Container(
+                    width: 30,
+                    height: 30,
+                    child: SvgPicture.asset('assets/drawable/gmail.svg'),
+                  ),
                   title: Text(
                     'Gmail',
                   ),

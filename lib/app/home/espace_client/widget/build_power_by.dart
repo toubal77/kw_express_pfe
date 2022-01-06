@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kw_express_pfe/constants/assets_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BuildPowerBy extends StatelessWidget {
@@ -27,11 +29,11 @@ class BuildPowerBy extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-            // Container(
-            //   width: 100,
-            //   height: 100,
-            //   child: SvgPicture.asset(iconKWsvg),
-            // ),
+            Container(
+              width: 100,
+              height: 100,
+              child: SvgPicture.asset(iconKWsvg),
+            ),
           ],
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
+import 'package:kw_express_pfe/common_widgets/icons_app.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
@@ -60,8 +61,8 @@ class EspaceClient extends StatelessWidget {
                       child: BuildEspaceClient(
                         title: 'inviter vos amis',
                         icon: Icon(
-                          //  IconsApp.share,
-                          Icons.share, color: Colors.red,
+                          IconsApp.share,
+                          color: Colors.red,
                         ),
                       ),
                     ),
@@ -80,8 +81,7 @@ class EspaceClient extends StatelessWidget {
                       child: BuildEspaceClient(
                         title: 'Service Client',
                         icon: Icon(
-                          //      IconsApp.serviceClient,
-                          Icons.room_service,
+                          IconsApp.serviceClient,
                           color: Colors.red,
                         ),
                       ),
@@ -101,8 +101,7 @@ class EspaceClient extends StatelessWidget {
                       child: BuildEspaceClient(
                         title: 'Questions Frequentes',
                         icon: Icon(
-                          //   IconsApp.questions,
-                          Icons.question_answer,
+                          IconsApp.questions,
                           color: Colors.red,
                         ),
                       ),
@@ -123,8 +122,7 @@ class EspaceClient extends StatelessWidget {
                       child: BuildEspaceClient(
                         title: 'Noter L\'application',
                         icon: Icon(
-                          //  IconsApp.noteApp,
-                          Icons.note_add,
+                          IconsApp.noteApp,
                           color: Colors.red,
                         ),
                       ),
@@ -139,8 +137,7 @@ class EspaceClient extends StatelessWidget {
                       child: BuildEspaceClient(
                         title: 'Log out',
                         icon: Icon(
-                          //   IconsApp.questions,
-                          Icons.exit_to_app,
+                          IconsApp.questions,
                           color: Colors.red,
                         ),
                       ),
