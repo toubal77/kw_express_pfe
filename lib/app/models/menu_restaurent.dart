@@ -11,15 +11,14 @@ class MenuRestaurent {
   final String type;
   final String name;
   final String description;
-
-  final int prix;
+  final double prix;
 
   factory MenuRestaurent.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
     final String type = data['type'] as String;
     final String name = data['name'] as String;
     final String description = data['description'] as String;
-    final int prix = data['prix'] as int;
+    final double prix = data['prix'] as double;
     return MenuRestaurent(
       id: id,
       type: type,

@@ -23,6 +23,8 @@ class APIPath {
 
   static String carouselSliderDocument(String carouselSliderId) =>
       'carouselSlider/$carouselSliderId';
+
+  static String orderDocument(String uid) => 'orders/$uid';
   // files
   static String userProfilePicture(String uid, String photoId) =>
       'users/$uid/profile_picutres/$photoId';

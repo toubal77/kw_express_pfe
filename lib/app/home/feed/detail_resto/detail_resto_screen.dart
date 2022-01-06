@@ -35,10 +35,10 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
 
   late final FeedBloc bloc;
   late final RestaurentBloc bloc2;
-
+  late final User user;
   @override
   void initState() {
-    final User user = context.read<User>();
+    user = context.read<User>();
     final Database database = context.read<Database>();
     bloc = FeedBloc(
       database: database,
@@ -262,7 +262,7 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CartScreen(widget.resto.name),
+                  builder: (context) => CartScreen(widget.resto.name, user),
                 ),
               );
             },

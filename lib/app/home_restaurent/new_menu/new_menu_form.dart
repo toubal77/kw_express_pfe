@@ -28,7 +28,7 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
   String? type;
   String? name;
   String? description;
-  int? prix;
+  double? prix;
   List<String> typesMenuResto = [
     'PIZZAS',
     'TACOS',
@@ -184,16 +184,16 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
                     Padding(
                       padding: padding,
                       child: CustomTextForm(
-                        initialValue: prix.toString() == 'null'
-                            ? 'Prix...'
-                            : prix.toString(),
+                        // initialValue: prix.toString() == 'null'
+                        //     ? 'Prix...'
+                        //     : prix.toString(),
                         fillColor: Colors.white70,
                         title: "Prix:",
                         hintText: "Prix...",
                         textInputType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         onChanged: (var value) {
-                          prix = int.parse(value);
+                          prix = double.parse(value);
                         },
                         validator: (String? value) {
                           return null;

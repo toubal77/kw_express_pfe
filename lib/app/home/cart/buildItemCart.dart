@@ -3,7 +3,7 @@ import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:provider/provider.dart';
 
 class BuildItemCart extends StatelessWidget {
-  final int price;
+  final double price;
   final int quantity;
   final String title;
 

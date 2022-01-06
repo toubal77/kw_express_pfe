@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CartItem {
   final String title;
   final int quantity;
-  final int price;
+  final double price;
 
   CartItem({
     required this.title,
@@ -33,17 +33,10 @@ class Cart with ChangeNotifier {
     return total;
   }
 
-  double totalPromo(double total) {
-    double reduc = total * 0.1;
-    total -= reduc;
-    print(total);
-    return total;
-  }
-
   void addItem(
     String title,
     int quantity,
-    int price,
+    double price,
   ) {
     if (_items.containsKey(title)) {
       _items.update(

@@ -1,15 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:kw_express_pfe/app/home/cart/buildItemCart.dart';
+import 'package:kw_express_pfe/app/home/cart/cart_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
+import 'package:kw_express_pfe/app/models/Order_detail.dart';
+import 'package:kw_express_pfe/app/models/order.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class CartScreen extends StatefulWidget {
   final nomRsto;
-  CartScreen(this.nomRsto);
+  final User user;
+  CartScreen(this.nomRsto, this.user);
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -18,6 +26,18 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   List commandes = [];
   late String codePromo;
+  late CartBloc cartBloc;
+
+  @override
+  void initState() {
+    final Database database = context.read<Database>();
+    cartBloc = CartBloc(
+      database: database,
+      currentUser: widget.user,
+    );
+
+    super.initState();
+  }
 
   late double total;
   @override
@@ -158,42 +178,64 @@ class _CartScreenState extends State<CartScreen> {
                 Center(
                   child: GestureDetector(
                     onTap: () async {
-                      if (cart.itemEmpty) {
-                        var message = StringBuffer();
-                        commandes.add('Restaurant: ' + widget.nomRsto + '\n\n');
+                      if (!cart.itemEmpty) {
+                        List<OrderDetail> orders = [];
+                        final Uuid uuid = Uuid();
 
-                        double commandePrice = cart.totalAmount + 400;
-                        commandes.add('Somme: ' +
-                            commandePrice.toString() +
-                            'DA' +
-                            '\n\n');
                         for (int i = 0; i < cart.items.length; i++) {
-                          commandes.add(
-                            cart.items.values.toList()[i].quantity.toString() +
-                                ' * ' +
-                                cart.items.values.toList()[i].title.toString(),
+                          orders.add(
+                            OrderDetail(
+                              name: cart.items.values.toList()[i].title,
+                              price: cart.items.values.toList()[i].price,
+                              quantity: cart.items.values.toList()[i].quantity,
+                            ),
                           );
                         }
+                        final order = Order(
+                          id: uuid.v4(),
+                          price: cart.totalAmount,
+                          adress: 'address',
+                          createdAt: Timestamp.now(),
+                          createdBy: widget.user.id,
+                          phone: widget.user.phoneNumber,
+                          orderDetail: orders,
+                        );
+                        cartBloc.saveOrder(order);
+                        // var message = StringBuffer();
+                        // commandes.add('Restaurant: ' + widget.nomRsto + '\n\n');
 
-                        List<String> recipents = ["0659185831"];
-                        commandes.forEach((item) {
-                          message.write(item + "\n\n");
-                        });
-                        print(commandes);
-                        String _result = await sendSMS(
-                                message: message.toString(),
-                                recipients: recipents)
-                            .catchError((onError) {
-                          print(onError);
-                        });
-                        print(_result);
+                        // double commandePrice = cart.totalAmount + 400;
+                        // commandes.add('Somme: ' +
+                        //     commandePrice.toString() +
+                        //     'DA' +
+                        //     '\n\n');
+                        // for (int i = 0; i < cart.items.length; i++) {
+                        //   commandes.add(
+                        //     cart.items.values.toList()[i].quantity.toString() +
+                        //         ' * ' +
+                        //         cart.items.values.toList()[i].title.toString(),
+                        //   );
+                        // }
+
+                        // List<String> recipents = ["0659185831"];
+                        // commandes.forEach((item) {
+                        //   message.write(item + "\n\n");
+                        // });
+                        // print(commandes);
+                        // String _result = await sendSMS(
+                        //         message: message.toString(),
+                        //         recipients: recipents)
+                        //     .catchError((onError) {
+                        //   print(onError);
+                        // });
+                        // print(_result);
                       }
                     },
                     child: Container(
                       width: 130,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.red,
+                        color: cart.itemEmpty ? Colors.grey : Colors.red,
                         borderRadius: BorderRadius.circular(40),
                       ),
                       child: Center(
@@ -220,180 +262,3 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 }
-
-
-
-// Container(
-//         padding: const EdgeInsets.all(8.0),
-//         child: Column(
-//           children: [
-//             Divider(
-//               height: 3,
-//               color: Colors.grey,
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   'Sous-Total:',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 16,
-//                   ),
-//                 ),
-//                 Text(
-//                   '400 DA',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 16,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   'Frais de livraison',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 13,
-//                     color: Colors.grey,
-//                   ),
-//                 ),
-//                 Text(
-//                   'A partir de 400 DA',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 13,
-//                     color: Colors.grey,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 Text(
-//                   'Total :',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 16,
-//                   ),
-//                 ),
-//                 Text(
-//                   '800 DA',
-//                   style: TextStyle(
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 16,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             Divider(
-//               height: 3,
-//               color: Colors.grey,
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//             Center(
-//               child: Container(
-//                 width: 130,
-//                 height: 40,
-//                 decoration: BoxDecoration(
-//                   color: Colors.red,
-//                   borderRadius: BorderRadius.circular(40),
-//                 ),
-//                 child: Center(
-//                   child: Text(
-//                     'COMMANDER',
-//                     style: TextStyle(
-//                       color: Colors.white,
-//                       fontSize: 14,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             SizedBox(
-//               height: 10,
-//             ),
-//           ],
-//         ),
-//       ),
-
-
-
-      //  Container(
-      //             padding: const EdgeInsets.all(10),
-      //             margin: const EdgeInsets.all(8),
-      //             width: MediaQuery.of(context).size.width,
-      //             decoration: BoxDecoration(
-      //               color: Colors.white,
-      //               boxShadow: [
-      //                 BoxShadow(
-      //                   color: Colors.grey,
-      //                   blurRadius: 1,
-      //                   offset: Offset(0, 1),
-      //                 ),
-      //               ],
-      //               borderRadius: BorderRadius.circular(5),
-      //             ),
-      //             child: Row(
-      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //               children: [
-      //                 Column(
-      //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //                   children: [
-      //                     Text(
-      //                       '1 x Pizzas - Marqherita',
-      //                       style: TextStyle(
-      //                         fontWeight: FontWeight.w900,
-      //                         fontSize: 15,
-      //                       ),
-      //                     ),
-      //                     Text(
-      //                       '400 DA',
-      //                       style: TextStyle(
-      //                         fontWeight: FontWeight.w900,
-      //                         fontSize: 15,
-      //                         color: Colors.red,
-      //                       ),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 Container(
-      //                   width: 100,
-      //                   height: 50,
-      //                   decoration: BoxDecoration(
-      //                     color: Colors.red,
-      //                     borderRadius: BorderRadius.circular(40),
-      //                   ),
-      //                   child: Center(
-      //                     child: Text(
-      //                       'SUPPRIMER',
-      //                       style: TextStyle(
-      //                         color: Colors.white,
-      //                         fontSize: 13,
-      //                         fontWeight: FontWeight.w600,
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
