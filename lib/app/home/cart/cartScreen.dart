@@ -114,7 +114,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      'A partir de 400 DA',
+                      'A partir de 250 DA',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 13,
@@ -137,7 +137,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      '${cart.totalAmount + 400} DA',
+                      '${cart.totalAmount + 250} DA',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
