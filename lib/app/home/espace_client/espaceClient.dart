@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:kw_express_pfe/app/home/espace_client/my_order/my_order_screen.dart';
 import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
@@ -48,6 +49,26 @@ class EspaceClient extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return MyOrderScreen();
+                          }),
+                        );
+                      },
+                      child: BuildEspaceClient(
+                        title: 'Mes commandes',
+                        icon: Icon(
+                          IconsApp.serviceClient,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     GestureDetector(
                       onTap: () async {
                         await FlutterShare.share(
