@@ -6,7 +6,8 @@ class Order {
   final String phone;
   final String adress;
   final double price;
-  final List orderDetail;
+  final List<Map> orderDetail;
+  final String status;
   final String createdBy;
   final Timestamp createdAt;
   Order({
@@ -14,6 +15,7 @@ class Order {
     required this.createdBy,
     required this.phone,
     required this.adress,
+    required this.status,
     required this.createdAt,
     required this.orderDetail,
     required this.price,
@@ -25,6 +27,7 @@ class Order {
       'phone': phone,
       'price': price,
       'adress': adress,
+      'status': status,
       'orderDetail': orderDetail.toList(),
       'createdBy': createdBy,
       'createdAt': createdAt,
@@ -36,11 +39,11 @@ class Order {
     final String phone = data['phone'] as String;
     final double price = data['price'] as double;
     final String adress = data['adress'] as String;
-    final List<OrderDetail> orderDetail =
-        data['orderDetail'] as List<OrderDetail>;
-    orderDetail.forEach((element) {
-      OrderDetail.fromJson(element as Map<String, dynamic>);
-    });
+    final String status = data['status'] as String;
+    final List<Map> orderDetail = data['orderDetail'] as List<Map>;
+    // orderDetail.forEach((element) {
+    //   OrderDetail.fromJson(element as Map<String, dynamic>);
+    // });
 
     final String createdBy = data['createdBy'] as String;
     final Timestamp createdAt =
@@ -50,6 +53,7 @@ class Order {
       phone: phone,
       price: price,
       adress: adress,
+      status: status,
       orderDetail: orderDetail,
       createdBy: createdBy,
       createdAt: createdAt,

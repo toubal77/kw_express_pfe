@@ -179,56 +179,32 @@ class _CartScreenState extends State<CartScreen> {
                   child: GestureDetector(
                     onTap: () async {
                       if (!cart.itemEmpty) {
-                        List<OrderDetail> orders = [];
+                        List<Map> orders = [];
                         final Uuid uuid = Uuid();
 
                         for (int i = 0; i < cart.items.length; i++) {
+                          Map map = {
+                            'name': cart.items.values.toList()[i].title,
+                            'price': cart.items.values.toList()[i].price,
+                            'quantity': cart.items.values.toList()[i].quantity,
+                          };
                           orders.add(
-                            OrderDetail(
-                              name: cart.items.values.toList()[i].title,
-                              price: cart.items.values.toList()[i].price,
-                              quantity: cart.items.values.toList()[i].quantity,
-                            ),
+                            map,
                           );
                         }
                         final order = Order(
                           id: uuid.v4(),
                           price: cart.totalAmount,
                           adress: 'address',
+                          status: 'Attente de confirmation',
                           createdAt: Timestamp.now(),
                           createdBy: widget.user.id,
                           phone: widget.user.phoneNumber,
                           orderDetail: orders,
                         );
                         cartBloc.saveOrder(order);
-                        // var message = StringBuffer();
-                        // commandes.add('Restaurant: ' + widget.nomRsto + '\n\n');
-
-                        // double commandePrice = cart.totalAmount + 400;
-                        // commandes.add('Somme: ' +
-                        //     commandePrice.toString() +
-                        //     'DA' +
-                        //     '\n\n');
-                        // for (int i = 0; i < cart.items.length; i++) {
-                        //   commandes.add(
-                        //     cart.items.values.toList()[i].quantity.toString() +
-                        //         ' * ' +
-                        //         cart.items.values.toList()[i].title.toString(),
-                        //   );
-                        // }
-
-                        // List<String> recipents = ["0659185831"];
-                        // commandes.forEach((item) {
-                        //   message.write(item + "\n\n");
-                        // });
-                        // print(commandes);
-                        // String _result = await sendSMS(
-                        //         message: message.toString(),
-                        //         recipients: recipents)
-                        //     .catchError((onError) {
-                        //   print(onError);
-                        // });
-                        // print(_result);
+                        cart.clear();
+                        Navigator.of(context).pop();
                       }
                     },
                     child: Container(
