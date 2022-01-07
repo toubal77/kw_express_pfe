@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sms/flutter_sms.dart';
 import 'package:kw_express_pfe/app/home/cart/buildItemCart.dart';
 import 'package:kw_express_pfe/app/home/cart/cart_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
-import 'package:kw_express_pfe/app/models/Order_detail.dart';
 import 'package:kw_express_pfe/app/models/order.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
-import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';

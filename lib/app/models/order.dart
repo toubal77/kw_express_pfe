@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kw_express_pfe/app/models/Order_detail.dart';
 
 class Order {
   final String id;
@@ -42,21 +41,8 @@ class Order {
     final String status = data['status'] as String;
 
     final List<Map> orderDetail = [];
-    // = data['orderDetail'].map((item) {
-    //   return item.forEach((element) {
-    //     return OrderDetail(
-    //       name: item["name"],
-    //       price: item["price"],
-    //       quantity: item["quantity"],
-    //     );
-    //   });
-    // });
-
     for (var item in data['orderDetail']) {
-      print('The list $orderDetail');
-      print('The item $item');
       orderDetail.add(item);
-      print('The list $orderDetail');
     }
     final String createdBy = data['createdBy'] as String;
     final Timestamp createdAt =
