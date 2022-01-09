@@ -21,4 +21,10 @@ class MyOrderBloc {
       ),
     );
   }
+
+  Future<void> changeStatus(String idOrder) {
+    return database.deleteDocument(
+      path: APIPath.orderDocument(idOrder),
+    );
+  }
 }

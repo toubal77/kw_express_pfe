@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_time_ago/get_time_ago.dart';
 import 'package:kw_express_pfe/app/home/espace_client/my_order/my_order_bloc.dart';
 import 'package:kw_express_pfe/app/models/order.dart';
@@ -95,32 +96,43 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
                             ),
                             trailing: Container(
                               width: MediaQuery.of(context).size.width * 0.2,
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.verified,
-                                    color: myOrders[index].status ==
-                                            'Attente de confirmation'
-                                        ? Colors.red
-                                        : myOrders[index].status ==
-                                                    'Attente de livreur' ||
-                                                myOrders[index].status ==
-                                                    'en preparation'
-                                            ? Colors.orange
-                                            : Colors.green,
-                                  ),
-                                  IconButton(
-                                    icon: Icon(_expanded
-                                        ? Icons.expand_less
-                                        : Icons.expand_more),
-                                    onPressed: () {
-                                      setState(() {
-                                        _expanded = !_expanded;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
+                              child: myOrders[index].status != 'En route'
+                                  ? Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.verified,
+                                          color: myOrders[index].status ==
+                                                  'Attente de confirmation'
+                                              ? Colors.red
+                                              : myOrders[index].status ==
+                                                          'Attente de livreur' ||
+                                                      myOrders[index].status ==
+                                                          'en preparation'
+                                                  ? Colors.orange
+                                                  : Colors.green,
+                                        ),
+                                        IconButton(
+                                          icon: Icon(_expanded
+                                              ? Icons.expand_less
+                                              : Icons.expand_more),
+                                          onPressed: () {
+                                            setState(() {
+                                              _expanded = !_expanded;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                  : TextButton(
+                                      child: Text('Confirme'),
+                                      onPressed: () {
+                                        bloc.changeStatus(myOrders[index].id);
+                                        Fluttertoast.showToast(
+                                          msg: 'Bonne dégustation',
+                                          toastLength: Toast.LENGTH_LONG,
+                                        );
+                                      },
+                                    ),
                             ),
                           ),
                         ),
