@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/models/menu_restaurent.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/types_menu.dart';
@@ -126,5 +127,28 @@ class RestaurentBloc {
       data: typeMenu.toMap(),
       merge: false,
     );
+  }
+
+  Future<void> desctiveResto() {
+    return database.updateData(
+      path: APIPath.userDocument(currentUser.id),
+      data: {
+        'isApproved': false,
+      },
+    );
+  }
+
+  Future<void> sendRequest() async {
+    if (currentUser.isApproved) {
+      Fluttertoast.showToast(
+        msg: 'Votre restaurent est deja active',
+        toastLength: Toast.LENGTH_LONG,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: 'votre demande est envoye avec succès',
+        toastLength: Toast.LENGTH_LONG,
+      );
+    }
   }
 }

@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/info_resto/info_resto_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_espace_resto.dart';
+import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
-class EspaceResto extends StatelessWidget {
+class EspaceResto extends StatefulWidget {
+  @override
+  _EspaceRestoState createState() => _EspaceRestoState();
+}
+
+class _EspaceRestoState extends State<EspaceResto> {
+  late final RestaurentBloc bloc;
+
+  @override
+  void initState() {
+    final User user = context.read<User>();
+    final Database database = context.read<Database>();
+    bloc = RestaurentBloc(
+      database: database,
+      currentUser: user,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,12 +104,34 @@ class EspaceResto extends StatelessWidget {
                       height: 30,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        bloc.desctiveResto();
+                        Fluttertoast.showToast(
+                          msg: 'Votre restaurent est desctive avec succès',
+                          toastLength: Toast.LENGTH_LONG,
+                        );
+                      },
                       child: BuildEspaceResto(
-                        title: 'Parametre',
+                        title: 'Desctive mon Restaurent',
                         icon: Icon(
                           //   IconsApp.questions,
-                          Icons.question_answer,
+                          Icons.no_accounts_rounded,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        bloc.sendRequest();
+                      },
+                      child: BuildEspaceResto(
+                        title: 'Demande l\'activation de mon restaurent',
+                        icon: Icon(
+                          //   IconsApp.questions,
+                          Icons.manage_accounts_rounded,
                           color: Colors.red,
                         ),
                       ),
