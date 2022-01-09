@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Order {
   final String id;
+  final String idResto;
   final String phone;
   final String adress;
   final double price;
@@ -11,6 +12,7 @@ class Order {
   final Timestamp createdAt;
   Order({
     required this.id,
+    required this.idResto,
     required this.createdBy,
     required this.phone,
     required this.adress,
@@ -23,6 +25,7 @@ class Order {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'idResto': idResto,
       'phone': phone,
       'price': price,
       'adress': adress,
@@ -35,6 +38,7 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = data['id'] as String;
+    final String idResto = data['idResto'] as String;
     final String phone = data['phone'] as String;
     final double price = data['price'] as double;
     final String adress = data['adress'] as String;
@@ -49,6 +53,7 @@ class Order {
         (data['createdAt'] as Timestamp?) ?? Timestamp.now();
     return Order(
       id: id,
+      idResto: idResto,
       phone: phone,
       price: price,
       adress: adress,

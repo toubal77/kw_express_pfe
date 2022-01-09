@@ -5,6 +5,7 @@ import 'package:kw_express_pfe/app/home/cart/buildItemCart.dart';
 import 'package:kw_express_pfe/app/home/cart/cart_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/app/models/order.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/services/database.dart';
@@ -13,9 +14,9 @@ import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class CartScreen extends StatefulWidget {
-  final nomRsto;
+  final Restaurent resto;
   final User user;
-  CartScreen(this.nomRsto, this.user);
+  CartScreen(this.resto, this.user);
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -190,8 +191,10 @@ class _CartScreenState extends State<CartScreen> {
                             map,
                           );
                         }
+
                         final order = Order(
                           id: uuid.v4(),
+                          idResto: widget.resto.id,
                           price: cart.totalAmount,
                           adress: 'address',
                           status: 'Attente de confirmation',

@@ -261,7 +261,7 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CartScreen(widget.resto.name, user),
+                  builder: (context) => CartScreen(widget.resto, user),
                 ),
               );
             },
