@@ -9,6 +9,7 @@ import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EspaceResto extends StatefulWidget {
   @override
@@ -96,6 +97,22 @@ class _EspaceRestoState extends State<EspaceResto> {
                         icon: Icon(
                           //      IconsApp.serviceClient,
                           Icons.room_service,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        launch('tel:+213659185831');
+                      },
+                      child: BuildEspaceResto(
+                        title: 'Appeler l\'administrateur',
+                        icon: Icon(
+                          //      IconsApp.serviceClient,
+                          Icons.call_sharp,
                           color: Colors.red,
                         ),
                       ),
