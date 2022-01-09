@@ -8,12 +8,10 @@ class UserTile extends StatefulWidget {
   const UserTile({
     Key? key,
     required this.user,
-    required this.initialValue,
     required this.moderatorsBloc,
     required this.onCheckBoxClicked,
   }) : super(key: key);
   final User user;
-  final bool initialValue;
   final ModeratorsBloc moderatorsBloc;
   final VoidCallback onCheckBoxClicked;
 

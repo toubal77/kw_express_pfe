@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_admin/admin_logout.dart';
+import 'package:kw_express_pfe/app/home_admin/moderators/data_search.dart';
 import 'package:kw_express_pfe/app/home_admin/moderators/moderators_bloc.dart';
 import 'package:kw_express_pfe/app/home_admin/moderators/user_tile.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
@@ -53,7 +54,12 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                           size: 25,
                         ),
                         color: darkBlue,
-                        onPressed: () {},
+                        onPressed: () {
+                          showSearch(
+                            context: context,
+                            delegate: DataSearch(modList, bloc),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -74,11 +80,8 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                               key: UniqueKey(),
                               itemCount: mods.length,
                               itemBuilder: (_, index) {
-                                final bool =
-                                    modsIdsList.value.contains(mods[index].id);
                                 return UserTile(
                                   user: mods[index],
-                                  initialValue: bool,
                                   moderatorsBloc: bloc,
                                   onCheckBoxClicked: () {
                                     //setState(() {});
