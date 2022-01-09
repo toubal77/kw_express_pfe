@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home/cart/buildItemCart.dart';
 import 'package:kw_express_pfe/app/home/cart/cart_bloc.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
@@ -201,6 +202,10 @@ class _CartScreenState extends State<CartScreen> {
                         );
                         cartBloc.saveOrder(order);
                         cart.clear();
+                        Fluttertoast.showToast(
+                          msg: 'Votre commende esr passe avec succès',
+                          toastLength: Toast.LENGTH_LONG,
+                        );
                         Navigator.of(context).pop();
                       }
                     },
