@@ -26,7 +26,7 @@ class _FeedScreenState extends State<FeedScreen> {
   late Stream<List<Restaurent>> allRestaurent;
   late CarouselSliderBloc carouselSliderBloc;
   late bool isLoadingNextMessages;
-
+  String searchText = '';
   @override
   void initState() {
     isLoadingNextMessages = false;
@@ -76,6 +76,11 @@ class _FeedScreenState extends State<FeedScreen> {
                     borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    searchText = value;
+                  });
+                },
               ),
             ),
             Expanded(
@@ -83,7 +88,15 @@ class _FeedScreenState extends State<FeedScreen> {
                 stream: allRestaurent,
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
-                    final List<Restaurent?> typeMenu = snapshot.data!;
+                    List<Restaurent?> typeMenu = snapshot.data!;
+                    final List<Restaurent?> restoSearch = [];
+                    if (searchText.isNotEmpty)
+                      typeMenu.forEach((element) {
+                        if (element!.name.contains(searchText)) {
+                          restoSearch.add(element);
+                        }
+                      });
+                    if (searchText.isNotEmpty) typeMenu = restoSearch;
                     return ListView.builder(
                       itemCount: typeMenu.length,
                       shrinkWrap: true,

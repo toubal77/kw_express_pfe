@@ -33,6 +33,17 @@ class FeedBloc {
     );
   }
 
+  Stream<List<Restaurent>> getSearchResto(String searchText) {
+    return database.streamCollection(
+      path: APIPath.usersCollection(),
+      builder: (data, documentId) => Restaurent.fromMap(data, documentId),
+      queryBuilder: (query) => query.where(
+        'type',
+        isEqualTo: 2,
+      ),
+    );
+  }
+
   Stream<List<MenuRestaurent>> getMenuResto(String id) {
     return database.streamCollection(
       path: APIPath.menuRestoCollection(id),
