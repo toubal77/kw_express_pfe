@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:kw_express_pfe/app/landing_screen.dart';
+import 'package:kw_express_pfe/constants/algeria_cities.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectLocation extends StatefulWidget {
-  final bool arrow;
-  const SelectLocation({Key? key, required this.arrow}) : super(key: key);
+  const SelectLocation({
+    Key? key,
+  }) : super(key: key);
   @override
   State<SelectLocation> createState() => _SelectLocationState();
 }
@@ -40,8 +44,18 @@ class _SelectLocationState extends State<SelectLocation> {
       print("code Postal: ${address.postal}");
       print("Country Name: ${address.countryName}");
       print('eàzhg $address');
+      var wilayaCode;
+      for (int i = 0; i < algeriaCities.length; i++) {
+        if (algeriaCities[i]['wilaya_name_ascii'] == address.city) {
+          wilayaCode = algeriaCities[i]['wilaya_code'];
+          print(algeriaCities[i]['wilaya_code']);
+        }
+      }
       adressUser =
-          '${address.streetNumber} ${address.streetAddress} ${address.city} ${address.region} ${address.postal} ${address.countryName}';
+          '${address.streetNumber} ${address.streetAddress} ${address.city} ${address.region} $wilayaCode ${address.countryName}';
+      print(adressUser);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('wilaya', wilayaCode);
       setState(() {
         getLocation = true;
       });
@@ -157,6 +171,12 @@ class _SelectLocationState extends State<SelectLocation> {
                               //     },
                               //   ),
                               // );
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      LandingScreen(),
+                                ),
+                              );
                             } else {
                               getUserLocation();
                             }

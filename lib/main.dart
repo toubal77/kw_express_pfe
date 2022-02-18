@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kw_express_pfe/app/auth/location.dart';
 import 'package:kw_express_pfe/app/landing_screen.dart';
 import 'package:kw_express_pfe/app/models/cart.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: LandingScreen(),
+          home: SelectLocation(),
         ),
       ),
     );
