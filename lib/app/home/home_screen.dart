@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           selectedColor: darkBlue,
           notchedShape: CircularNotchedRectangle(),
           selectedIndex: index,
+          buildCenterSpace: false,
           onTabSelected: (int index) {
             setState(() => this.index = index);
           },
