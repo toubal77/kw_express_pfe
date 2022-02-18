@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/feed/widget/build_resto.dart';
 import 'package:kw_express_pfe/app/home/feed/carousel_slider/carousel.dart';
