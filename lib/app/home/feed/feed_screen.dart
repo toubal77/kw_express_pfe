@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/feed/widget/build_resto.dart';
 import 'package:kw_express_pfe/app/home/feed/carousel_slider/carousel.dart';
@@ -12,6 +14,7 @@ import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -27,6 +30,7 @@ class _FeedScreenState extends State<FeedScreen> {
   late CarouselSliderBloc carouselSliderBloc;
   late bool isLoadingNextMessages;
   String searchText = '';
+  int wilaya = 16;
   @override
   void initState() {
     isLoadingNextMessages = false;
@@ -40,7 +44,13 @@ class _FeedScreenState extends State<FeedScreen> {
       database: context.read<Database>(),
     );
     carouselSliderStream = carouselSliderBloc.getCarouselSliders();
+    getWilayaCode();
     super.initState();
+  }
+
+  Future getWilayaCode() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    wilaya = int.parse(prefs.getString('wilaya')!);
   }
 
   @override
@@ -90,6 +100,14 @@ class _FeedScreenState extends State<FeedScreen> {
                   if (snapshot.hasData && snapshot.data != null) {
                     List<Restaurent?> typeMenu = snapshot.data!;
                     final List<Restaurent?> restoSearch = [];
+
+                    List<Restaurent?> restoo = [];
+                    for (Restaurent? res in typeMenu) {
+                      if (res!.wilaya == wilaya) {
+                        restoo.add(res);
+                      }
+                    }
+                    typeMenu = restoo;
                     if (searchText.isNotEmpty)
                       typeMenu.forEach((element) {
                         if (element!.name.contains(searchText)) {
@@ -97,6 +115,7 @@ class _FeedScreenState extends State<FeedScreen> {
                         }
                       });
                     if (searchText.isNotEmpty) typeMenu = restoSearch;
+
                     return ListView.builder(
                       itemCount: typeMenu.length,
                       shrinkWrap: true,
