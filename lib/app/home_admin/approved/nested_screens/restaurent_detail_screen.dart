@@ -6,6 +6,7 @@ import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/utils/logger.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RestaurentDetailScreen extends StatefulWidget {
   const RestaurentDetailScreen({
@@ -96,10 +97,47 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
                 initialValue: widget.restaurent.address,
                 fillColor: Colors.white70,
                 title: 'Localisation:',
-                hintText: 'Oran,Alger...',
+                hintText: 'Akid,Harrache...',
                 textInputAction: TextInputAction.next,
                 onChanged: (var value) {},
                 validator: (String? value) {},
+              ),
+              CustomTextForm(
+                isEnabled: false,
+                titleStyle: TextStyle(),
+                initialValue: widget.restaurent.wilaya.toString(),
+                fillColor: Colors.white70,
+                title: 'Wiliya:',
+                hintText: '31,16,55...',
+                textInputAction: TextInputAction.next,
+                onChanged: (var value) {},
+                validator: (String? value) {},
+              ),
+              GestureDetector(
+                onTap: () async {
+                  if (await canLaunch(widget.restaurent.mapAdress!)) {
+                    await launch(
+                      widget.restaurent.mapAdress!,
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Can\'t open google map'),
+                      ),
+                    );
+                  }
+                },
+                child: CustomTextForm(
+                  isEnabled: false,
+                  titleStyle: TextStyle(),
+                  initialValue: widget.restaurent.mapAdress,
+                  fillColor: Colors.white70,
+                  title: 'Localisation map:',
+                  hintText: 'https://www.google.com/maps/place/...',
+                  textInputAction: TextInputAction.next,
+                  onChanged: (var value) {},
+                  validator: (String? value) {},
+                ),
               ),
               CustomTextForm(
                 isEnabled: false,
@@ -108,6 +146,28 @@ class _RestaurentDetailScreenState extends State<RestaurentDetailScreen> {
                 fillColor: Colors.white70,
                 title: 'Numero de telephone:',
                 hintText: 'Numero de telephone...',
+                textInputAction: TextInputAction.next,
+                onChanged: (var value) {},
+                validator: (String? value) {},
+              ),
+              CustomTextForm(
+                isEnabled: false,
+                titleStyle: TextStyle(),
+                initialValue: widget.restaurent.timeOpen,
+                fillColor: Colors.white70,
+                title: "Heure d'ouverture:",
+                hintText: '9H-22H',
+                textInputAction: TextInputAction.next,
+                onChanged: (var value) {},
+                validator: (String? value) {},
+              ),
+              CustomTextForm(
+                isEnabled: false,
+                titleStyle: TextStyle(),
+                initialValue: widget.restaurent.dure,
+                fillColor: Colors.white70,
+                title: "Dure de livraison:",
+                hintText: '10min-20minH',
                 textInputAction: TextInputAction.next,
                 onChanged: (var value) {},
                 validator: (String? value) {},
