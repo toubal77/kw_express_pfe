@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // firebaseMessagingService.configFirebaseNotification(user.id, database);
     screens = [
       FeedScreen(),
-      FavoriteResto(),
       OffreResto(),
       EspaceClient(),
       // ProfileScreen(user: user),
@@ -69,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: [
             FABBottomAppBarItem(iconData: Icons.home, notification: 0),
-            FABBottomAppBarItem(iconData: Icons.store, notification: 0),
+            //  FABBottomAppBarItem(iconData: Icons.store, notification: 0),
             FABBottomAppBarItem(
               iconData: Icons.calendar_today,
               notification: 0,

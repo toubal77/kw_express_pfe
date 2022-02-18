@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/feed/detail_resto/detail_resto_screen.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class CardBuildRestaurent extends StatefulWidget {
@@ -160,7 +161,9 @@ class _CardBuildRestaurentState extends State<CardBuildRestaurent> {
             bottom: 55,
             right: 40,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                launch('tel:${widget.res!.phoneNumber}');
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -176,8 +179,8 @@ class _CardBuildRestaurentState extends State<CardBuildRestaurent> {
                 height: 55,
                 width: 55,
                 child: Icon(
-                  Icons.favorite,
-                  color: Colors.black,
+                  Icons.phone,
+                  color: Colors.red,
                 ),
               ),
             ),
