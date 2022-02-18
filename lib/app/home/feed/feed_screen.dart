@@ -102,12 +102,18 @@ class _FeedScreenState extends State<FeedScreen> {
                     final List<Restaurent?> restoSearch = [];
 
                     List<Restaurent?> restoo = [];
+                    List<Restaurent?> restooo = [];
                     for (Restaurent? res in typeMenu) {
                       if (res!.wilaya == wilaya) {
                         restoo.add(res);
                       }
                     }
-                    typeMenu = restoo;
+                    for (Restaurent? res in restoo) {
+                      if (res!.isApproved == true) {
+                        restooo.add(res);
+                      }
+                    }
+                    typeMenu = restooo;
                     if (searchText.isNotEmpty)
                       typeMenu.forEach((element) {
                         if (element!.name.contains(searchText)) {
