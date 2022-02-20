@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
+import 'package:kw_express_pfe/app/home/feed/widget/build_resto.dart';
+import 'package:kw_express_pfe/app/home/offer_resto/widgets/empty_offre_resto.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/common_widgets/empty_content.dart';
+import 'package:kw_express_pfe/services/database.dart';
+import 'package:provider/provider.dart';
 
 class OffreResto extends StatefulWidget {
   @override
@@ -8,82 +14,15 @@ class OffreResto extends StatefulWidget {
 }
 
 class _OffreRestoState extends State<OffreResto> {
-  List<Restaurent?> _list = [];
-  // Future<List<OffresResto?>?> getOffreResto() async {
-  //   try {
-  //     var url = Uri.parse(ApiApp.restaurant);
-  //     var response = await http.get(url);
-  //     if (response.statusCode == 200) {
-  //       print('seccus get offre Resto');
-  //       final data = json.decode(response.body)["offre"];
-  //       setState(() {
-  //         for (Map<String, dynamic> i in data) {
-  //           _list.add(OffresResto.fromJson(i));
-  //         }
-  //       });
-  //     } else {
-  //       print('field get offre Resto');
-  //       print('Response status: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     print('field to try get offre Resto');
-  //     print(e.toString());
-  //   }
-  // }
-
+  late FeedBloc bloc;
+  late Stream<List<Restaurent>> allRestaurent;
   @override
   void initState() {
-    // getOffreResto().then((value) {
-    for (int i = 0; i < _list.length; i++) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            contentPadding: EdgeInsets.zero,
-            content: Stack(
-              children: <Widget>[
-                Opacity(
-                  opacity: 1,
-                  child: Container(
-                    margin: EdgeInsets.all(10.0),
-                    color: Colors.transparent,
-                    child: Image.network(
-                      _list[i]!.profilePicture!,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    child: DecoratedBox(
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          icon: Icon(
-                            Icons.close,
-                            color: Colors.red,
-                            size: 18,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          }),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        // borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    }
-
+    bloc = FeedBloc(
+      currentUser: context.read<User>(),
+      database: context.read<Database>(),
+    );
+    allRestaurent = bloc.getAllResto();
     super.initState();
   }
 
@@ -103,57 +42,49 @@ class _OffreRestoState extends State<OffreResto> {
         centerTitle: true,
         elevation: 10.0,
       ),
-      body: ListView(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade500,
-                  blurRadius: 3,
-                  offset: Offset(0, 8),
-                ),
-              ],
-            ),
-            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade500,
-                  blurRadius: 3,
-                  offset: Offset(0, 8),
-                ),
-              ],
-            ),
-            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade500,
-                  blurRadius: 3,
-                  offset: Offset(8, 8),
-                ),
-              ],
-            ),
-            child: SvgPicture.asset('assets/drawable/resto_offre.svg'),
-          ),
-        ],
+      body: StreamBuilder<List<Restaurent?>>(
+        stream: allRestaurent,
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            List<Restaurent?> typeMenu = snapshot.data!;
+            List<Restaurent?> restoo = [];
+            for (Restaurent? res in restoo) {
+              if (res!.remise == 0) {
+                restoo.add(res);
+              }
+            }
+            print('dpsqg gpzdh  pzer ${typeMenu.length}');
+            print('dpsqg iugiudh  pzer ${restoo.length}');
+            typeMenu = restoo;
+            if (typeMenu.length != 0)
+              return ListView.builder(
+                itemCount: typeMenu.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return CardBuildRestaurent(
+                    res: typeMenu[index],
+                    isLoading: false,
+                  );
+                },
+              );
+            else
+              return EmptyOffreResto();
+          } else if (!(snapshot.hasData && snapshot.data != null)) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EmptyContent(
+                title: 'Aucune Données',
+                message: '',
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return EmptyContent(
+              title: "Quelque chose s'est mal passé",
+              message: "Impossible de charger les éléments pour le moment",
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

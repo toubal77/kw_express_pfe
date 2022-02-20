@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/espace_client/espaceClient.dart';
+import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_screen.dart';
 import 'package:kw_express_pfe/app/home/offer_resto/offreResto.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
+import 'package:kw_express_pfe/services/database.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,11 +20,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   //late final User user;
-  int index = 1;
+  int index = 0;
   late List<Widget> screens;
+  late FeedBloc bloc;
+  late Stream<List<Restaurent>> allRestaurent;
 
   @override
   void initState() {
+    bloc = FeedBloc(
+      currentUser: context.read<User>(),
+      database: context.read<Database>(),
+    );
+    allRestaurent = bloc.getAllResto();
     //  user = context.read<User>();
     // final Database database = context.read<Database>();
     super.initState();
