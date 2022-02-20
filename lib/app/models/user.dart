@@ -6,6 +6,7 @@ class User {
     required this.id,
     required this.type,
     required this.name,
+    required this.remise,
     required this.bio,
     required this.profilePicture,
     required this.couvPicture,
@@ -25,6 +26,7 @@ class User {
   //type 2 restaurent
   final String id;
   final int type;
+  final int remise;
   final String name;
   final String? bio;
   final String? address;
@@ -42,6 +44,7 @@ class User {
   factory User.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
     final int type = data['type'] as int;
+    final int remise = data['remise'] as int;
     final String name = data['name'] as String;
     final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
@@ -58,6 +61,7 @@ class User {
     return User(
       id: id,
       type: type,
+      remise: remise,
       name: name,
       bio: bio,
       address: address,
@@ -85,6 +89,7 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       'type': type,
+      'remise': remise,
       'name': name,
       'bio': bio,
       'address': address,

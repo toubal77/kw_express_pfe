@@ -4,6 +4,7 @@ class Client extends User {
   Client({
     required String id,
     required int type,
+    required int remise,
     required String name,
     required String? bio,
     required String? address,
@@ -21,6 +22,7 @@ class Client extends User {
           id: id,
           type: type,
           name: name,
+          remise: remise,
           bio: bio,
           address: address,
           timeOpen: timeOpen,
@@ -38,6 +40,7 @@ class Client extends User {
   factory Client.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
     final int type = data['type'] as int;
+    final int remise = data['remise'] as int;
     final String name = data['name'] as String;
     final String? bio = data['bio'] as String?;
     final String? address = data['address'] as String?;
@@ -55,6 +58,7 @@ class Client extends User {
     return Client(
       id: id,
       type: type,
+      remise: remise,
       name: name,
       bio: bio,
       address: address,

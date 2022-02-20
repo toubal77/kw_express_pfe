@@ -5,6 +5,7 @@ class Restaurent extends User {
     required String id,
     required int type,
     required String name,
+    required int remise,
     required String phoneNumber,
     required String? bio,
     required String? profilePicture,
@@ -20,6 +21,7 @@ class Restaurent extends User {
   }) : super(
           id: id,
           type: type,
+          remise: remise,
           name: name,
           bio: bio,
           address: adress,
@@ -38,6 +40,7 @@ class Restaurent extends User {
   factory Restaurent.fromMap(Map<String, dynamic> data, String documentId) {
     final String id = documentId;
     final int type = data['type'] as int;
+    final int remise = data['remise'] as int;
     final String name = data['name'] as String;
     final String? bio = data['bio'] as String?;
     final String phoneNumber = data['phoneNumber'] as String;
@@ -56,6 +59,7 @@ class Restaurent extends User {
       id: id,
       type: type,
       name: name,
+      remise: remise,
       bio: bio,
       phoneNumber: phoneNumber,
       couvPicture: couvPicture,

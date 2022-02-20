@@ -59,6 +59,7 @@ class _SignUpClientScreenState extends State<SignUpClientScreen> {
       final Client client = Client(
         id: '',
         type: 1,
+        remise: 0,
         name: _username,
         address: '',
         timeOpen: '',

@@ -99,6 +99,7 @@ class SignUpBloc {
     final Client clientt = Client(
       id: '',
       type: 1,
+      remise: 0,
       name: client.name,
       address: '',
       bio: '',
@@ -124,6 +125,7 @@ class SignUpBloc {
     final Restaurent restaurentt = Restaurent(
       id: '',
       type: 2,
+      remise: 0,
       name: restaurent.name,
       bio: restaurent.bio,
       timeOpen: restaurent.timeOpen,

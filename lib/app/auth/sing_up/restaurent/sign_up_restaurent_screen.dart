@@ -71,6 +71,7 @@ class _SignUpRestaurentScreenState extends State<SignUpRestaurentScreen> {
       final Restaurent restaurent = Restaurent(
         id: '',
         type: 2,
+        remise: 0,
         name: usernames,
         bio: bioo,
         phoneNumber: phoneNumberr,

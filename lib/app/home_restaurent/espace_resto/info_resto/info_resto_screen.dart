@@ -47,6 +47,7 @@ class _InfoRestoScreenState extends State<InfoRestoScreen> {
     restos = Restaurent(
       id: user.id,
       type: 2,
+      remise: user.remise,
       name: user.name,
       bio: user.bio,
       timeOpen: user.timeOpen,
@@ -89,6 +90,7 @@ class _InfoRestoScreenState extends State<InfoRestoScreen> {
       final Restaurent restaurent = Restaurent(
         id: user.id,
         type: 2,
+        remise: user.remise,
         name: usernames,
         bio: bioo,
         timeOpen: user.timeOpen,

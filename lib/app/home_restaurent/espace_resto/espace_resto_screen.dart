@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/info_resto/info_resto_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_espace_resto.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_offre.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/auth.dart';
@@ -113,6 +114,21 @@ class _EspaceRestoState extends State<EspaceResto> {
                           //      IconsApp.serviceClient,
                           Icons.call_sharp,
                           color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await buildOffre(context, bloc);
+                      },
+                      child: BuildEspaceResto(
+                        title: 'Faire un offre',
+                        icon: Icon(
+                          //  IconsApp.share,
+                          Icons.offline_share, color: Colors.red,
                         ),
                       ),
                     ),

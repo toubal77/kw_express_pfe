@@ -6,6 +6,7 @@ class Admin extends User {
   }) : super(
           id: id,
           type: 0,
+          remise: 0,
           name: 'name',
           bio: '',
           address: '',

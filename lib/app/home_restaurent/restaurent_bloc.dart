@@ -44,6 +44,7 @@ class RestaurentBloc {
     final Restaurent restaurentt = Restaurent(
       id: restoId,
       type: 2,
+      remise: restaurent.remise,
       name: restaurent.name,
       bio: restaurent.bio,
       timeOpen: restaurent.timeOpen,
@@ -125,6 +126,32 @@ class RestaurentBloc {
     await database.setData(
       path: APIPath.menuTypeDocument(currentUser.id, typeMenuId),
       data: typeMenu.toMap(),
+      merge: false,
+    );
+  }
+
+  Future<void> makeRemise(int remise) async {
+    final Restaurent restaurentt = Restaurent(
+      id: currentUser.id,
+      type: 2,
+      remise: remise,
+      name: currentUser.name,
+      bio: currentUser.bio,
+      timeOpen: currentUser.timeOpen,
+      mapAdress: currentUser.mapAdress,
+      dure: currentUser.dure,
+      phoneNumber: currentUser.phoneNumber,
+      couvPicture: currentUser.couvPicture,
+      profilePicture: currentUser.profilePicture,
+      adress: currentUser.address,
+      createdBy: currentUser.createdBy,
+      isModerator: false,
+      isApproved: currentUser.isApproved,
+      wilaya: currentUser.wilaya,
+    );
+    await database.setData(
+      path: APIPath.userDocument(currentUser.id),
+      data: restaurentt.toMap(),
       merge: false,
     );
   }
