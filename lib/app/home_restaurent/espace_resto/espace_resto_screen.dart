@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/info_resto/info_resto_screen.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/update_phone/confirmation_phone_screen.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/update_phone/update_phone_screen.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_espace_resto.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_offre.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
@@ -91,7 +93,15 @@ class _EspaceRestoState extends State<EspaceResto> {
                       height: 30,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return UpdatePhoneScreen();
+                            },
+                          ),
+                        );
+                      },
                       child: BuildEspaceResto(
                         title: 'Modifier le numero de telephone',
                         icon: Icon(
