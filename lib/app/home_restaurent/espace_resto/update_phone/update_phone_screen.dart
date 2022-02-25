@@ -3,16 +3,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/espace_resto_bloc.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
-import 'package:kw_express_pfe/common_widgets/custom_app_bar.dart';
-import 'package:kw_express_pfe/common_widgets/custom_scaffold.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
-import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
-import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
-import 'package:kw_express_pfe/utils/validators.dart';
 import 'package:provider/provider.dart';
 
 class UpdatePhoneScreen extends StatefulWidget {
