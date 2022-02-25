@@ -44,6 +44,11 @@ class _CartScreenState extends State<CartScreen> {
     SizeConfig.init(context);
     final cart = Provider.of<Cart>(context);
     total = cart.totalAmount;
+    var tt = 0;
+    if (widget.resto.remise != 0) {
+      tt = (total * (widget.resto.remise / 100)).ceil();
+      total = total - tt;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -118,6 +123,32 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
+                if (widget.resto.remise != 0)
+                  SizedBox(
+                    height: 10,
+                  ),
+                if (widget.resto.remise != 0)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Remise :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Text(
+                        '$tt DA',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
                 SizedBox(
                   height: 10,
                 ),
@@ -156,7 +187,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      '${cart.totalAmount + 250} DA',
+                      '${total + 250} DA',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
@@ -195,7 +226,7 @@ class _CartScreenState extends State<CartScreen> {
                         final order = Order(
                           id: uuid.v4(),
                           idResto: widget.resto.id,
-                          price: cart.totalAmount,
+                          price: total,
                           adress: 'address',
                           status: 'Attente de confirmation',
                           createdAt: Timestamp.now(),
