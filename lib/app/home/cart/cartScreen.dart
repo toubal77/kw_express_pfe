@@ -49,6 +49,7 @@ class _CartScreenState extends State<CartScreen> {
       tt = (total * (widget.resto.remise / 100)).ceil();
       total = total - tt;
     }
+    total = total + 250;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -187,7 +188,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      '${total + 250} DA',
+                      '$total  DA',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
