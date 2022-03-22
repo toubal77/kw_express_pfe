@@ -48,15 +48,13 @@ class _OffreRestoState extends State<OffreResto> {
           if (snapshot.hasData && snapshot.data != null) {
             List<Restaurent?> typeMenu = snapshot.data!;
             List<Restaurent?> restoo = [];
-            for (Restaurent? res in restoo) {
-              if (res!.remise == 0) {
+            for (Restaurent? res in typeMenu) {
+              if (res!.remise != 0) {
                 restoo.add(res);
               }
             }
-            print('dpsqg gpzdh  pzer ${typeMenu.length}');
-            print('dpsqg iugiudh  pzer ${restoo.length}');
             typeMenu = restoo;
-            if (typeMenu.length != 0)
+            if (typeMenu.isNotEmpty)
               return ListView.builder(
                 itemCount: typeMenu.length,
                 shrinkWrap: true,
