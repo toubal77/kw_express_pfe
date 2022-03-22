@@ -33,6 +33,9 @@ buildOffre(BuildContext context, RestaurentBloc bloc) async {
                     if (value == null) {
                     } else {
                       switch (value) {
+                        case 'Livraison gratuite':
+                          remise = -1;
+                          break;
                         case '0%':
                           remise = 0;
                           break;

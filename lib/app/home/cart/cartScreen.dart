@@ -39,6 +39,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   late double total;
+  late bool truck = false;
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -46,10 +47,13 @@ class _CartScreenState extends State<CartScreen> {
     total = cart.totalAmount;
     var tt = 0;
     if (widget.resto.remise != 0) {
-      tt = (total * (widget.resto.remise / 100)).ceil();
+      if (widget.resto.remise == -1)
+        truck = true;
+      else
+        tt = (total * (widget.resto.remise / 100)).ceil();
       total = total - tt;
     }
-    total = total + 250;
+    if (widget.resto.remise != -1) total = total + 250;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -124,11 +128,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                if (widget.resto.remise != 0)
+                if (widget.resto.remise > 0)
                   SizedBox(
                     height: 10,
                   ),
-                if (widget.resto.remise != 0)
+                if (widget.resto.remise > 0)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -165,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     ),
                     Text(
-                      'A partir de 250 DA',
+                      truck ? '0 DA' : 'A partir de 250 DA',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 13,

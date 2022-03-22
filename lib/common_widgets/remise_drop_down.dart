@@ -28,6 +28,7 @@ class RemiseDropDown extends StatefulWidget {
 
 class _WilayaPickerState extends State<RemiseDropDown> {
   late List<String> options = [
+    'Livraison gratuite',
     '00%',
     '10%',
     '20%',
