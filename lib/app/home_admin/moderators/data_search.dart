@@ -4,9 +4,11 @@ import 'package:kw_express_pfe/app/home_admin/moderators/user_tile.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/common_widgets/loading_screen.dart';
+import 'package:kw_express_pfe/services/database.dart';
+import 'package:provider/provider.dart';
 
 class DataSearch extends SearchDelegate<String> {
-  final modList;
+  final Stream<List<User>> modList;
   final ModeratorsBloc bloc;
   DataSearch(this.modList, this.bloc);
   @override
@@ -38,13 +40,21 @@ class DataSearch extends SearchDelegate<String> {
 
   Widget buildResult(BuildContext context) {
     return StreamBuilder<List<User>>(
-        stream: modList,
-        builder: (_, snapshot) {
+        stream: ModeratorsBloc(database: context.read<Database>())
+            .getModeratorsList(),
+        builder: (context, snapshot) {
           if (snapshot.hasData && (snapshot.data != null)) {
-            final List<User> mods = snapshot.data!;
+            List<User> mods = snapshot.data!;
+            final List<User> mod = [];
+            for (User user in mods) {
+              if (user.name.contains(query)) {
+                mod.add(user);
+              }
+            }
+            mods = mod;
             if (mods.isEmpty) {
               return EmptyContent(
-                title: 'there are no moderator',
+                title: 'there are no user',
                 message: '',
               );
             } else {
