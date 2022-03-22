@@ -43,15 +43,6 @@ class _AllOrdersState extends State<AllOrders> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        leading: GestureDetector(
-          onTap: () {
-            //         Navigator.of(context).pop();
-          },
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.red,
-          ),
-        ),
         centerTitle: true,
         elevation: 6.0,
       ),
