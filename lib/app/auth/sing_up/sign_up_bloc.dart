@@ -106,7 +106,7 @@ class SignUpBloc {
       timeOpen: '',
       mapAdress: '',
       dure: '',
-      profilePicture: '',
+      profilePicture: client.profilePicture,
       couvPicture: '',
       phoneNumber: client.phoneNumber,
       createdBy: _authUser.uid,

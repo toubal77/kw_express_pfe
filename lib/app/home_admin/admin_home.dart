@@ -17,7 +17,7 @@ class AdminHome extends StatefulWidget {
 
 class _AdminHomeState extends State<AdminHome> {
   late final Admin admin;
-  int index = 4;
+  int index = 0;
   late List<Widget> screens;
 
   @override
