@@ -17,7 +17,7 @@ class RestaurentHome extends StatefulWidget {
 
 class _RestaurentHomeState extends State<RestaurentHome> {
   late final User admin;
-  int index = 1;
+  int index = 0;
   late List<Widget> screens;
 
   @override

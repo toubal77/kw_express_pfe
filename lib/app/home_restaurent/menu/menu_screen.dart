@@ -15,6 +15,7 @@ import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
 String? type;
+bool? click = false;
 
 class RestaurentMenu extends StatefulWidget {
   const RestaurentMenu({Key? key}) : super(key: key);
@@ -111,12 +112,11 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
                       final List<TypeMenu?> typeMenu = snapshot.data!;
+                      if (click == false) type = typeMenu[0]!.name;
                       return DefaultTabController(
                         length: typeMenu.length,
                         child: TabBar(
-                          isScrollable: true,
-                          indicatorColor: Colors.red,
-                          indicatorWeight: 2.0,
+                          indicatorWeight: 0.1,
                           tabs: <Widget>[
                             for (int i = 0; i < typeMenu.length; i++)
                               GestureDetector(
@@ -124,6 +124,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                                   setState(() {
                                     type = typeMenu[i]!.name;
                                     print('fdohsdogh $type');
+                                    click = true;
                                   });
                                 },
                                 child: Tab(
@@ -131,7 +132,9 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                                     child: Text(
                                       typeMenu[i]!.name,
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: typeMenu[i]!.name == type
+                                            ? Colors.red
+                                            : Colors.black,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.w800,
                                       ),
