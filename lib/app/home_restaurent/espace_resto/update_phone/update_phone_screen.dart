@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/espace_resto_bloc.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/update_phone/confirmation_phone_screen.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
+import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -31,11 +33,11 @@ class _UpdatePhoneScreenState extends State<UpdatePhoneScreen> {
   @override
   void initState() {
     _formKey = GlobalKey<FormState>();
-    final User user = context.read<User>();
+    final Auth auth = context.read<Auth>();
     final Database database = context.read<Database>();
     bloc = EspaceRestoBloc(
       database: database,
-      currentUser: user,
+      auth: auth,
     );
 
     super.initState();
@@ -144,11 +146,17 @@ class _UpdatePhoneScreenState extends State<UpdatePhoneScreen> {
                 press: () async {
                   if (_formKey.currentState!.validate()) {
                     bloc.verifyPhoneNumber(phoneNumber);
-                    Fluttertoast.showToast(
-                      msg: 'Update phone avec succès',
-                      toastLength: Toast.LENGTH_LONG,
-                    );
-                    Navigator.of(context).pop();
+                    // Fluttertoast.showToast(
+                    //   msg: 'Update phone avec succès',
+                    //   toastLength: Toast.LENGTH_LONG,
+                    // );
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return ConfirmationPhoneScreen(
+                        bloc: bloc,
+                        phoneNumber: phoneNumber,
+                      );
+                    }));
                   }
                 },
                 color: Color(0xff5383EC),

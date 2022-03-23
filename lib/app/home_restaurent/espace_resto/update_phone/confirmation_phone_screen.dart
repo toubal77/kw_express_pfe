@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
+import 'package:kw_express_pfe/app/home_restaurent/espace_resto/espace_resto_bloc.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
 import 'package:kw_express_pfe/common_widgets/sign_up_title.dart';
 import 'package:kw_express_pfe/common_widgets/signup_divider.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
 import 'package:kw_express_pfe/utils/validators.dart';
+import 'package:provider/provider.dart';
 
 class ConfirmationPhoneScreen extends StatefulWidget {
   const ConfirmationPhoneScreen({
     Key? key,
     //   required this.onNextPressed,
+    required this.bloc,
+    required this.phoneNumber,
   }) : super(key: key);
 
+  final EspaceRestoBloc bloc;
+  final String phoneNumber;
   // final ValueChanged<String> onNextPressed;
 
   @override
@@ -106,7 +114,11 @@ class _ConfirmationPhoneScreenState extends State<ConfirmationPhoneScreen> {
               child: ButtomMedia(
                 press: () async {
                   if (_formKey.currentState!.validate()) {
-                    //        widget.onNextPressed(code);
+                    widget.bloc.sendInfo(widget.phoneNumber, code, context);
+                    Fluttertoast.showToast(
+                      msg: 'Update phone avec succès',
+                      toastLength: Toast.LENGTH_LONG,
+                    );
                   }
                 },
                 color: Color(0xff5383EC),
