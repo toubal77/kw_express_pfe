@@ -32,7 +32,8 @@ class BuildPowerBy extends StatelessWidget {
             Container(
               width: 100,
               height: 100,
-              child: SvgPicture.asset(iconKWsvg),
+              child: Image.asset(iconKWpng),
+              //  child: SvgPicture.asset(iconKWsvg),
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kw_express_pfe/app/landing_screen.dart';
 import 'package:kw_express_pfe/constants/algeria_cities.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -70,6 +71,7 @@ class _SelectLocationState extends State<SelectLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       // resizeToAvoidBottomInset: false,
       // extendBodyBehindAppBar: true,
       // appBar: AppBar(
