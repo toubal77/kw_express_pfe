@@ -9,6 +9,7 @@ import 'package:kw_express_pfe/common_widgets/fab_bottom_app_bar.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
+import 'package:kw_express_pfe/services/firebase_messaging_service.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,11 +20,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //late final User user;
+  late final User user;
   int index = 0;
   late List<Widget> screens;
   late FeedBloc bloc;
   late Stream<List<Restaurent>> allRestaurent;
+  late final FirebaseMessagingService firebaseMessagingService;
 
   @override
   void initState() {
@@ -32,12 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
       database: context.read<Database>(),
     );
     allRestaurent = bloc.getAllResto();
-    //  user = context.read<User>();
-    // final Database database = context.read<Database>();
     super.initState();
-    // final FirebaseMessagingService firebaseMessagingService =
-    //     FirebaseMessagingService();
-    // firebaseMessagingService.configFirebaseNotification(user.id, database);
+    user = context.read<User>();
+    final Database database = context.read<Database>();
+    super.initState();
+    firebaseMessagingService = FirebaseMessagingService(
+      database: database,
+      uid: user.id,
+    );
+    firebaseMessagingService.configFirebaseNotification();
     screens = [
       FeedScreen(),
       OffreResto(),

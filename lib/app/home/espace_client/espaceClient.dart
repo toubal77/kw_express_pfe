@@ -4,8 +4,10 @@ import 'package:kw_express_pfe/app/home/espace_client/my_order/my_order_screen.d
 import 'package:kw_express_pfe/app/home/espace_client/serviceClient.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client.dart';
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/icons_app.dart';
 import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/firebase_messaging_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
@@ -153,7 +155,12 @@ class EspaceClient extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<Auth>().signOut();
+                        final Auth auth = context.read<Auth>();
+                        final User user = context.read<User>();
+                        auth.signOut();
+                        context
+                            .read<FirebaseMessagingService>()
+                            .removeToken(user.id);
                       },
                       child: BuildEspaceClient(
                         title: 'Log out',

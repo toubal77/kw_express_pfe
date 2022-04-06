@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/services/auth.dart';
+import 'package:kw_express_pfe/services/firebase_messaging_service.dart';
 import 'package:provider/provider.dart';
 
 class AdminLogout extends StatelessWidget {
@@ -9,7 +11,11 @@ class AdminLogout extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        context.read<Auth>().signOut();
+        final Auth auth = context.read<Auth>();
+        auth.signOut();
+
+        final User user = context.read<User>();
+        context.read<FirebaseMessagingService>().removeToken(user.id);
       },
       icon: Icon(Icons.logout, color: Colors.black),
     );
