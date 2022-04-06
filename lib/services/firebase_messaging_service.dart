@@ -24,7 +24,7 @@ class FirebaseMessagingService {
 
   Future<void> _configLocalNotification() async {
     final initializationSettingsAndroid =
-        AndroidInitializationSettings('launcher_icon');
+        AndroidInitializationSettings('icon_appp');
     final initializationSettingsIOS = IOSInitializationSettings(
         onDidReceiveLocalNotification:
             (int id, String? title, String? body, String? payload) {
