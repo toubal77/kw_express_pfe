@@ -1,4 +1,3 @@
-import 'package:kw_express_pfe/app/models/mini_user.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 
 class User {
@@ -104,12 +103,5 @@ class User {
       'isApproved': isApproved,
       'wilaya': wilaya,
     };
-  }
-
-  MiniUser toMiniUser() {
-    return MiniUser(
-      id: id,
-      name: name,
-    );
   }
 }
