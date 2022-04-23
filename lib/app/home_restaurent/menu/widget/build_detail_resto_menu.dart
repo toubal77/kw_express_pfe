@@ -54,11 +54,15 @@ class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  widget.res!.description,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Text(
+                    widget.res!.description,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 SizedBox(

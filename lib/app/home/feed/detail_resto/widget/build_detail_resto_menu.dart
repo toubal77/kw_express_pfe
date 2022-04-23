@@ -62,6 +62,7 @@ class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
             SizedBox(
               height: 10,
