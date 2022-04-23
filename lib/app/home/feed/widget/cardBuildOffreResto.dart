@@ -1,0 +1,208 @@
+import 'package:flutter/material.dart';
+import 'package:kw_express_pfe/app/home/feed/detail_resto/detail_resto_screen.dart';
+import 'package:kw_express_pfe/app/models/restaurent.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// ignore: must_be_immutable
+class CardBuildOffreResto extends StatefulWidget {
+  Restaurent? res;
+  bool isLoading;
+  CardBuildOffreResto({this.res, this.isLoading = false});
+  @override
+  _CardBuildOffreRestoState createState() => _CardBuildOffreRestoState();
+}
+
+class _CardBuildOffreRestoState extends State<CardBuildOffreResto> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return DetailRestoScreen(resto: widget.res!);
+            },
+          ),
+        );
+      },
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+                top: 7.0, left: 10.0, right: 10.0, bottom: 10.0),
+            height: 310,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 3,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          widget.res!.couvPicture!,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Center(
+                      child: RotationTransition(
+                        turns: new AlwaysStoppedAnimation(15 / 360),
+                        child: Container(
+                          color: Colors.white,
+                          child: new Text(
+                            "Remise ${widget.res!.remise}%",
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            left: 30,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.res!.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    widget.res!.address!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    widget.res!.timeOpen!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 120,
+            left: 30,
+            child: Container(
+              width: 85,
+              height: 85,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 5.0),
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  widget.res!.profilePicture!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 140,
+            right: 20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 3,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  widget.res!.dure!,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+              height: 40,
+              width: 100,
+            ),
+          ),
+          Positioned(
+            bottom: 55,
+            right: 40,
+            child: GestureDetector(
+              onTap: () {
+                launch('tel:${widget.res!.phoneNumber}');
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(50),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 3,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                height: 55,
+                width: 55,
+                child: Icon(
+                  Icons.phone,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

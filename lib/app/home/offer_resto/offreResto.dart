@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home/feed/feed_bloc.dart';
-import 'package:kw_express_pfe/app/home/feed/widget/build_resto.dart';
+import 'package:kw_express_pfe/app/home/feed/widget/cardBuildOffreResto.dart';
 import 'package:kw_express_pfe/app/home/offer_resto/widgets/empty_offre_resto.dart';
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
@@ -49,7 +49,7 @@ class _OffreRestoState extends State<OffreResto> {
             List<Restaurent?> typeMenu = snapshot.data!;
             List<Restaurent?> restoo = [];
             for (Restaurent? res in typeMenu) {
-              if (res!.remise != 0) {
+              if (res!.remise != 0 && res.remise != -1) {
                 restoo.add(res);
               }
             }
@@ -59,7 +59,7 @@ class _OffreRestoState extends State<OffreResto> {
                 itemCount: typeMenu.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return CardBuildRestaurent(
+                  return CardBuildOffreResto(
                     res: typeMenu[index],
                     isLoading: false,
                   );
