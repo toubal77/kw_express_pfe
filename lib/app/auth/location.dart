@@ -111,7 +111,7 @@ class _SelectLocationState extends State<SelectLocation> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 24.95),
+                  padding: const EdgeInsets.only(top: 20, left: 25, right: 23),
                   child: Column(
                     children: [
                       SizedBox(
@@ -144,8 +144,8 @@ class _SelectLocationState extends State<SelectLocation> {
                       ),
                       if (getLocation)
                         SizedBox(
-                          width: 324.w,
-                          height: 57.h,
+                          width: 364.w,
+                          height: 67.h,
                           child: Text(
                             'Your adress: $adressUser',
                             style: TextStyle(
@@ -184,11 +184,7 @@ class _SelectLocationState extends State<SelectLocation> {
                             }
                           },
                           child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 25,
-                              left: 25.3,
-                              right: 24.52,
-                            ),
+                            margin: const EdgeInsets.only(left: 23, right: 23),
                             width: 364.w,
                             height: 67.h,
                             decoration: BoxDecoration(

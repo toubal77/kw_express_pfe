@@ -118,23 +118,6 @@ class _InfoRestoFormState extends State<InfoRestoForm> {
                                     ),
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //     left: 8.0,
-                                //     right: 8.0,
-                                //     bottom: 16.0,
-                                //   ),
-                                //   child: Text('Photo de profile :'),
-                                // ),
-                                // Avatar(
-                                //   placeHolder: Image.network(
-                                //     widget.resto.profilePicture!,
-                                //     width: 150,
-                                //   ),
-                                //   onChanged: (File f) {
-                                //     imageFile = f;
-                                //   },
-                                // ),
                               ],
                             ),
                           ),
@@ -274,7 +257,7 @@ class _InfoRestoFormState extends State<InfoRestoForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 30.0, top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Align(
                 child: ButtomMedia(
                   press: () {
