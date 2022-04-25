@@ -109,7 +109,7 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     SizedBox(
                       width: 233.w,
-                      height: 14.h,
+                      height: 30.h,
                       child: Text(
                         'Entrez votre email et votre mot de passe',
                         style: TextStyle(

@@ -116,7 +116,7 @@ class _SelectLocationState extends State<SelectLocation> {
                     children: [
                       SizedBox(
                         width: 246.w,
-                        height: 29.h,
+                        height: 50.h,
                         child: Text(
                           'Sélectionnez votre emplacement',
                           style: TextStyle(
@@ -134,7 +134,7 @@ class _SelectLocationState extends State<SelectLocation> {
                         width: 324.w,
                         height: 57.h,
                         child: Text(
-                          "Activez votre position pour rester en contact avec ce qui se passe dans votre région",
+                          "Activez votre position pour rester en contact avec les restaurants dans votre région",
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff7C7C7C),
