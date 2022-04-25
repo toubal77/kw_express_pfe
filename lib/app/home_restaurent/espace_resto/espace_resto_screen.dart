@@ -7,6 +7,7 @@ import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_es
 import 'package:kw_express_pfe/app/home_restaurent/espace_resto/widgets/build_offre.dart';
 import 'package:kw_express_pfe/app/home_restaurent/restaurent_bloc.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _EspaceRestoState extends State<EspaceResto> {
         title: Text(
           'Espace Client',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

@@ -57,7 +57,7 @@ class _RestaurentHomeState extends State<RestaurentHome> {
           iconSize: 32,
           centerItemText: '',
           color: Colors.grey,
-          selectedColor: darkBlue,
+          selectedColor: iconBackgroundColor,
           notchedShape: CircularNotchedRectangle(),
           selectedIndex: index,
           onTabSelected: (int index) {

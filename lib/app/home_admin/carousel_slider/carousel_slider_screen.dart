@@ -52,6 +52,7 @@ class _CarsouselSliderScreenState extends State<CarsouselSliderScreen> {
                   icon: Icon(
                     Icons.add_business,
                     size: 25,
+                    color: iconBackgroundColor,
                   ),
                   color: darkBlue,
                   onPressed: () {
@@ -65,7 +66,9 @@ class _CarsouselSliderScreenState extends State<CarsouselSliderScreen> {
               iconTheme: IconThemeData(color: darkBlue),
               title: Text(
                 'Carousel Slider',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: iconBackgroundColor,
+                ),
               ),
             ),
             body: buildBody(snapshot),

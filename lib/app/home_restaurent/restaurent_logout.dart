@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/firebase_messaging_service.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,10 @@ class RestaurentLogout extends StatelessWidget {
         final User user = context.read<User>();
         context.read<FirebaseMessagingService>().removeToken(user.id);
       },
-      icon: Icon(Icons.logout, color: Colors.black),
+      icon: Icon(
+        Icons.logout,
+        color: iconBackgroundColor,
+      ),
     );
   }
 }

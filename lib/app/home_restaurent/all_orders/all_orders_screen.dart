@@ -5,6 +5,7 @@ import 'package:kw_express_pfe/app/models/order.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/common_widgets/size_config.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,7 +39,7 @@ class _AllOrdersState extends State<AllOrders> {
         title: Text(
           'Mes commandes',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

@@ -57,7 +57,7 @@ class _AdminHomeState extends State<AdminHome> {
           iconSize: 32,
           centerItemText: '',
           color: Colors.grey,
-          selectedColor: darkBlue,
+          selectedColor: iconBackgroundColor,
           notchedShape: CircularNotchedRectangle(),
           selectedIndex: index,
           onTabSelected: (int index) {

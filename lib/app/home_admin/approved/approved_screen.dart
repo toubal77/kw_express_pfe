@@ -44,7 +44,9 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
               iconTheme: IconThemeData(color: darkBlue),
               title: Text(
                 'Restaurents',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: iconBackgroundColor,
+                ),
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -52,6 +54,7 @@ class _ApprovedScreenState extends State<ApprovedScreen> {
                   icon: Icon(
                     Icons.search,
                     size: 25,
+                    color: iconBackgroundColor,
                   ),
                   color: darkBlue,
                   onPressed: () {

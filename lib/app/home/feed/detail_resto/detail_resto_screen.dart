@@ -65,13 +65,16 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
           iconTheme: IconThemeData(color: darkBlue),
           title: Text(
             'Mon Restaurent',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+              color: iconBackgroundColor,
+            ),
           ),
           leading: Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: IconButton(
               icon: Icon(
                 Icons.arrow_back,
+                color: iconBackgroundColor,
               ),
               onPressed: () {
                 Provider.of<Cart>(context, listen: false).itemEmpty == true

@@ -60,7 +60,9 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
               iconTheme: IconThemeData(color: darkBlue),
               title: Text(
                 'Mon Restaurent',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  color: iconBackgroundColor,
+                ),
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -68,6 +70,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
                   icon: Icon(
                     Icons.add,
                     size: 25,
+                    color: iconBackgroundColor,
                   ),
                   color: darkBlue,
                   onPressed: () {

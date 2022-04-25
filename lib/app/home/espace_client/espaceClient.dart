@@ -6,6 +6,7 @@ import 'package:kw_express_pfe/app/home/espace_client/widget/build_espace_client
 import 'package:kw_express_pfe/app/home/espace_client/widget/build_power_by.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/icons_app.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/auth.dart';
 import 'package:kw_express_pfe/services/firebase_messaging_service.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +21,7 @@ class EspaceClient extends StatelessWidget {
         title: Text(
           'Espace Client',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

@@ -7,6 +7,7 @@ import 'package:kw_express_pfe/app/home/espace_client/my_order/my_order_bloc.dar
 import 'package:kw_express_pfe/app/models/order.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
         title: Text(
           'Mes commandes',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -50,7 +51,7 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
           },
           child: Icon(
             Icons.arrow_back,
-            color: Colors.red,
+            color: iconBackgroundColor,
           ),
         ),
         centerTitle: true,

@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
           iconSize: 32,
           centerItemText: '',
           color: Colors.grey,
-          selectedColor: darkBlue,
+          selectedColor: iconBackgroundColor,
           notchedShape: CircularNotchedRectangle(),
           selectedIndex: index,
           buildCenterSpace: false,

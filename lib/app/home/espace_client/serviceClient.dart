@@ -7,6 +7,7 @@ import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_new_resto.da
 import 'package:kw_express_pfe/app/home/espace_client/widget/dialog_send_bug.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/icons_app.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class _ServiceClientState extends State<ServiceClient> {
         title: Text(
           'Service Client',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

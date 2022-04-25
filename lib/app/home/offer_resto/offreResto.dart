@@ -5,6 +5,7 @@ import 'package:kw_express_pfe/app/home/offer_resto/widgets/empty_offre_resto.da
 import 'package:kw_express_pfe/app/models/restaurent.dart';
 import 'package:kw_express_pfe/app/models/user.dart';
 import 'package:kw_express_pfe/common_widgets/empty_content.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +35,7 @@ class _OffreRestoState extends State<OffreResto> {
         title: Text(
           'Offres Restaurants',
           style: TextStyle(
-            color: Colors.grey,
+            color: iconBackgroundColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),

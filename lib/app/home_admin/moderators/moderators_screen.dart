@@ -52,6 +52,7 @@ class _ModeratorsScreenState extends State<ModeratorsScreen> {
                         icon: Icon(
                           Icons.search,
                           size: 25,
+                          color: iconBackgroundColor,
                         ),
                         color: darkBlue,
                         onPressed: () {
