@@ -205,7 +205,7 @@ class _NewMenuRestaurentFormState extends State<NewMenuRestaurentForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 30.0, top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Align(
                 child: ButtomMedia(
                   press: () {
