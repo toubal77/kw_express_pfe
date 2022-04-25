@@ -118,7 +118,7 @@ class _SelectLocationState extends State<SelectLocation> {
                         width: 246.w,
                         height: 29.h,
                         child: Text(
-                          'Select Your Location',
+                          'Sélectionnez votre emplacement',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.w600,
@@ -134,7 +134,7 @@ class _SelectLocationState extends State<SelectLocation> {
                         width: 324.w,
                         height: 57.h,
                         child: Text(
-                          "Swithch on your location to stay in tune with what's happening in your area",
+                          "Activez votre position pour rester en contact avec ce qui se passe dans votre région",
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff7C7C7C),
@@ -147,7 +147,7 @@ class _SelectLocationState extends State<SelectLocation> {
                           width: 364.w,
                           height: 67.h,
                           child: Text(
-                            'Your adress: $adressUser',
+                            'Votre adresse: $adressUser',
                             style: TextStyle(
                               fontSize: 16,
                               color: Color(0xff7C7C7C),
@@ -193,7 +193,9 @@ class _SelectLocationState extends State<SelectLocation> {
                             ),
                             child: Center(
                               child: Text(
-                                !getLocation ? 'Get Location' : 'Submit',
+                                !getLocation
+                                    ? 'Obtenir l\'emplacement'
+                                    : 'Soumettre',
                                 style: TextStyle(
                                   color: Color(0xffFFF9FF),
                                   fontSize: 18,

@@ -111,7 +111,7 @@ class _SignInFormState extends State<SignInForm> {
                       width: 233.w,
                       height: 14.h,
                       child: Text(
-                        'Enter your email and password',
+                        'Entrez votre email et votre mot de passe',
                         style: TextStyle(
                           color: Color(0xff7C7C7C),
                           fontSize: 16,
@@ -174,7 +174,7 @@ class _SignInFormState extends State<SignInForm> {
                         alignment: Alignment.topRight,
                         height: 14.h,
                         child: Text(
-                          'Forgot Password?',
+                          'Mot de passe oublié?',
                           style: TextStyle(
                             color: Color(0xff181725),
                             fontSize: 14,
