@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: Size(360, 690),
         builder: () => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'K&W Express',
           theme: ThemeData(
             primarySwatch: Colors.blue,
