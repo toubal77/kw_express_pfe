@@ -4,6 +4,7 @@ import 'package:kw_express_pfe/app/auth/forgot_password/forgot_pass_screen.dart'
 import 'package:kw_express_pfe/app/auth/sing_up/singup_screen.dart';
 import 'package:kw_express_pfe/app/auth/widgets/buttom_media.dart';
 import 'package:kw_express_pfe/common_widgets/custom_text_field.dart';
+import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/constants/assets_constants.dart';
 import 'package:kw_express_pfe/constants/strings.dart';
 import 'package:kw_express_pfe/utils/validators.dart';
@@ -71,6 +72,7 @@ class _SignInFormState extends State<SignInForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
