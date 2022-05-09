@@ -44,19 +44,21 @@ class _SelectLocationState extends State<SelectLocation> {
       print("Region: ${address.region}");
       print("code Postal: ${address.postal}");
       print("Country Name: ${address.countryName}");
-      print('eàzhg $address');
-      var wilayaCode;
-      for (int i = 0; i < algeriaCities.length; i++) {
-        if (algeriaCities[i]['wilaya_name_ascii'] == address.city) {
-          wilayaCode = algeriaCities[i]['wilaya_code'];
-          print(algeriaCities[i]['wilaya_code']);
-        }
-      }
+      var wilayaCode = address.postal!.substring(0, 2).toUpperCase();
+      // for (int i = 0; i < algeriaCities.length; i++) {
+      //   if (algeriaCities[i]['wilaya_name_ascii'] == address.city) {
+      //     wilayaCode = algeriaCities[i]['wilaya_code'];
+      //     print(algeriaCities[i]['wilaya_code']);
+      //   }
+      // }
       adressUser =
           '${address.streetNumber} ${address.streetAddress} ${address.city} ${address.region} $wilayaCode ${address.countryName}';
       print(adressUser);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('wilaya', wilayaCode);
+      prefs.clear();
+      prefs
+          .setString('wilaya', wilayaCode)
+          .then((value) => print('done done done'));
       setState(() {
         getLocation = true;
       });
