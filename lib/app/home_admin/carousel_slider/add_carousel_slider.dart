@@ -151,7 +151,7 @@ class _AddCarouselSliderState extends State<AddCarouselSlider> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 60.0, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 100.0, left: 20, right: 20),
             child: Text(
               "Veuillez choisir une image horizontale ",
               textAlign: TextAlign.center,
