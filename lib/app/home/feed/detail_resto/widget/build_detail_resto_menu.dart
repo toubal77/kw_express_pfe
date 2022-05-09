@@ -51,6 +51,7 @@ class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
               style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
+                color: Colors.black,
               ),
             ),
             SizedBox(
@@ -61,6 +62,7 @@ class _BuildDetailRestoMenuState extends State<BuildDetailRestoMenu> {
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
+                color: Colors.black,
               ),
               overflow: TextOverflow.ellipsis,
             ),
