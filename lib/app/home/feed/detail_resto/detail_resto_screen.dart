@@ -64,7 +64,7 @@ class _DetailRestoScreenState extends State<DetailRestoScreen> {
           //  actions: [RestaurentLogout()],
           iconTheme: IconThemeData(color: darkBlue),
           title: Text(
-            'Mon Restaurent',
+            widget.resto.name,
             style: TextStyle(
               color: iconBackgroundColor,
             ),
