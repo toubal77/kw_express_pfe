@@ -59,7 +59,7 @@ class _RestaurentMenuState extends State<RestaurentMenu> {
               actions: [RestaurentLogout()],
               iconTheme: IconThemeData(color: darkBlue),
               title: Text(
-                'Mon Restaurent',
+                'Mon Restaurant',
                 style: TextStyle(
                   color: iconBackgroundColor,
                 ),
