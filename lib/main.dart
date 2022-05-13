@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         designSize: Size(360, 690),
         builder: () => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'K&W Express',
+          title: 'TBL Express',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geocode/geocode.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kw_express_pfe/app/landing_screen.dart';
 import 'package:kw_express_pfe/constants/algeria_cities.dart';
@@ -32,27 +33,30 @@ class _SelectLocationState extends State<SelectLocation> {
       );
       final lastPosition = await Geolocator.getLastKnownPosition();
       print(lastPosition);
-      print('lalitude: ${position.latitude}, logitude: ${position.latitude}');
-
-      final Address address = await geoCode.reverseGeocoding(
-        latitude: position.latitude,
-        longitude: position.longitude,
-      );
-      print("Street Number: ${address.streetNumber}");
-      print("Street Address: ${address.streetAddress}");
-      print("City: ${address.city}");
-      print("Region: ${address.region}");
-      print("code Postal: ${address.postal}");
-      print("Country Name: ${address.countryName}");
-      var wilayaCode = address.postal!.substring(0, 2).toUpperCase();
-      // for (int i = 0; i < algeriaCities.length; i++) {
-      //   if (algeriaCities[i]['wilaya_name_ascii'] == address.city) {
-      //     wilayaCode = algeriaCities[i]['wilaya_code'];
-      //     print(algeriaCities[i]['wilaya_code']);
-      //   }
-      // }
+      print('lalitude: ${position.longitude}, logitude: ${position.latitude}');
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      print('dosghi $placemarks');
+      // final Address address = await geoCode.reverseGeocoding(
+      //   latitude: position.latitude,
+      //   longitude: position.longitude,
+      // );
+      print("Street Address: ${placemarks[0].street}");
+      print("City: ${placemarks[0].administrativeArea}");
+      print("Region: ${placemarks[0].subAdministrativeArea}");
+      print("code Postal: ${placemarks[0].postalCode}");
+      print("Country Name: ${placemarks[0].country}");
+      //  var wilayaCode = placemarks[0].postalCode!.substring(0, 2).toUpperCase();
+      var wilayaCode;
+      for (int i = 0; i < algeriaCities.length; i++) {
+        if (algeriaCities[i]['daira_name_ascii'] ==
+            placemarks[0].subAdministrativeArea) {
+          wilayaCode = algeriaCities[i]['wilaya_code'];
+          print(algeriaCities[i]['wilaya_code']);
+        }
+      }
       adressUser =
-          '${address.streetNumber} ${address.streetAddress} ${address.city} ${address.region} $wilayaCode ${address.countryName}';
+          '${placemarks[0].street} ${placemarks[0].administrativeArea} ${placemarks[0].subAdministrativeArea} ${placemarks[0].postalCode} $wilayaCode ${placemarks[0].country}';
       print(adressUser);
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.clear();
