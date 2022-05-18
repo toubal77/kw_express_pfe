@@ -8,6 +8,7 @@ import 'package:kw_express_pfe/common_widgets/empty_content.dart';
 import 'package:kw_express_pfe/constants/app_colors.dart';
 import 'package:kw_express_pfe/services/database.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OffreResto extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class OffreResto extends StatefulWidget {
 
 class _OffreRestoState extends State<OffreResto> {
   late FeedBloc bloc;
+  int wilaya = 16;
   late Stream<List<Restaurent>> allRestaurent;
   @override
   void initState() {
@@ -24,7 +26,13 @@ class _OffreRestoState extends State<OffreResto> {
       database: context.read<Database>(),
     );
     allRestaurent = bloc.getAllResto();
+    getWilayaCode();
     super.initState();
+  }
+
+  Future getWilayaCode() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    wilaya = int.parse(prefs.getString('wilaya')!);
   }
 
   @override
@@ -49,9 +57,18 @@ class _OffreRestoState extends State<OffreResto> {
           if (snapshot.hasData && snapshot.data != null) {
             List<Restaurent?> typeMenu = snapshot.data!;
             List<Restaurent?> restoo = [];
+            List<Restaurent?> restooo = [];
+            for (Restaurent? res in typeMenu) {
+              if (res!.wilaya == wilaya) {
+                restooo.add(res);
+              }
+            }
+            restooo = typeMenu;
             for (Restaurent? res in typeMenu) {
               if (res!.remise != 0 && res.remise != -1) {
-                restoo.add(res);
+                if (res.isApproved == true) {
+                  restoo.add(res);
+                }
               }
             }
             typeMenu = restoo;
