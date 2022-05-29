@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kw_express_pfe/app/home_admin/approved/approved_screen.dart';
+import 'package:kw_express_pfe/app/home_admin/bugs/bug_screen.dart';
 import 'package:kw_express_pfe/app/home_admin/carousel_slider/carousel_slider_screen.dart';
 import 'package:kw_express_pfe/app/home_admin/moderators/moderators_screen.dart';
 import 'package:kw_express_pfe/app/models/admin.dart';
@@ -28,6 +29,7 @@ class _AdminHomeState extends State<AdminHome> {
       ModeratorsScreen(),
       CarsouselSliderScreen(),
       ApprovedScreen(),
+      BugScreen(),
     ];
   }
 
@@ -68,6 +70,7 @@ class _AdminHomeState extends State<AdminHome> {
             FABBottomAppBarItem(
                 iconData: Icons.picture_in_picture, notification: 0),
             FABBottomAppBarItem(iconData: Icons.restaurant, notification: 0),
+            FABBottomAppBarItem(iconData: Icons.bug_report, notification: 0),
           ],
           backgroundColor: Colors.white,
         ),

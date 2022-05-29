@@ -23,7 +23,6 @@ class _SelectLocationState extends State<SelectLocation> {
   late String adressUser;
   // ignore: always_declare_return_types, type_annotate_public_apis
   getUserLocation() async {
-    final GeoCode geoCode = GeoCode();
     setState(() {
       isLoading = true;
     });
